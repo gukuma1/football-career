@@ -43,3 +43,20 @@ export function shuffleArray(array) {
 	}
 	return array;
 }
+
+export function weightedAverage(arr) {
+	let weightedSum = 0;
+	let totalWeight = 0;
+
+	for (const obj of arr) {
+		if (typeof obj.stat === "number" && typeof obj.multiplier === "number") {
+			weightedSum += obj.stat * obj.multiplier;
+			totalWeight += obj.multiplier;
+		}
+	}
+
+	if (totalWeight === 0) return 0;
+
+	return weightedSum / totalWeight;
+}
+
