@@ -430,7 +430,7 @@ function App() {
 
 		let opportunities = 0;
 		let awardRecord = [
-			{ name: "Performance", stat: (currentSeason.performance + 1) / 2, multiplier: 1.5 },
+			{ name: "Performance", stat: (currentSeason.performance + 1.5) / 2.5, multiplier: 1.0 },
 			{ name: "Starting", stat: currentSeason.starting / 100, multiplier: 1.0 },
 		];
 		let trophies = 0;
@@ -490,11 +490,11 @@ function App() {
 		const playerPosition = playerLeagueResult.table.findIndex(
 			(team) => team.name === player.team.name
 		);
-		competitionPerformance = Math.max(0, (8 - playerPosition) / 8); //max = 1
+		competitionPerformance = Math.max(0, (10 - playerPosition) / 10); //max = 1, 0.5 at 6th
 		awardRecord.push({
 			name: "Liga",
 			stat: competitionPerformance,
-			multiplier: 1.5 + playerLeagueResult.championsSpots / 10,
+			multiplier: 0.5,
 		});
 		currentSeason.titles.push(
 			[`Liga${playerPosition >= 0 ? `: ${playerPosition + 1}º lugar` : ""}`].concat(leaguesTable)
@@ -595,7 +595,7 @@ function App() {
 		awardRecord.push({
 			name: "Copa Nacional",
 			stat: competitionPerformance,
-			multiplier: 1.0,
+			multiplier: 0.5,
 		});
 
 		currentSeason.titles.push(
@@ -644,7 +644,7 @@ function App() {
 
 		if (playerChampionsPos >= 0) {
 			opportunities += Math.max(0, 4 / (1 + playerChampionsPos / 4)); //max 4 at 1, 2 at 4
-			competitionPerformance += Math.max(0, 24 - playerChampionsPos) / 80; //max 0.3 at 0, 0 at 24
+			competitionPerformance += Math.max(0, 24 - playerChampionsPos) / 80; //max 0.3 at 0, 0.1 at 16
 		}
 
 		// Construir a descrição da fase do torneio
@@ -780,7 +780,7 @@ function App() {
 		awardRecord.push({
 			name: "Champions League",
 			stat: competitionPerformance,
-			multiplier: 2.0,
+			multiplier: 1.0,
 		});
 		let playerChampionsResult = player.championsQualification
 			? `: ${TournamentPath[playerPhase]}`
@@ -1063,14 +1063,14 @@ function App() {
 
 			let clubWorldCupDescription = [];
 
-			let results = GetTournamentResults(groups, 8, clubWorlcCupDraw, player.team);
+			let clubWorldCupResults = GetTournamentResults(groups, 8, clubWorlcCupDraw, player.team);
 
-			clubWorldCupDescription.push(`Grupos${results.desc}`);
+			clubWorldCupDescription.push(`Grupos${clubWorldCupResults.desc}`);
 
-			if(results.playerPosition != null) competitionPerformance += Math.floor((4 - results.playerPosition) / 20) //max 0.2
+			if(clubWorldCupResults.playerPosition != null) competitionPerformance += (4 - clubWorldCupResults.playerPosition) / 20 //max 0.2
 
 			// Combinar os primeiros, segundos e terceiros colocados de todos os grupos e os oito primeiros terceiros colocados
-			let classif = results.classif;
+			let classif = clubWorldCupResults.classif;
 
 			phase += 2;
 
@@ -1155,7 +1155,7 @@ function App() {
 			awardRecord.push({
 				name: "Mundial de Clubes",
 				stat: competitionPerformance,
-				multiplier: 2.5,
+				multiplier: 1.0,
 			});
 
 			currentSeason.titles.push(
@@ -1652,7 +1652,7 @@ function App() {
 			awardRecord.push({
 				name: "Copa Continental",
 				stat: competitionPerformance,
-				multiplier: 2.5,
+				multiplier: 1.0,
 			});
 		}
 
@@ -1832,7 +1832,7 @@ function App() {
 			awardRecord.push({
 				name: "Copa do Mundo",
 				stat: competitionPerformance,
-				multiplier: 3.0,
+				multiplier: 1.0,
 			});
 
 			if (classifToWorldCup) {
@@ -1926,16 +1926,17 @@ function App() {
 			currentSeason.titles.push(["Tríplice Coroa"]);
 		}
 
+		console.log(awardRecord)
 		currentSeason.awardPoints = weightedAverage(awardRecord);
 
-		console.log("Award Points: " + Math.round(currentSeason.awardPoints * 100) + "%");
+		console.log("Award Points: " + (currentSeason.awardPoints * 100).toPrecision(4) + "%");
 
 		let goldenBootsGoals = 35 + RandomNumber(0, 5);
 
 		if (goldenBootsGoals <= currentSeason.goals) {
 			//Golden Shoes
 			player.awards.push(`Artilheiro ${year} (${player.team.name})`);
-			player.fame += 30;
+			player.fame += 20;
 			currentSeason.titles.push(["Artilheiro"]);
 		}
 
@@ -1950,8 +1951,8 @@ function App() {
 			} da Temporada: 1º lugar`;
 			currentSeason.titles.push([desc]);
 		} else if (currentSeason.awardPoints >= 0.71) {
-			let pts = Math.floor(currentSeason.awardPoints * 100 - 70);
-			player.fame += pts * 3;
+			let pts = Math.floor(currentSeason.awardPoints * 100 - 71);
+			player.fame += (pts + 1) * 2;
 			position = 10 - pts;
 			let desc = `${
 				player.position.title === "Goleiro" ? "Goleiro" : "Jogador"
@@ -1960,9 +1961,6 @@ function App() {
 		}
 
 		player.fame += currentSeason.performance * 20;
-
-		player.fame += currentSeason.goals / 5.0;
-		player.fame += currentSeason.assists / 5.0;
 
 		leagueResults.forEach((leagueResult) => {
 			const league = leagueResult._reference;
