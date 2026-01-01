@@ -108,7 +108,7 @@ function App() {
 
 	const [history, setHistory] = useState([]);
 
-	const [year, setYear] = useState(new Date().getFullYear());
+	const [year, setYear] = useState(new Date().getFullYear() - 1 );
 
 	const [contract, setContract] = useState(0);
 
@@ -116,7 +116,7 @@ function App() {
 
 	const [transfers, setTransfers] = useState([]);
 
-	const [uefaWinners, setUefaWinners] = useState([]);
+	const [uefaWinners, setUefaWinners] = useState([]); //incluir aqui os ganhadores passados
 
 	const [renew, setRenew] = useState({ duration: 0, addition: null, position: null });
 
@@ -1198,7 +1198,7 @@ function App() {
 
 			let eurocopaResults = GetTournamentResults(europeanGroups, 4, euroCupDraw, player.nation);
 
-			if(eurocopaResults.playerPosition != null) competitionPerformance += Math.floor((4 - eurocopaResults.playerPosition) / 20) //max 0.2
+			if(eurocopaResults.playerPosition != null) competitionPerformance += (4 - eurocopaResults.playerPosition) / 20 //max 0.2
 
 			let classif = eurocopaResults.classif;
 
@@ -1320,7 +1320,7 @@ function App() {
 
 			let americanResults = GetTournamentResults(americanGroups, 0, americanCupDraw, player.nation);
 
-			if(americanResults.playerPosition != null) competitionPerformance += Math.floor((4 - americanResults.playerPosition) / 20) //max 0.2
+			if(americanResults.playerPosition != null) competitionPerformance += (4 - americanResults.playerPosition) / 20 //max 0.2
 
 			classif = americanResults.classif;
 
@@ -1437,7 +1437,7 @@ function App() {
 
 			let africanResults = GetTournamentResults(africanGroups, 2, africanAsianCupDraw, player.nation);
 
-			if(africanResults.playerPosition != null) competitionPerformance += Math.floor((4 - africanResults.playerPosition) / 20) //max 0.2
+			if(africanResults.playerPosition != null) competitionPerformance += (4 - africanResults.playerPosition) / 20 //max 0.2
 
 			// Combinar os primeiros, segundos e terceiros colocados de todos os grupos e os oito primeiros terceiros colocados
 			classif = africanResults.classif;
@@ -1554,7 +1554,7 @@ function App() {
 
 			let asianResults = GetTournamentResults(asianGroups, 2, africanAsianCupDraw, player.nation);
 
-			if(asianResults.playerPosition != null) competitionPerformance += Math.floor((4 - asianResults.playerPosition) / 20) //max 0.2
+			if(asianResults.playerPosition != null) competitionPerformance += (4 - asianResults.playerPosition) / 20 //max 0.2
 
 			classif = asianResults.classif;
 
@@ -1671,6 +1671,14 @@ function App() {
 			}
 			worldCupDescription.push(worldCupHostDescription);
 
+			//was called by the manager
+			let playedWorldCup =
+				player.team.power +
+					currentSeason.starting / 100 +
+					currentSeason.performance +
+					player.fame / 1000 >=
+				player.nation.power;
+
 			// Lista para armazenar todas as nações qualificadas para a Copa do Mundo
 			let allClassifNations = [];
 
@@ -1725,22 +1733,14 @@ function App() {
 
 			allClassifNations = hostsAreFirst.concat(allClassifNations);
 
+			let groups = DrawWorldGroups(allClassifNations, hostsAreFirst.length);
+
 			// Verificar se a nação do novo jogador está entre as nações qualificadas para a Copa do Mundo
 			let classifToWorldCup = allClassifNations.some((t) => t.name === player.nation.name);
 
-			//was called by the manager
-			let playedWorldCup =
-				player.team.power +
-					currentSeason.starting / 100 +
-					currentSeason.performance +
-					player.fame / 1000 >=
-				player.nation.power;
-
-			let groups = DrawWorldGroups(allClassifNations, hostsAreFirst.length);
-
 			let results = GetTournamentResults(groups, 8, worldCupDraw, player.nation);
 
-			if(results.playerPosition != null) competitionPerformance += Math.floor((4 - results.playerPosition) / 20) //max 0.2
+			if(results.playerPosition != null) competitionPerformance += (4 - results.playerPosition) / 20 //max 0.2
 
 			worldCupDescription.push(`Grupos${results.desc}`);
 
