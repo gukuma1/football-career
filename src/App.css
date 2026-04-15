@@ -6,6 +6,10 @@ header {
 	padding: 1rem;
 }
 
+header h1, header h2, header h3 {
+	font-family: "Nunito", sans-serif;
+}
+
 header ol {
 	color: var(--color-light);
 }
@@ -54,6 +58,7 @@ section {
 
 .choices button,
 .choices select {
+	font-family: "Nunito", sans-serif;
 	margin-bottom: 1rem;
 	padding: 1rem;
 	color: var(--color-contrast);
@@ -65,6 +70,10 @@ section {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.choices select, .choices button p {
+	font-family: "Lora", serif;
 }
 
 .choices {
@@ -150,6 +159,7 @@ section {
 
 .stats-div-div details div {
 	padding-left: 1rem;
+	font-family: "Nunito", sans-serif;
 }
 
 .stats-div-div details summary:hover {

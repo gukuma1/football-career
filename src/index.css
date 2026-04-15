@@ -1,16 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 :root {
-	--color-background: #2c2c2c;
-	--color-dark: #3b4b3b;
-	--color-medium: #5a7a5a;
+	--color-background: #121c12;
+	--color-dark: #243122;
+	--color-medium: #3f6b44;
 	--color-light: #70a070;
-	--color-contrast: #a0c070;
+	--color-contrast: #c1df9d;
 }
 
 * {
 	box-sizing: border-box;
-	font-family: "Montserrat", sans-serif;
 	text-decoration: none;
 	margin: 0;
 	padding: 0;
@@ -20,5 +20,6 @@
 
 body {
 	background-color: var(--color-background);
+	font-family: "Lora", sans-serif;
 	margin-bottom: 10vh;
 }

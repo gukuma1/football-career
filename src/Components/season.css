@@ -11,6 +11,7 @@
 }
 
 .season-title {
+	font-family: "Nunito", sans-serif;
 	padding: 0.5rem;
 	display: flex;
 	justify-content: space-between;
@@ -55,6 +56,10 @@
 	margin-top: 0.5rem;
 }
 
+.season-titles {
+	font-family: "Nunito", sans-serif;
+}
+
 .season-titles-list {
 	display: flex;
 	flex-direction: column;
@@ -64,6 +69,7 @@
 }
 
 summary {
+	font-family: "Nunito", sans-serif;
 	cursor: pointer;
 }
 

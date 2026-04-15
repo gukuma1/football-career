@@ -7,33 +7,56 @@ const ChartComponent = ({ data }) => {
 	const chartRef3 = useRef(null);
 
 	useEffect(() => {
+		const rootStyles = getComputedStyle(document.documentElement);
+		const colorDark = rootStyles.getPropertyValue("--color-dark").trim();
+		const colorMedium = rootStyles.getPropertyValue("--color-medium").trim();
+		const colorLight = rootStyles.getPropertyValue("--color-light").trim();
+		const colorContrast = rootStyles.getPropertyValue("--color-contrast").trim();
+
 		const chartOptions = {
 			scales: {
 				x: {
 					grid: {
-						color: "rgba(71, 74, 72, 1)", // Set color for x-axis grid lines
+						color: colorDark,
 					},
 					ticks: {
-						color: "rgba(144, 149, 144, 1)", // Set color for x-axis labels
+						color: colorContrast,
 					},
 				},
 				y: {
 					grid: {
-						color: "rgba(71, 74, 72, 1)", // Set color for x-axis grid lines
+						color: colorDark,
 					},
 					ticks: {
-						color: "rgba(144, 149, 144, 1)", // Set color for x-axis labels
+						color: colorContrast,
 					},
 				},
 			},
 			plugins: {
 				title: {
 					display: true,
-					color: "rgba(144, 149, 144, 1)", // Set color for chart title
+					color: colorContrast,
 				},
 				legend: {
 					labels: {
-						color: "rgba(144, 149, 144, 1)", // Set color for legend labels
+						color: colorContrast,
+					},
+				},
+				tooltip: {
+					titleColor: colorContrast,
+					bodyColor: colorContrast,
+					backgroundColor: colorDark,
+
+					titleFont: {
+						family: "Nunito",
+						size: 16,
+						weight: "bold",
+					},
+
+					bodyFont: {
+						family: "Nunito",
+						size: 14,
+						weight: "normal",
 					},
 				},
 			},
@@ -47,8 +70,8 @@ const ChartComponent = ({ data }) => {
 					{
 						label: "Fama",
 						data: data.map((item) => item.fame), // y-axis data
-						backgroundColor: "rgba(154, 225, 157, 1)", // Set background color
-						borderColor: "rgba(154, 225, 157, 1)", // Set border color
+						backgroundColor: colorLight,
+						borderColor: colorLight,
 					},
 				],
 			},
@@ -63,14 +86,14 @@ const ChartComponent = ({ data }) => {
 					{
 						label: "Gols",
 						data: data.map((item) => item.goals), // y-axis data
-						backgroundColor: "rgba(154, 225, 157, 1)", // Set background color
-						borderColor: "rgba(154, 225, 157, 1)", // Set border color
+						backgroundColor: colorLight,
+						borderColor: colorLight,
 					},
 					{
 						label: "Assistências",
 						data: data.map((item) => item.assists), // y-axis data
-						backgroundColor: "rgba(83, 122, 90, 1)", // Set background color
-						borderColor: "rgba(83, 122, 90, 1)", // Set border color
+						backgroundColor: colorMedium,
+						borderColor: colorMedium,
 					},
 				],
 			},
@@ -85,8 +108,8 @@ const ChartComponent = ({ data }) => {
 					{
 						label: "Valor (M)",
 						data: data.map((item) => Math.floor(item.marketValue / 100000) / 10), // y-axis data
-						backgroundColor: "rgba(154, 225, 157, 1)", // Set background color
-						borderColor: "rgba(154, 225, 157, 1)", // Set border color
+						backgroundColor: colorContrast,
+						borderColor: colorContrast,
 					},
 				],
 			},
