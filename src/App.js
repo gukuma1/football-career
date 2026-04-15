@@ -433,7 +433,6 @@ function App() {
 			{ name: "Performance", stat: (currentSeason.performance + 1.5) / 2.5, multiplier: 1.0 },
 			{ name: "Starting", stat: currentSeason.starting / 100, multiplier: 1.0 },
 		];
-		let trophies = 0;
 		let triplice = 0;
 		let competitionPerformance = 0;
 
@@ -510,7 +509,6 @@ function App() {
 		if (playerPosition === 0) {
 			player.leagueTitles.push(`${year} (${player.team.name})`);
 			triplice++;
-			trophies++;
 		}
 
 		let nationalCupDescription = [];
