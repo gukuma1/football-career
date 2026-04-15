@@ -58,7 +58,7 @@ section {
 
 .choices button,
 .choices select {
-	font-family: "Nunito", sans-serif;
+	font-family: "Nunito", serif;
 	margin-bottom: 1rem;
 	padding: 1rem;
 	color: var(--color-contrast);
