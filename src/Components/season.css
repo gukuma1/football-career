@@ -127,7 +127,7 @@ summary::-webkit-details-marker {
 
 .season-titles-list details details summary {
 	margin: 0;
-	padding-left: 0.55rem;
+	padding-left: 1rem;
 }
 
 .season-titles-list p {
