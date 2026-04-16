@@ -86,7 +86,7 @@ summary {
 .season-titles-list details summary::before {
 	content: "▸";
 	position: absolute;
-	left: -4px;
+	left: 0;
 	color: var(--color-contrast);
 	transition: transform 0.2s ease;
 }
@@ -115,9 +115,9 @@ summary::-webkit-details-marker {
 
 .season-titles-list details summary {
 	display: block;
-	margin: 0.25rem 0;
+	margin: 0;
 	border-radius: 1rem;
-	padding: 0.4rem 0.6rem;
+	padding: 0.2rem 1rem;
 }
 
 .season-titles-list details details {
@@ -126,12 +126,8 @@ summary::-webkit-details-marker {
 }
 
 .season-titles-list details details summary {
-	margin: 0.2rem 0;
+	margin: 0;
 	padding-left: 0.55rem;
-}
-
-.season-titles-list details summary:hover {
-	background-color: rgba(112, 160, 112, 0.3);
 }
 
 .season-titles-list p {
