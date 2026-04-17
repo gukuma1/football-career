@@ -91,7 +91,7 @@
 	},
 	{
 		"name": "CAF",
-		"worldCupSpots": 8,
+		"worldCupSpots": 9,
 		"teams": [
 			{
 				"name": "África do Sul",
@@ -183,7 +183,7 @@
 	},
 	{
 		"name": "CONCACAF",
-		"worldCupSpots": 4,
+		"worldCupSpots": 5,
 		"teams": [
 			{
 				"name": "Canadá",
@@ -231,7 +231,7 @@
 	},
 	{
 		"name": "CONMEBOL",
-		"worldCupSpots": 8,
+		"worldCupSpots": 6,
 		"teams": [
 			{
 				"name": "Argentina",
