@@ -2262,9 +2262,11 @@ function App() {
 
 						//se der certo, fazer a troca. se não continue para o grupo anterior.
 						if (canFit) {
-							let r = RandomNumber(0, retroValidNations.length - 1);
-							pot1validNations = [groups[indexRetro][1]];
-							groups[indexRetro][1] = retroValidNations[r];
+							const oldTeam = groups[indexRetro][1];
+							const newTeam = retroValidNations[RandomNumber(0, retroValidNations.length - 1)];
+							groups[indexRetro][1] = newTeam;
+							pots[1] = pots[1].filter((n) => n.name !== newTeam.name);
+							pot1validNations = [oldTeam];
 							found = true;
 							break;
 						}
@@ -2309,9 +2311,11 @@ function App() {
 
 						//se der certo, fazer a troca. se não continue para o grupo anterior.
 						if (canFit) {
-							let r = RandomNumber(0, retroValidNations.length - 1);
-							pot2validNations = [groups[indexRetro][2]];
-							groups[indexRetro][2] = retroValidNations[r];
+							const oldTeam = groups[indexRetro][2];
+							const newTeam = retroValidNations[RandomNumber(0, retroValidNations.length - 1)];
+							groups[indexRetro][2] = newTeam;
+							pots[2] = pots[2].filter((n) => n.name !== newTeam.name);
+							pot2validNations = [oldTeam];
 							found = true;
 							break;
 						}
@@ -2356,9 +2360,11 @@ function App() {
 
 						//se der certo, fazer a troca. se não continue para o grupo anterior.
 						if (canFit) {
-							let r = RandomNumber(0, retroValidNations.length - 1);
-							pot3validNations = [groups[indexRetro][3]];
-							groups[indexRetro][3] = retroValidNations[r];
+							const oldTeam = groups[indexRetro][3];
+							const newTeam = retroValidNations[RandomNumber(0, retroValidNations.length - 1)];
+							groups[indexRetro][3] = newTeam;
+							pots[3] = pots[3].filter((n) => n.name !== newTeam.name);
+							pot3validNations = [oldTeam];
 							found = true;
 							break;
 						}
