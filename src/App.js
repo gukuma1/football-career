@@ -1303,6 +1303,8 @@ function App() {
 
 			americanTeams.sort((a, b) => b.power - a.power - Math.random());
 
+console.log(americanTeams)
+
 			let americanPots = [];
 			for (let i = 0; i < 4; i++) {
 				americanPots.push(shuffleArray(americanTeams.splice(0, 4)));
