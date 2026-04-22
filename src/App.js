@@ -8,20 +8,17 @@ import Positions from "./Database/positions.json";
 import ChartComponent from "./Components/chartComponent";
 import Season from "./Components/season";
 import { RandomNumber, DeepClone, shuffleArray, weightedAverage } from "./Utils";
-import { GetMatch, GetKnockoutResult } from "./Utils/matchUtils";
+import { GetKnockoutResult } from "./Utils/matchUtils";
 import {
   GetLeaguePosition,
   GetChampionsPosition,
-  GetWorldCupPosition,
   GetTournamentResults,
-  DrawMatches,
   DrawWorldGroups,
   euroCupDraw,
   americanCupDraw,
   africanAsianCupDraw,
   worldCupDraw,
   clubWorldCupDraw,
-  customReverse,
 } from "./Utils/tournamentUtils";
 import { GetInitTeams, GetNewTeams, GetTransferValue } from "./Utils/transferUtils";
 import { computeTeamsStats, computeExtraTeamsStats, computeNationsStats } from "./Utils/statsUtils";

@@ -5,7 +5,7 @@
  */
 
 import { RandomNumber, DeepClone, shuffleArray } from "../Utils";
-import { GetMatch, GetKnockoutResult } from "./matchUtils";
+import { GetMatch } from "./matchUtils";
 
 // ─── Auxiliares de chaveamento ────────────────────────────────────────────────
 
