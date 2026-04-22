@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import WorldCupHistoryHosts from "./Database/worldCupLastHosts.json";
 import Leagues from "./Database/leagues.json";
