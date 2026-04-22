@@ -436,6 +436,15 @@ function App() {
 		let triplice = 0;
 		let competitionPerformance = 0;
 
+		// Set champions qualification based on last season
+		let lastPlayerLeagueResult = lastLeagueResults.find((league) => league.country === player.team.country);
+		if (lastPlayerLeagueResult) {
+			let lp = lastPlayerLeagueResult.table.findIndex((team) => team.name === player.team.name) + 1;
+			player.championsQualification = lp > 0 && lp <= lastPlayerLeagueResult.championsSpots;
+		} else {
+			player.championsQualification = false;
+		}
+
 		//national tournaments
 		let leagueResults = leagues.map((league) => {
 			const result = GetLeaguePosition(shuffleArray(league.highestLeague.teams));
@@ -1302,8 +1311,6 @@ function App() {
 			]);
 
 			americanTeams.sort((a, b) => b.power - a.power - Math.random());
-
-console.log(americanTeams)
 
 			let americanPots = [];
 			for (let i = 0; i < 4; i++) {
