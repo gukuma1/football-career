@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import WorldCupHistoryHosts from "./Database/worldCupLastHosts.json";
 import Leagues from "./Database/leagues.json";
@@ -1714,8 +1714,11 @@ function App() {
 				// Adicionar as equipes qualificadas para a Copa do Mundo à lista de todas as nações
 				allClassifNations = allClassifNations.concat(classif);
 
-				// Adicionar as equipes restantes à lista de equipes para os playoffs
-				playoffClassif = playoffClassif.concat(region.teams);
+				// Adicionar duas das equipes restantes à lista de equipes para os playoffs
+				if (region.name !== "UEFA") {
+					let regionPlayoffs = region.teams.splice(0, 2);
+					playoffClassif = playoffClassif.concat(regionPlayoffs);
+				}
 			}
 
 			// Embaralhar as equipes para os playoffs
