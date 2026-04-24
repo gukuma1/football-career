@@ -667,3 +667,302 @@ export function DrawWorldGroups(teams, hostsQtd) {
 
 	return groups;
 }
+
+// ─── Mundial de Clubes ────────────────────────────────────────────────────────
+
+/**
+ * Monta os 8 grupos do Mundial de Clubes via backtracking,
+ * garantindo que nenhum grupo tenha dois times do mesmo continente.
+ *
+ * @param {Array} pot1continents - Ordem dos continentes do pot1 (embaralhada)
+ * @param {Array} pot3continents - Ordem dos continentes do pot3 (embaralhada)
+ * @param {Array} pot4continents - Ordem dos continentes do pot4 (embaralhada)
+ * @returns {Array|null} lista de 8 trios [cont1, cont3, cont4] ou null se impossível
+ */
+export function montarGrupos(pot1continents, pot3continents, pot4continents) {
+	const usadosPot3 = Array(pot3continents.length).fill(false);
+	const usadosPot4 = Array(pot4continents.length).fill(false);
+	const grupos = [];
+
+	function tentar(pos) {
+		if (pos === pot1continents.length) return true;
+
+		const continente1 = pot1continents[pos];
+
+		for (let i = 0; i < pot3continents.length; i++) {
+			if (usadosPot3[i]) continue;
+			const continente3 = pot3continents[i];
+			if (continente3 === continente1) continue;
+
+			for (let j = 0; j < pot4continents.length; j++) {
+				if (usadosPot4[j]) continue;
+				const continente4 = pot4continents[j];
+				if (continente4 === continente1 || continente4 === continente3) continue;
+
+				usadosPot3[i] = true;
+				usadosPot4[j] = true;
+				grupos.push([continente1, continente3, continente4]);
+
+				if (tentar(pos + 1)) return true;
+
+				usadosPot3[i] = false;
+				usadosPot4[j] = false;
+				grupos.pop();
+			}
+		}
+
+		return false;
+	}
+
+	return tentar(0) ? grupos : null;
+}
+
+/**
+ * Seleciona os times e monta os 8 grupos do Mundial de Clubes.
+ *
+ * O `setUefaWinners([])` deve ser chamado no componente após esta função,
+ * pois ela não tem acesso ao setState.
+ *
+ * @param {Object} params
+ * @param {Array}  params.extrateams           - Estado atual dos times extras
+ * @param {Array}  params.leagues              - Estado atual das ligas
+ * @param {Array}  params.nations              - Estado atual das seleções
+ * @param {Array}  params.worldCupHistoryHosts - Histórico de sedes da Copa
+ * @param {Array}  params.uefaWinners          - Times vencedores da UEFA (últimas 4 edições)
+ * @param {number} params.year                 - Ano atual da simulação
+ * @param {Object} params.playerTeam           - Time do jogador
+ * @returns {{ groups: Array, playedClubWC: boolean, extraContinent: string }}
+ */
+export function DrawClubWorldCupGroups({
+	extrateams,
+	leagues,
+	nations,
+	worldCupHistoryHosts,
+	uefaWinners,
+	year,
+	playerTeam,
+}) {
+	// ── Selecionar times por confederação ──────────────────────────────────────
+	let afcConf = DeepClone(extrateams.filter((c) => c.name === "AFC")[0]);
+	let afcClubs = afcConf.teams.sort((a, b) => a.power > b.power + Math.random());
+	let clubWC_afc = afcClubs.splice(0, afcConf.clubWorldCupSpots);
+
+	let cafConf = DeepClone(extrateams.filter((c) => c.name === "CAF")[0]);
+	let cafClubs = cafConf.teams.sort((a, b) => a.power > b.power + Math.random());
+	let clubWC_caf = cafClubs.splice(0, cafConf.clubWorldCupSpots);
+
+	let concacafConf = DeepClone(extrateams.filter((c) => c.name === "CONCACAF")[0]);
+	let concacafClubs = concacafConf.teams.sort((a, b) => a.power > b.power + Math.random());
+	let clubWC_concacaf = concacafClubs.splice(0, concacafConf.clubWorldCupSpots);
+
+	let clubWC_conmebol = [];
+	let conmebolConf = DeepClone(extrateams.filter((c) => c.name === "CONMEBOL")[0]);
+	let conmebolClubs = conmebolConf.teams.sort((a, b) => b.power - a.power - Math.random());
+	let conmebolIndex = 0;
+	while (clubWC_conmebol.length < conmebolConf.clubWorldCupSpots) {
+		let club = conmebolClubs[conmebolIndex];
+		if (clubWC_conmebol.filter((c) => c.country === club.country).length < 4)
+			clubWC_conmebol.push(club);
+		conmebolIndex++;
+		if (conmebolIndex >= conmebolClubs.length) throw new Error("Não deu (CONMEBOL)");
+	}
+
+	let clubWC_ofc = DeepClone(extrateams.filter((c) => c.name === "OFC")[0].teams[0]);
+
+	// ── UEFA: prioriza vencedores da Champions, completa por poder ─────────────
+	let clubWC_uefa = [];
+	for (let i = 0; i < 4; i++) {
+		if (clubWC_uefa.filter((t) => t.name === uefaWinners[i].name).length > 0) continue;
+		let league = leagues.filter((l) => l.country === uefaWinners[i].country)[0];
+		let team = null;
+		if (!league) {
+			league = extrateams.filter((l) => l.name === "UEFA")[0].teams;
+			team = league.filter((t) => t.name === uefaWinners[i].name)[0];
+		} else {
+			team = league.highestLeague.teams.filter((t) => t.name === uefaWinners[i].name)[0];
+			if (!team)
+				team = league.lowerLeague.teams.filter((t) => t.name === uefaWinners[i].name)[0];
+		}
+		if (!team) throw new Error(`Time não encontrado: ${uefaWinners[i].name}`);
+		clubWC_uefa.push(team);
+	}
+
+	let uefaIndex = 0;
+	let uefaConf = DeepClone(extrateams.filter((c) => c.name === "UEFA")[0]);
+	let uefaClubs = [];
+	for (let leagueID = 0; leagueID < leagues.length; leagueID++) {
+		uefaClubs = uefaClubs.concat([...leagues[leagueID].highestLeague.teams]);
+	}
+	uefaClubs.sort((a, b) => b.power - a.power);
+	while (clubWC_uefa.length < uefaConf.clubWorldCupSpots) {
+		if (uefaIndex >= uefaClubs.length) throw new Error("Não deu (UEFA)");
+		let club = uefaClubs[uefaIndex];
+		if (
+			clubWC_uefa.filter((c) => c.country === club.country).length < 2 &&
+			!clubWC_uefa.some((c) => c.name === club.name)
+		)
+			clubWC_uefa.push(club);
+		uefaIndex++;
+	}
+
+	// ── Time extra do país-sede ────────────────────────────────────────────────
+	let extra = null;
+	let hostCountry = worldCupHistoryHosts.find((h) => h.year === year + 1).hosts[0];
+	let country = null;
+	for (const conf of nations) {
+		for (const team of conf.teams) {
+			if (team.name === hostCountry) country = team;
+		}
+	}
+	if (!country) throw new Error(`País-sede não encontrado: ${hostCountry}`);
+
+	let extraContinent = country.continent;
+
+	if (country.continent === "UEFA") {
+		if (!clubWC_uefa.some((c) => c.country === hostCountry)) {
+			let league = leagues.filter((l) => l.country === country.name);
+			if (league.length > 0) {
+				league = league[0].highestLeague.teams;
+			} else {
+				let extraLeague = DeepClone(extrateams.filter((l) => l.name === country.continent)[0]);
+				league = extraLeague.teams.filter((t) => t.country === country.name);
+			}
+			league.sort((a, b) => b.power - a.power - Math.random());
+			clubWC_uefa.pop();
+			clubWC_uefa.push(league[0]);
+		}
+		let candidates = {
+			AFC: afcClubs[0],
+			CAF: cafClubs[0],
+			CONCACAF: concacafClubs[0],
+			CONMEBOL: conmebolClubs[0],
+		};
+		let pots = shuffleArray(["AFC", "CAF", "CONCACAF", "CONMEBOL"]);
+		extraContinent = pots[0];
+		extra = candidates[extraContinent];
+	} else {
+		let league = DeepClone(extrateams.filter((l) => l.name === country.continent)[0]);
+		let validTeams = league.teams.filter((t) => t.country === country.name);
+		extra = validTeams[0];
+		switch (country.continent) {
+			case "AFC": {
+				let duplicated = clubWC_afc.filter((c) => c.name === extra.name);
+				if (duplicated.length > 0) {
+					clubWC_afc = clubWC_afc.filter((c) => c.name !== extra.name);
+					clubWC_afc.push(afcClubs[0]);
+				}
+				break;
+			}
+			case "CAF": {
+				let duplicated = clubWC_caf.filter((c) => c.name === extra.name);
+				if (duplicated.length > 0) {
+					clubWC_caf = clubWC_caf.filter((c) => c.name !== extra.name);
+					clubWC_caf.push(cafClubs[0]);
+				}
+				break;
+			}
+			case "CONCACAF": {
+				let duplicated = clubWC_concacaf.filter((c) => c.name === extra.name);
+				if (duplicated.length > 0) {
+					clubWC_concacaf = clubWC_concacaf.filter((c) => c.name !== extra.name);
+					clubWC_concacaf.push(concacafClubs[0]);
+				}
+				break;
+			}
+			case "CONMEBOL": {
+				let duplicated = clubWC_conmebol.filter((c) => c.name === extra.name);
+				if (duplicated.length > 0) {
+					clubWC_conmebol = clubWC_conmebol.filter((c) => c.name !== extra.name);
+					clubWC_conmebol.push(conmebolClubs[0]);
+				}
+				break;
+			}
+			default:
+				throw new Error("Continente do país-sede inválido");
+		}
+	}
+
+	// ── Montar pots ───────────────────────────────────────────────────────────
+	clubWC_uefa.sort((a, b) => b.power - a.power);
+	clubWC_conmebol.sort((a, b) => b.power - a.power);
+
+	let pot1 = {
+		UEFA: shuffleArray(clubWC_uefa.splice(0, 4)),
+		CONMEBOL: shuffleArray(clubWC_conmebol.splice(0, 4)),
+	};
+	let pot2 = {
+		UEFA: shuffleArray(clubWC_uefa),
+	};
+	let pot3 = {
+		CONMEBOL: shuffleArray(clubWC_conmebol),
+		AFC: shuffleArray(clubWC_afc.splice(0, 2)),
+		CAF: shuffleArray(clubWC_caf.splice(0, 2)),
+		CONCACAF: shuffleArray(clubWC_concacaf.splice(0, 2)),
+	};
+	let pot4 = {
+		AFC: shuffleArray(clubWC_afc),
+		CAF: shuffleArray(clubWC_caf),
+		CONCACAF: shuffleArray(clubWC_concacaf),
+		OFC: [clubWC_ofc],
+		CONMEBOL: [],
+		UEFA: [],
+	};
+	pot4[extraContinent].push(extra);
+
+	const playedClubWC = [pot1, pot2, pot3, pot4].some((pot) =>
+		Object.values(pot).some((conf) => conf.some((club) => club.name === playerTeam.name))
+	);
+
+	// ── Sorteio dos grupos ─────────────────────────────────────────────────────
+	const resultado = montarGrupos(
+		shuffleArray(["UEFA", "CONMEBOL", "UEFA", "CONMEBOL", "UEFA", "CONMEBOL", "UEFA", "CONMEBOL"]),
+		shuffleArray(["CONMEBOL", "CONMEBOL", "AFC", "AFC", "CAF", "CAF", "CONCACAF", "CONCACAF"]),
+		shuffleArray(["OFC", extraContinent, "AFC", "AFC", "CAF", "CAF", "CONCACAF", "CONCACAF"])
+	);
+
+	if (!resultado) throw new Error("Não foi possível montar os grupos do Mundial de Clubes");
+
+	let groups = [[], [], [], [], [], [], [], []];
+	for (let i = 0; i < 8; i++) {
+		let pot1club = pot1[resultado[i][0]].shift();
+		groups[i].push(pot1club);
+
+		let index = 0;
+		let pot2club = pot2.UEFA[index];
+		while (pot1club.country === pot2club.country) {
+			index++;
+			if (index >= pot2.UEFA.length) break;
+			pot2club = pot2.UEFA[index];
+		}
+		if (pot1club.country === pot2club.country) {
+			// Tenta trocar com um grupo já sorteado
+			let trocou = false;
+			for (let k = i - 1; k >= 0; k--) {
+				const candidato = groups[k][1];
+				if (
+					candidato.country !== pot1club.country &&
+					groups[k][0].country !== pot2club.country
+				) {
+					groups[k][1] = pot2club;         // coloca o conflitante no grupo anterior
+					pot2club = candidato;             // pega o do grupo anterior
+					const selectedName = pot2club.name;
+					pot2.UEFA = pot2.UEFA.filter((c) => c.name !== selectedName);
+					trocou = true;
+					break;
+				}
+			}
+			if (!trocou) {
+				// fallback: usa o primeiro disponível mesmo com conflito de país
+				pot2club = pot2.UEFA[0];
+			}
+		}
+
+		pot2.UEFA = pot2.UEFA.filter((c) => c.name !== pot2club.name);
+		groups[i].push(pot2club);
+
+		groups[i].push(pot3[resultado[i][1]].shift());
+		groups[i].push(pot4[resultado[i][2]].shift());
+	}
+
+	return { groups, playedClubWC, extraContinent };
+}
