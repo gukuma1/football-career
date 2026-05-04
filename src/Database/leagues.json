@@ -13,6 +13,7 @@
 				{ "name": "Anderlecht", "country": "Bélgica", "power": 6.0 },
 				{ "name": "Gent", "country": "Bélgica", "power": 5.7 },
 				{ "name": "Mechelen", "country": "Bélgica", "power": 4.9 },
+				{ "name": "Cercle Brugge", "country": "Bélgica", "power": 4.9 },
 				{ "name": "Charleroi", "country": "Bélgica", "power": 4.8 },
 				{ "name": "Liège", "country": "Bélgica", "power": 4.8 },
 				{ "name": "Sint-Truidense VV", "country": "Bélgica", "power": 4.8 },
@@ -20,19 +21,18 @@
 				{ "name": "Westerlo", "country": "Bélgica", "power": 4.3 },
 				{ "name": "Zulte-Waregen", "country": "Bélgica", "power": 3.6 },
 				{ "name": "Verbroedering", "country": "Bélgica", "power": 3.4 },
-				{ "name": "RWDM", "country": "Bélgica", "power": 3.3 },
 				{ "name": "La Louviere", "country": "Bélgica", "power": 3.2 }
 			]
 		},
 		"lowerLeague": {
 			"name": "Challenger Pro League",
 			"teams": [
-				{ "name": "Cercle Brugge", "country": "Bélgica", "power": 4.9 },
 				{ "name": "Kortrijk", "country": "Bélgica", "power": 4.3 },
 				{ "name": "KAS Eupen", "country": "Bélgica", "power": 3.9 },
 				{ "name": "Oostende", "country": "Bélgica", "power": 3.7 },
 				{ "name": "Boussu", "country": "Bélgica", "power": 3.5 },
 				{ "name": "Beerschot", "country": "Bélgica", "power": 3.4 },
+				{ "name": "RWDM", "country": "Bélgica", "power": 3.3 },
 				{ "name": "Patro Eisden", "country": "Bélgica", "power": 3.2 },
 				{ "name": "NXT", "country": "Bélgica", "power": 3.2 },
 				{ "name": "Beveren", "country": "Bélgica", "power": 3.2 },
@@ -68,22 +68,22 @@
 				{ "name": "Augsburg", "country": "Alemanha", "power": 6.4 },
 				{ "name": "Werder Bremen", "country": "Alemanha", "power": 6.1 },
 				{ "name": "Köln", "country": "Alemanha", "power": 6.1 },
+				{ "name": "Heidenheim", "country": "Alemanha", "power": 5.7 },
 				{ "name": "St Pauli", "country": "Alemanha", "power": 5.4 },
-				{ "name": "Hamburg", "country": "Alemanha", "power": 5.2 },
-				{ "name": "Elversberg", "country": "Alemanha", "power": 5.2 }
+				{ "name": "Hamburg", "country": "Alemanha", "power": 5.2 }
 			]
 		},
 		"lowerLeague": {
 			"name": "2. Bundesliga",
 			"teams": [
 				{ "name": "Bochum", "country": "Alemanha", "power": 6.2 },
-				{ "name": "Heidenheim", "country": "Alemanha", "power": 5.7 },
 				{ "name": "Hertha Berlin", "country": "Alemanha", "power": 5.6 },
 				{ "name": "Schalke", "country": "Alemanha", "power": 5.4 },
 				{ "name": "Arminia", "country": "Alemanha", "power": 5.4 },
 				{ "name": "Holstein", "country": "Alemanha", "power": 5.3 },
 				{ "name": "Greuther", "country": "Alemanha", "power": 5.3 },
 				{ "name": "Magdeburg", "country": "Alemanha", "power": 5.3 },
+				{ "name": "Elversberg", "country": "Alemanha", "power": 5.2 },
 				{ "name": "Düsseldorf", "country": "Alemanha", "power": 5.2 },
 				{ "name": "Hannover 96", "country": "Alemanha", "power": 5.2 },
 				{ "name": "Nuremberg", "country": "Alemanha", "power": 5.2 },
@@ -115,9 +115,9 @@
 				{ "name": "Zwolle", "country": "Países Baixos", "power": 3.2 },
 				{ "name": "Groningen", "country": "Países Baixos", "power": 3.1 },
 				{ "name": "Excelsior", "country": "Países Baixos", "power": 2.9 },
-				{ "name": "Cambuur", "country": "Países Baixos", "power": 2.8 },
 				{ "name": "Volendam", "country": "Países Baixos", "power": 2.8 },
-				{ "name": "NAC", "country": "Países Baixos", "power": 2.7 }
+				{ "name": "NAC", "country": "Países Baixos", "power": 2.7 },
+				{ "name": "Telstar", "country": "Países Baixos", "power": 2.4 }
 			]
 		},
 		"lowerLeague": {
@@ -126,6 +126,7 @@
 				{ "name": "RKC", "country": "Países Baixos", "power": 3.6 },
 				{ "name": "Vitesse", "country": "Países Baixos", "power": 3.2 },
 				{ "name": "Wilem II", "country": "Países Baixos", "power": 2.9 },
+				{ "name": "Cambuur", "country": "Países Baixos", "power": 2.8 },
 				{ "name": "Almere", "country": "Países Baixos", "power": 2.8 },
 				{ "name": "Emmen", "country": "Países Baixos", "power": 2.6 },
 				{ "name": "Den Haag", "country": "Países Baixos", "power": 2.4 },
@@ -135,7 +136,6 @@
 				{ "name": "Helmond Sport", "country": "Países Baixos", "power": 2.4 },
 				{ "name": "Maastricht", "country": "Países Baixos", "power": 2.4 },
 				{ "name": "Kerkrade", "country": "Países Baixos", "power": 2.4 },
-				{ "name": "Telstar", "country": "Países Baixos", "power": 2.4 },
 				{ "name": "VVV", "country": "Países Baixos", "power": 2.4 }
 			]
 		}
@@ -260,7 +260,7 @@
 				{ "name": "Nottinham Forest", "country": "Inglaterra", "power": 6.1 },
 				{ "name": "Leeds", "country": "Inglaterra", "power": 5.7 },
 				{ "name": "Burnley", "country": "Inglaterra", "power": 5.6 },
-				{ "name": "Sheffield", "country": "Inglaterra", "power": 5.3 }
+				{ "name": "Sunderland", "country": "Inglaterra", "power": 5.3 }
 			]
 		},
 		"lowerLeague": {
@@ -272,7 +272,7 @@
 				{ "name": "Watford", "country": "Inglaterra", "power": 5.4 },
 				{ "name": "Ipswich", "country": "Inglaterra", "power": 5.4 },
 				{ "name": "Norwich", "country": "Inglaterra", "power": 5.4 },
-				{ "name": "Sunderland", "country": "Inglaterra", "power": 5.3 },
+				{ "name": "Sheffield", "country": "Inglaterra", "power": 5.3 },
 				{ "name": "Coventry", "country": "Inglaterra", "power": 5.3 },
 				{ "name": "Bristol", "country": "Inglaterra", "power": 5.3 },
 				{ "name": "Blackburn Rose", "country": "Inglaterra", "power": 5.3 },
@@ -301,10 +301,10 @@
 				{ "name": "Moreirense", "country": "Portugal", "power": 3.8 },
 				{ "name": "Santa Clara", "country": "Portugal", "power": 3.7 },
 				{ "name": "Rio Ave", "country": "Portugal", "power": 3.7 },
-				{ "name": "Vizela", "country": "Portugal", "power": 3.5 },
 				{ "name": "Estrela Amadora", "country": "Portugal", "power": 3.2 },
 				{ "name": "Nacional", "country": "Portugal", "power": 3.0 },
 				{ "name": "Tondela", "country": "Portugal", "power": 3.0 },
+				{ "name": "AVS SAD", "country": "Portugal", "power": 2.9 },
 				{ "name": "Alverca", "country": "Portugal", "power": 2.8 }
 			]
 		},
@@ -313,11 +313,11 @@
 			"teams": [
 				{ "name": "Boavista", "country": "Portugal", "power": 4.0 },
 				{ "name": "Portimonense", "country": "Portugal", "power": 3.6 },
+				{ "name": "Vizela", "country": "Portugal", "power": 3.5 },
 				{ "name": "Chaves", "country": "Portugal", "power": 3.3 },
 				{ "name": "Farense", "country": "Portugal", "power": 3.2 },
 				{ "name": "Marítimo", "country": "Portugal", "power": 3.2 },
 				{ "name": "Passos Ferreira", "country": "Portugal", "power": 3.2 },
-				{ "name": "AVS SAD", "country": "Portugal", "power": 2.9 },
 				{ "name": "B-SAD", "country": "Portugal", "power": 2.9 },
 				{ "name": "Panafiel", "country": "Portugal", "power": 2.8 },
 				{ "name": "Leixões", "country": "Portugal", "power": 2.8 },
@@ -351,9 +351,9 @@
 				{ "name": "Genoa", "country": "Itália", "power": 6.0 },
 				{ "name": "Lecce", "country": "Itália", "power": 5.9 },
 				{ "name": "Cagliari", "country": "Itália", "power": 5.8 },
-				{ "name": "Spezia", "country": "Itália", "power": 5.6 },
 				{ "name": "Como", "country": "Itália", "power": 5.4 },
 				{ "name": "Parma", "country": "Itália", "power": 5.4 },
+				{ "name": "Cremonese", "country": "Itália", "power": 5.3 },
 				{ "name": "Pisa", "country": "Itália", "power": 5.2 }
 			]
 		},
@@ -363,10 +363,10 @@
 				{ "name": "Empoli", "country": "Itália", "power": 6.3 },
 				{ "name": "Monza", "country": "Itália", "power": 5.9 },
 				{ "name": "Salernitana", "country": "Itália", "power": 5.7 },
+				{ "name": "Spezia", "country": "Itália", "power": 5.6 },
 				{ "name": "Venezia", "country": "Itália", "power": 5.5 },
 				{ "name": "Sampdoria", "country": "Itália", "power": 5.5 },
 				{ "name": "Frosinone", "country": "Itália", "power": 5.4 },
-				{ "name": "Cremonese", "country": "Itália", "power": 5.3 },
 				{ "name": "Catanzaro", "country": "Itália", "power": 5.2 },
 				{ "name": "Cesena", "country": "Itália", "power": 5.2 },
 				{ "name": "Palermo", "country": "Itália", "power": 5.2 },

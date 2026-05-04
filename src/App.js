@@ -231,6 +231,8 @@ function App() {
 			return leagueResult;
 		});
 
+		console.log("Resultados das ligas atualizados:", leagueResults);
+
 		setLastLeagueResults(leagueResults);
 		// Update league results
 		setTransfers(GetInitTeams(newTeams, player)); // Use selectedPosition
