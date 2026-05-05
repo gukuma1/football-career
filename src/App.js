@@ -1990,11 +1990,12 @@ function App() {
 						id="continent-dropdown"
 						onChange={() => updateNationDropdown()}>
 						<option value="">Selecione uma Confederação</option>
-						<option value="AFC">Ásia e Oceania</option>
-						<option value="CAF">África</option>
-						<option value="CONCACAF">América do Norte</option>
-						<option value="CONMEBOL">América do Sul</option>
-						<option value="UEFA">Europa</option>
+						<option value="AFC">Ásia (AFC)</option>
+						<option value="CAF">África (CAF)</option>
+						<option value="CONCACAF">América do Norte (CONCACAF)</option>
+						<option value="CONMEBOL">América do Sul (CONMEBOL)</option>
+						<option value="OFC">Oceania (OFC)</option>
+						<option value="UEFA">Europa (UEFA)</option>
 					</select>
 					<select id="nation-dropdown">
 						<option value="">Selecione uma Nação</option>

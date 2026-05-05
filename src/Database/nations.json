@@ -1,7 +1,7 @@
 [
 	{
 		"name": "AFC",
-		"worldCupSpots": 8,
+		"worldCupSpots": 7,
 		"teams": [
 			{
 				"name": "Arábia Saudita",
@@ -336,6 +336,19 @@
 				"continent": "CONMEBOL",
 				"power": 5.0,
 				"borders": ["Colômbia", "Brasil", "Guyana"],
+				"can_host": false
+			}
+		]
+	},
+	{
+		"name": "OFC",
+		"worldCupSpots": 1,
+		"teams": [
+			{
+				"name": "Nova Zelândia",
+				"continent": "OFC",
+				"power": 4.0,
+				"borders": [],
 				"can_host": false
 			}
 		]
