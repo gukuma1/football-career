@@ -4,84 +4,84 @@
     "championsSpots": 2,
     "table": [
       {
-        "name": "Genk",
-        "country": "Bélgica",
-        "power": 6.37
-      },
-      {
         "name": "Club Brugge",
         "country": "Bélgica",
-        "power": 6.35
+        "power": 6.4
       },
       {
-        "name": "Union SG",
+        "name": "Union Saint-Gilloise",
         "country": "Bélgica",
-        "power": 7.14
+        "power": 7.2
+      },
+      {
+        "name": "Genk",
+        "country": "Bélgica",
+        "power": 6.4
       },
       {
         "name": "Anderlecht",
         "country": "Bélgica",
-        "power": 5.83
+        "power": 6
       },
       {
         "name": "Antwerp",
         "country": "Bélgica",
-        "power": 6.3
-      },
-      {
-        "name": "Gent",
-        "country": "Bélgica",
-        "power": 5.77
-      },
-      {
-        "name": "Standard Liège",
-        "country": "Bélgica",
-        "power": 4.85
-      },
-      {
-        "name": "Mechelen",
-        "country": "Bélgica",
-        "power": 5
-      },
-      {
-        "name": "Westerlo",
-        "country": "Bélgica",
-        "power": 4.31
+        "power": 6.2
       },
       {
         "name": "Charleroi",
         "country": "Bélgica",
-        "power": 4.81
+        "power": 4.8
       },
       {
-        "name": "OH Leuven",
+        "name": "Mechelen",
         "country": "Bélgica",
-        "power": 4.75
+        "power": 4.9
       },
       {
-        "name": "Dender EH",
+        "name": "Leuven",
         "country": "Bélgica",
-        "power": 3.33
+        "power": 4.7
+      },
+      {
+        "name": "Liège",
+        "country": "Bélgica",
+        "power": 4.8
+      },
+      {
+        "name": "Sint-Truidense VV",
+        "country": "Bélgica",
+        "power": 4.8
       },
       {
         "name": "Cercle Brugge",
         "country": "Bélgica",
-        "power": 3.7
+        "power": 4.9
       },
       {
-        "name": "Sint-Truiden",
+        "name": "Gent",
         "country": "Bélgica",
-        "power": 4.72
+        "power": 5.7
       },
       {
-        "name": "Kortrijk",
+        "name": "Westerlo",
         "country": "Bélgica",
-        "power": 3.24
+        "power": 4.3
       },
       {
-        "name": "Beerschot",
+        "name": "Zulte-Waregen",
         "country": "Bélgica",
-        "power": 3.35
+        "power": 3.6
+      },
+      {
+        "name": "Verbroedering",
+        "country": "Bélgica",
+        "power": 3.4
+      },
+      {
+        "name": "La Louviere",
+        "country": "Bélgica",
+        "power": 3.2
       }
     ]
   },
@@ -97,17 +97,27 @@
       {
         "name": "Leverkusen",
         "country": "Alemanha",
-        "power": 8.71
-      },
-      {
-        "name": "Frankfurt",
-        "country": "Alemanha",
-        "power": 7.02
+        "power": 8.7
       },
       {
         "name": "Bor. Dortmund",
         "country": "Alemanha",
-        "power": 8.49
+        "power": 8.4
+      },
+      {
+        "name": "RB Leipzig",
+        "country": "Alemanha",
+        "power": 8
+      },
+      {
+        "name": "Frankfurt",
+        "country": "Alemanha",
+        "power": 7
+      },
+      {
+        "name": "Stuttgart",
+        "country": "Alemanha",
+        "power": 6.8
       },
       {
         "name": "Freiburg",
@@ -115,69 +125,59 @@
         "power": 7.3
       },
       {
-        "name": "Mainz",
-        "country": "Alemanha",
-        "power": 6.84
-      },
-      {
-        "name": "RB Leipzig",
-        "country": "Alemanha",
-        "power": 7.94
-      },
-      {
-        "name": "Werder Bremen",
-        "country": "Alemanha",
-        "power": 6.12
-      },
-      {
-        "name": "Stuttgart",
-        "country": "Alemanha",
-        "power": 6.74
-      },
-      {
-        "name": "Bor. Mönchengladbach",
-        "country": "Alemanha",
-        "power": 6.44
-      },
-      {
         "name": "Wolfsburg",
         "country": "Alemanha",
-        "power": 6.64
-      },
-      {
-        "name": "Augsburg",
-        "country": "Alemanha",
-        "power": 6.55
+        "power": 6.6
       },
       {
         "name": "Union Berlin",
         "country": "Alemanha",
-        "power": 6.93
-      },
-      {
-        "name": "St Pauli",
-        "country": "Alemanha",
-        "power": 5.33
-      },
-      {
-        "name": "Hoffenheim",
-        "country": "Alemanha",
-        "power": 6.46
+        "power": 6.9
       },
       {
         "name": "Heidenheim",
         "country": "Alemanha",
+        "power": 5.7
+      },
+      {
+        "name": "Bor. Mönchengladbach",
+        "country": "Alemanha",
+        "power": 6.6
+      },
+      {
+        "name": "Hoffenheim",
+        "country": "Alemanha",
+        "power": 6.5
+      },
+      {
+        "name": "Augsburg",
+        "country": "Alemanha",
+        "power": 6.4
+      },
+      {
+        "name": "Mainz",
+        "country": "Alemanha",
+        "power": 6.7
+      },
+      {
+        "name": "Werder Bremen",
+        "country": "Alemanha",
         "power": 6.1
       },
       {
-        "name": "Holstein Kiel",
+        "name": "St Pauli",
         "country": "Alemanha",
-        "power": 5.17
+        "power": 5.4
       },
       {
-        "name": "Bochum",
+        "name": "Köln",
         "country": "Alemanha",
-        "power": 5.12
+        "power": 6.1
+      },
+      {
+        "name": "Hamburg",
+        "country": "Alemanha",
+        "power": 5.2
       }
     ]
   },
@@ -188,92 +188,92 @@
       {
         "name": "PSV",
         "country": "Países Baixos",
-        "power": 7.58
-      },
-      {
-        "name": "Ajax",
-        "country": "Países Baixos",
-        "power": 6.52
-      },
-      {
-        "name": "Feyenoord",
-        "country": "Países Baixos",
-        "power": 7.09
-      },
-      {
-        "name": "Utrecht",
-        "country": "Países Baixos",
-        "power": 4.86
-      },
-      {
-        "name": "AZ",
-        "country": "Países Baixos",
-        "power": 5.64
+        "power": 7.5
       },
       {
         "name": "Twente",
         "country": "Países Baixos",
-        "power": 5.94
+        "power": 5.9
+      },
+      {
+        "name": "AZ",
+        "country": "Países Baixos",
+        "power": 5.8
+      },
+      {
+        "name": "Feyenoord",
+        "country": "Países Baixos",
+        "power": 7.1
+      },
+      {
+        "name": "Ajax",
+        "country": "Países Baixos",
+        "power": 6.6
+      },
+      {
+        "name": "Utrecht",
+        "country": "Países Baixos",
+        "power": 5
       },
       {
         "name": "Go Ahead Eagles",
         "country": "Países Baixos",
-        "power": 4.1
-      },
-      {
-        "name": "NEC Nijmegen",
-        "country": "Países Baixos",
-        "power": 4.13
-      },
-      {
-        "name": "Heerenveen",
-        "country": "Países Baixos",
-        "power": 3.91
+        "power": 4
       },
       {
         "name": "Zwolle",
         "country": "Países Baixos",
-        "power": 3.18
-      },
-      {
-        "name": "Fortuna Sittard",
-        "country": "Países Baixos",
-        "power": 3.65
+        "power": 3.2
       },
       {
         "name": "Sparta Rotterdam",
         "country": "Países Baixos",
-        "power": 4.17
+        "power": 4.2
       },
       {
-        "name": "Groningen",
+        "name": "Fortuna Sittard",
         "country": "Países Baixos",
-        "power": 2.98
+        "power": 3.8
+      },
+      {
+        "name": "Heerenveen",
+        "country": "Países Baixos",
+        "power": 4
+      },
+      {
+        "name": "NEC Nijmegen",
+        "country": "Países Baixos",
+        "power": 4
+      },
+      {
+        "name": "Excelsior",
+        "country": "Países Baixos",
+        "power": 2.9
       },
       {
         "name": "Heracles Almelo",
         "country": "Países Baixos",
-        "power": 3.26
+        "power": 3.3
       },
       {
-        "name": "NAC Breda",
+        "name": "NAC",
         "country": "Países Baixos",
-        "power": 2.89
+        "power": 2.7
       },
       {
-        "name": "Willem II",
+        "name": "Groningen",
         "country": "Países Baixos",
-        "power": 2.95
+        "power": 3.1
       },
       {
-        "name": "RKC Waalwijk",
+        "name": "Telstar",
         "country": "Países Baixos",
-        "power": 3.01
+        "power": 2.4
       },
       {
-        "name": "Almere City",
+        "name": "Volendam",
         "country": "Países Baixos",
-        "power": 2.91
+        "power": 2.8
       }
     ]
   },
@@ -284,102 +284,102 @@
       {
         "name": "Barcelona",
         "country": "Espanha",
-        "power": 9.43
+        "power": 9.4
       },
       {
         "name": "Real Madrid",
         "country": "Espanha",
-        "power": 9.53
-      },
-      {
-        "name": "At. de Madrid",
-        "country": "Espanha",
-        "power": 8.86
+        "power": 9.5
       },
       {
         "name": "Ath. Bilbao",
         "country": "Espanha",
-        "power": 7.85
+        "power": 7.8
+      },
+      {
+        "name": "At. de Madrid",
+        "country": "Espanha",
+        "power": 8.8
       },
       {
         "name": "Villarreal",
         "country": "Espanha",
-        "power": 7.9
+        "power": 7.8
       },
       {
         "name": "Real Betis",
         "country": "Espanha",
-        "power": 7.81
+        "power": 7.7
+      },
+      {
+        "name": "Sevilla",
+        "country": "Espanha",
+        "power": 7
+      },
+      {
+        "name": "Mallorca",
+        "country": "Espanha",
+        "power": 6.8
+      },
+      {
+        "name": "Real Sociedad",
+        "country": "Espanha",
+        "power": 7.7
+      },
+      {
+        "name": "Alavés",
+        "country": "Espanha",
+        "power": 6.2
+      },
+      {
+        "name": "Espanyol",
+        "country": "Espanha",
+        "power": 6.3
+      },
+      {
+        "name": "Osasuna",
+        "country": "Espanha",
+        "power": 6.9
+      },
+      {
+        "name": "Valência",
+        "country": "Espanha",
+        "power": 6.8
       },
       {
         "name": "Celta de Vigo",
+        "country": "Espanha",
+        "power": 6.8
+      },
+      {
+        "name": "Girona",
         "country": "Espanha",
         "power": 6.7
       },
       {
         "name": "Rayo Vallecano",
         "country": "Espanha",
-        "power": 6.83
+        "power": 6.8
       },
       {
-        "name": "Osasuna",
+        "name": "Oviedo",
         "country": "Espanha",
-        "power": 6.78
+        "power": 5.6
       },
       {
-        "name": "Mallorca",
+        "name": "Elche",
         "country": "Espanha",
-        "power": 6.75
-      },
-      {
-        "name": "Real Sociedad",
-        "country": "Espanha",
-        "power": 7.69
-      },
-      {
-        "name": "Valência",
-        "country": "Espanha",
-        "power": 6.89
+        "power": 5.9
       },
       {
         "name": "Getafe",
         "country": "Espanha",
-        "power": 6.51
+        "power": 6.7
       },
       {
-        "name": "Espanyol",
+        "name": "Levante",
         "country": "Espanha",
-        "power": 6.31
-      },
-      {
-        "name": "Alavés",
-        "country": "Espanha",
-        "power": 6.06
-      },
-      {
-        "name": "Girona",
-        "country": "Espanha",
-        "power": 6.74
-      },
-      {
-        "name": "Sevilla",
-        "country": "Espanha",
-        "power": 7.02
-      },
-      {
-        "name": "Leganés",
-        "country": "Espanha",
-        "power": 5.76
-      },
-      {
-        "name": "Las Palmas",
-        "country": "Espanha",
-        "power": 5.96
-      },
-      {
-        "name": "Valladolid",
-        "country": "Espanha",
-        "power": 5.58
+        "power": 5.7
       }
     ]
   },
@@ -390,90 +390,90 @@
       {
         "name": "PSG",
         "country": "França",
-        "power": 9.14
-      },
-      {
-        "name": "Marseille",
-        "country": "França",
-        "power": 7.71
+        "power": 9.1
       },
       {
         "name": "Monaco",
         "country": "França",
-        "power": 7.66
+        "power": 7.7
       },
       {
-        "name": "Nice",
+        "name": "Ol. de Marseille",
         "country": "França",
-        "power": 7.12
+        "power": 7.6
       },
       {
         "name": "Lille",
         "country": "França",
-        "power": 7.37
+        "power": 7.3
       },
       {
-        "name": "Lyon",
+        "name": "Nice",
         "country": "França",
-        "power": 7.08
+        "power": 7.2
       },
       {
         "name": "Strasbourg",
         "country": "França",
-        "power": 6.61
+        "power": 6.6
+      },
+      {
+        "name": "Lyon",
+        "country": "França",
+        "power": 7.1
       },
       {
         "name": "Lens",
         "country": "França",
-        "power": 7.38
-      },
-      {
-        "name": "Brest",
-        "country": "França",
-        "power": 6.06
-      },
-      {
-        "name": "Toulouse",
-        "country": "França",
-        "power": 6.01
-      },
-      {
-        "name": "Auxerre",
-        "country": "França",
-        "power": 5.49
+        "power": 7.4
       },
       {
         "name": "Rennes",
         "country": "França",
-        "power": 6.77
+        "power": 6.8
       },
       {
         "name": "Nantes",
         "country": "França",
-        "power": 6.14
+        "power": 6.2
       },
       {
-        "name": "Angers",
+        "name": "Auxerre",
         "country": "França",
-        "power": 5.55
+        "power": 5.5
+      },
+      {
+        "name": "Toulouse",
+        "country": "França",
+        "power": 5.9
+      },
+      {
+        "name": "Lorient",
+        "country": "França",
+        "power": 5.8
+      },
+      {
+        "name": "Stade Brestois",
+        "country": "França",
+        "power": 6.1
+      },
+      {
+        "name": "Metz",
+        "country": "França",
+        "power": 5.4
       },
       {
         "name": "Le Havre",
         "country": "França",
-        "power": 5.3
+        "power": 5.4
       },
       {
-        "name": "Reims",
+        "name": "Angers",
         "country": "França",
-        "power": 5.82
+        "power": 5.6
       },
       {
-        "name": "Saint-Étienne",
-        "country": "França",
-        "power": 5.47
-      },
-      {
-        "name": "Montpellier",
+        "name": "Paris FC",
         "country": "França",
         "power": 5
       }
@@ -484,104 +484,104 @@
     "championsSpots": 5,
     "table": [
       {
-        "name": "Liverpool",
-        "country": "Inglaterra",
-        "power": 8.83
-      },
-      {
-        "name": "Arsenal",
-        "country": "Inglaterra",
-        "power": 8.68
-      },
-      {
         "name": "Man. City",
         "country": "Inglaterra",
-        "power": 9.13
-      },
-      {
-        "name": "Chelsea",
-        "country": "Inglaterra",
-        "power": 7.54
-      },
-      {
-        "name": "Newcastle",
-        "country": "Inglaterra",
-        "power": 7.4
+        "power": 9.2
       },
       {
         "name": "Aston Villa",
         "country": "Inglaterra",
-        "power": 7.11
+        "power": 7.1
       },
       {
-        "name": "Nottingham Forest",
+        "name": "Liverpool",
         "country": "Inglaterra",
-        "power": 6.13
+        "power": 8.9
       },
       {
-        "name": "Brighton",
+        "name": "Arsenal",
         "country": "Inglaterra",
-        "power": 6.98
+        "power": 8.7
+      },
+      {
+        "name": "Chelsea",
+        "country": "Inglaterra",
+        "power": 7.4
+      },
+      {
+        "name": "Newcastle",
+        "country": "Inglaterra",
+        "power": 7.3
       },
       {
         "name": "Bournemouth",
         "country": "Inglaterra",
-        "power": 6.13
-      },
-      {
-        "name": "Brentford",
-        "country": "Inglaterra",
-        "power": 6.59
-      },
-      {
-        "name": "Fulham",
-        "country": "Inglaterra",
-        "power": 6.46
-      },
-      {
-        "name": "Crystal Palace",
-        "country": "Inglaterra",
-        "power": 6.71
-      },
-      {
-        "name": "Everton",
-        "country": "Inglaterra",
-        "power": 6.33
-      },
-      {
-        "name": "West Ham",
-        "country": "Inglaterra",
-        "power": 6.62
+        "power": 6.2
       },
       {
         "name": "Man. United",
         "country": "Inglaterra",
-        "power": 6.98
+        "power": 7.1
+      },
+      {
+        "name": "Nottinham Forest",
+        "country": "Inglaterra",
+        "power": 6.1
+      },
+      {
+        "name": "Brighton",
+        "country": "Inglaterra",
+        "power": 7
       },
       {
         "name": "Wolves",
         "country": "Inglaterra",
-        "power": 6.45
+        "power": 6.5
       },
       {
         "name": "Tottenham",
         "country": "Inglaterra",
-        "power": 7.14
+        "power": 7.1
       },
       {
-        "name": "Leicester City",
+        "name": "Crystal Palace",
         "country": "Inglaterra",
-        "power": 5.76
+        "power": 6.7
       },
       {
-        "name": "Ipswich Town",
+        "name": "Everton",
+        "country": "Inglaterra",
+        "power": 6.4
+      },
+      {
+        "name": "West Ham",
+        "country": "Inglaterra",
+        "power": 6.6
+      },
+      {
+        "name": "Brentford",
+        "country": "Inglaterra",
+        "power": 6.7
+      },
+      {
+        "name": "Leeds",
+        "country": "Inglaterra",
+        "power": 5.7
+      },
+      {
+        "name": "Burnley",
+        "country": "Inglaterra",
+        "power": 5.6
+      },
+      {
+        "name": "Fulham",
+        "country": "Inglaterra",
+        "power": 6.3
+      },
+      {
+        "name": "Sunderland",
         "country": "Inglaterra",
         "power": 5.3
-      },
-      {
-        "name": "Southampton",
-        "country": "Inglaterra",
-        "power": 5.76
       }
     ]
   },
@@ -590,94 +590,94 @@
     "championsSpots": 2,
     "table": [
       {
-        "name": "Sporting",
-        "country": "Portugal",
-        "power": 8.07
-      },
-      {
         "name": "Benfica",
         "country": "Portugal",
-        "power": 8.13
-      },
-      {
-        "name": "Porto",
-        "country": "Portugal",
-        "power": 7.93
+        "power": 8
       },
       {
         "name": "Braga",
         "country": "Portugal",
-        "power": 6.83
+        "power": 7
       },
       {
-        "name": "Santa Clara",
+        "name": "Sporting",
         "country": "Portugal",
-        "power": 3.82
+        "power": 8.2
       },
       {
-        "name": "Vitória",
+        "name": "Porto",
         "country": "Portugal",
-        "power": 5.56
-      },
-      {
-        "name": "Famalicão",
-        "country": "Portugal",
-        "power": 4.45
-      },
-      {
-        "name": "Estoril",
-        "country": "Portugal",
-        "power": 4.17
-      },
-      {
-        "name": "Casa Pia",
-        "country": "Portugal",
-        "power": 3.86
-      },
-      {
-        "name": "Moreirense",
-        "country": "Portugal",
-        "power": 3.73
-      },
-      {
-        "name": "Rio Ave",
-        "country": "Portugal",
-        "power": 3.64
-      },
-      {
-        "name": "Arouca",
-        "country": "Portugal",
-        "power": 4.51
+        "power": 8
       },
       {
         "name": "Gil Vicente",
         "country": "Portugal",
-        "power": 4.06
+        "power": 4.2
+      },
+      {
+        "name": "Arouca",
+        "country": "Portugal",
+        "power": 4.5
+      },
+      {
+        "name": "Vitória",
+        "country": "Portugal",
+        "power": 5.6
+      },
+      {
+        "name": "Estoril",
+        "country": "Portugal",
+        "power": 4.1
+      },
+      {
+        "name": "Famalicão",
+        "country": "Portugal",
+        "power": 4.5
+      },
+      {
+        "name": "Moreirense",
+        "country": "Portugal",
+        "power": 3.8
+      },
+      {
+        "name": "Santa Clara",
+        "country": "Portugal",
+        "power": 3.7
+      },
+      {
+        "name": "Casa Pia",
+        "country": "Portugal",
+        "power": 3.8
+      },
+      {
+        "name": "Rio Ave",
+        "country": "Portugal",
+        "power": 3.7
       },
       {
         "name": "Nacional",
         "country": "Portugal",
-        "power": 2.93
+        "power": 3
       },
       {
         "name": "Estrela Amadora",
         "country": "Portugal",
-        "power": 3.3
+        "power": 3.2
       },
       {
-        "name": "AVS",
+        "name": "Alverca",
         "country": "Portugal",
-        "power": 3.6
+        "power": 2.8
       },
       {
-        "name": "Farense",
+        "name": "Tondela",
         "country": "Portugal",
-        "power": 3.07
+        "power": 3
       },
       {
-        "name": "Boavista",
+        "name": "AVS SAD",
         "country": "Portugal",
-        "power": 2.96
+        "power": 2.9
       }
     ]
   },
@@ -686,104 +686,104 @@
     "championsSpots": 4,
     "table": [
       {
-        "name": "Napoli",
+        "name": "Milan",
         "country": "Itália",
-        "power": 8.52
-      },
-      {
-        "name": "Inter de Milão",
-        "country": "Itália",
-        "power": 9.09
-      },
-      {
-        "name": "Atalanta",
-        "country": "Itália",
-        "power": 7.66
+        "power": 8.3
       },
       {
         "name": "Juventus",
         "country": "Itália",
-        "power": 8
+        "power": 7.9
       },
       {
-        "name": "Roma",
+        "name": "Napoli",
         "country": "Itália",
-        "power": 7.59
+        "power": 8.5
       },
       {
-        "name": "Fiorentina",
+        "name": "Inter de Milão",
         "country": "Itália",
-        "power": 7.1
-      },
-      {
-        "name": "Lazio",
-        "country": "Itália",
-        "power": 7.53
-      },
-      {
-        "name": "Milan",
-        "country": "Itália",
-        "power": 8.29
+        "power": 9
       },
       {
         "name": "Bologna",
         "country": "Itália",
-        "power": 7.09
+        "power": 7.1
       },
       {
-        "name": "Como",
+        "name": "Roma",
         "country": "Itália",
-        "power": 5.33
+        "power": 7.5
+      },
+      {
+        "name": "Fiorentina",
+        "country": "Itália",
+        "power": 7.2
+      },
+      {
+        "name": "Lazio",
+        "country": "Itália",
+        "power": 7.7
       },
       {
         "name": "Torino",
         "country": "Itália",
-        "power": 6.81
-      },
-      {
-        "name": "Udinese",
-        "country": "Itália",
-        "power": 6.54
-      },
-      {
-        "name": "Genoa",
-        "country": "Itália",
-        "power": 5.9
+        "power": 6.8
       },
       {
         "name": "Verona",
         "country": "Itália",
-        "power": 6.22
+        "power": 6.4
       },
       {
-        "name": "Cagliari",
+        "name": "Sassuolo",
         "country": "Itália",
-        "power": 5.84
+        "power": 6
       },
       {
-        "name": "Parma",
+        "name": "Atalanta",
         "country": "Itália",
-        "power": 5.38
+        "power": 7.7
+      },
+      {
+        "name": "Udinese",
+        "country": "Itália",
+        "power": 6.5
       },
       {
         "name": "Lecce",
         "country": "Itália",
-        "power": 5.96
+        "power": 5.9
       },
       {
-        "name": "Empoli",
+        "name": "Cagliari",
         "country": "Itália",
-        "power": 5.76
+        "power": 5.8
       },
       {
-        "name": "Venezia",
+        "name": "Cremonese",
         "country": "Itália",
-        "power": 6.12
+        "power": 5.3
       },
       {
-        "name": "Monza",
+        "name": "Genoa",
         "country": "Itália",
-        "power": 5.27
+        "power": 6
+      },
+      {
+        "name": "Pisa",
+        "country": "Itália",
+        "power": 5.2
+      },
+      {
+        "name": "Como",
+        "country": "Itália",
+        "power": 5.4
+      },
+      {
+        "name": "Parma",
+        "country": "Itália",
+        "power": 5.4
       }
     ]
   }
