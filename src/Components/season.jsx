@@ -13,7 +13,9 @@ const Season = (props) => {
 			open={open}>
 			<summary className="season-title">
 				<div>
-					<p>{season.year}</p>
+					<p>
+						{`${season.year - 1}/${String(season.year % 100).padStart(2, '0')}`}
+					</p>
 					<p>
 						{season.team.name} ({(Math.round(season.team.power * 50.0) / 100.0).toFixed(2)})
 					</p>

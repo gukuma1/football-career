@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import WorldCupHistoryHosts from "./Database/worldCupLastHosts.json";
+import HistoryLeagues from "./Database/history-leagues.json";
 import Leagues from "./Database/leagues.json";
 import ExtraTeams from "./Database/extrateams.json";
 import Nations from "./Database/nations.json";
@@ -119,11 +120,11 @@ function App() {
 		baseValue: 1000000,
 	});
 
-	const [lastLeagueResults, setLastLeagueResults] = useState([]);
+	const [lastLeagueResults, setLastLeagueResults] = useState(HistoryLeagues);
 
 	const [history, setHistory] = useState([]);
 
-	const [year, setYear] = useState(new Date().getFullYear() - 1 );
+	const [year, setYear] = useState(2025);
 
 	const [contract, setContract] = useState(0);
 
@@ -195,7 +196,7 @@ function App() {
 
 		player.position = selectedPosition; // Assign the selected position
 
-		let newTeams = UpdateTeamsStats(20.0).newTeams;
+		/* let newTeams = UpdateTeamsStats(20.0).newTeams;
 
 		let leagueResults = newTeams.map((league) => {
 			const result = GetLeaguePosition(shuffleArray(league.highestLeague.teams));
@@ -231,11 +232,10 @@ function App() {
 			return leagueResult;
 		});
 
-		console.log("Resultados das ligas atualizados:", leagueResults);
+		setLastLeagueResults(leagueResults); */
 
-		setLastLeagueResults(leagueResults);
 		// Update league results
-		setTransfers(GetInitTeams(newTeams, player)); // Use selectedPosition
+		setTransfers(GetInitTeams(leagues, player)); // Use selectedPosition
 	}
 
 	function ChooseTeam(newTeam = null) {
@@ -657,7 +657,7 @@ function App() {
 		qualifiedToChampions = qualifiedToChampions.concat(
 			extrateams.find((conf) => conf.name === "UEFA").teams.slice(0, 8)
 		);
-
+		
 		// Obter a posição dos campeões em um grupo específico
 		let championsGroup = GetChampionsPosition(
 			qualifiedToChampions,

@@ -176,7 +176,7 @@
 				{ "name": "Las Palmas", "country": "Espanha", "power": 6.0 },
 				{ "name": "Almería", "country": "Espanha", "power": 5.9 },
 				{ "name": "Granada", "country": "Espanha", "power": 5.9 },
-				{ "name": "Real Valladolid", "country": "Espanha", "power": 5.9 },
+				{ "name": "Valladolid", "country": "Espanha", "power": 5.9 },
 				{ "name": "Leganés", "country": "Espanha", "power": 5.8 },
 				{ "name": "Mirandés", "country": "Espanha", "power": 5.6 },
 				{ "name": "Racing", "country": "Espanha", "power": 5.6 },
@@ -257,7 +257,7 @@
 				{ "name": "Everton", "country": "Inglaterra", "power": 6.4 },
 				{ "name": "Fulham", "country": "Inglaterra", "power": 6.3 },
 				{ "name": "Bournemouth", "country": "Inglaterra", "power": 6.2 },
-				{ "name": "Nottinham Forest", "country": "Inglaterra", "power": 6.1 },
+				{ "name": "Nottingham Forest", "country": "Inglaterra", "power": 6.1 },
 				{ "name": "Leeds", "country": "Inglaterra", "power": 5.7 },
 				{ "name": "Burnley", "country": "Inglaterra", "power": 5.6 },
 				{ "name": "Sunderland", "country": "Inglaterra", "power": 5.3 }
