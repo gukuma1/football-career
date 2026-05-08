@@ -100,6 +100,10 @@ export function africanAsianCupDraw(firstPlaces, secondPlaces, thirdPlaces) {
 }
 
 export function worldCupDraw(firstPlaces, secondPlaces, thirdPlaces) {
+	console.log("Primeiros colocados:", firstPlaces);
+	console.log("Segundos colocados:", secondPlaces);
+	console.log("Terceiros colocados:", thirdPlaces);
+
 	const setMapping = ["T1", "T1", "T2", "T2", "T2", "T2", "T1", "T1", "T1", "T1", "T2", "T2"];
 	const subsetsMapping = ["S1", "S2", "S2", "S1", "S1", "S2"];
 	const allocationPriority = {
@@ -121,34 +125,34 @@ export function worldCupDraw(firstPlaces, secondPlaces, thirdPlaces) {
 		const mainPriorities = priorities["main"];
 
 		for (let teamIndex = 0; teamIndex < subset.length; teamIndex++) {
-			let alocated = false;
+			let allocated = false;
 
 			if (isSecond) {
 				if (thirdDraw[exchangePriorities[0]] == null) {
 					thirdDraw[exchangePriorities[0]] = subset[teamIndex];
-					alocated = true;
+					allocated = true;
 				} else if (thirdDraw[exchangePriorities[1]] == null) {
 					thirdDraw[exchangePriorities[1]] = subset[teamIndex];
-					alocated = true;
+					allocated = true;
 				}
 			}
 
-			if (!alocated) {
+			if (!allocated) {
 				for (let i = 0; i < mainPriorities.length; i++) {
 					if (!thirdDraw[mainPriorities[i]]) {
 						thirdDraw[mainPriorities[i]] = subset[teamIndex];
-						alocated = true;
+						allocated = true;
 						break;
 					}
 				}
 			}
 
-			if (!alocated) {
+			if (!allocated) {
 				for (let i = 0; i < 2; i++) {
 					const drawIndex = exchangePriorities[i];
 					if (!thirdDraw[drawIndex]) {
 						thirdDraw[drawIndex] = subset[teamIndex];
-						alocated = true;
+						allocated = true;
 
 						const originalIndex = thirdPlaces.indexOf(subset[teamIndex]);
 						const swapIndex = secondPlaceSwapMap[originalIndex];
