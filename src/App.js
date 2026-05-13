@@ -25,8 +25,6 @@ import {
 import { GetInitTeams, GetNewTeams, GetTransferValue } from "./Utils/transferUtils";
 import { computeTeamsStats, computeExtraTeamsStats, computeNationsStats } from "./Utils/statsUtils";
 
-import grupos2026 from "./Database/grupos-2026.json";
-
 const StarPath = [
 	"Esquecido", //0
 	"Ruim", //100
@@ -1509,9 +1507,6 @@ function App() {
 			allClassifNations = hostsAreFirst.concat(allClassifNations);
 
 			let groups = DrawWorldGroups(allClassifNations, hostsAreFirst.length);
-
-			groups = grupos2026
-			console.log("Grupos Reais:", groups);
 
 			// Verificar se a nação do novo jogador está entre as nações qualificadas para a Copa do Mundo
 			let classifToWorldCup = allClassifNations.some((t) => t.name === player.nation.name);

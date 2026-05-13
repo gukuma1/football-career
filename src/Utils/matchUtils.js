@@ -10,19 +10,34 @@
  * @param {Object} team2
  * @returns {[number, number]} [golsTeam1, golsTeam2]
  */
+function poisson(lambda) {
+	let L = Math.exp(-lambda), k = 0, p = 1;
+	do {
+		k++;
+		p *= Math.random();
+	} while (p > L);
+	return k - 1;
+}
+
 export function GetMatch(team1, team2) {
 	let base = Math.pow(team1.power, 2) + Math.pow(team2.power, 2);
+
 	let team1Power = Math.pow(team1.power, 2) / base;
 	let team2Power = Math.pow(team2.power, 2) / base;
 
-	let team1Luck = 3 * (Math.random() + Math.random()) * (Math.random() + Math.random());
-	let team2Luck = 3 * (Math.random() + Math.random()) * (Math.random() + Math.random());
+	// média total de gols da partida
+	let totalGoals = 2.5;
 
-	let team1Score = Math.floor(team1Luck * team1Power);
-	let team2Score = Math.floor(team2Luck * team2Power);
+	// média esperada de gols de cada time
+	let team1Lambda = totalGoals * team1Power;
+	let team2Lambda = totalGoals * team2Power;
 
-	if (team1Score < 0) team1Score = 0;
-	if (team2Score < 0) team2Score = 0;
+	// evita lambda muito baixo demais
+	if (team1Lambda < 0.1) team1Lambda = 0.1;
+	if (team2Lambda < 0.1) team2Lambda = 0.1;
+
+	let team1Score = poisson(team1Lambda);
+	let team2Score = poisson(team2Lambda);
 
 	return [team1Score, team2Score];
 }
@@ -35,17 +50,23 @@ export function GetMatch(team1, team2) {
  */
 export function GetExtraTime(team1, team2) {
 	let base = Math.pow(team1.power, 2) + Math.pow(team2.power, 2);
+
 	let team1Power = Math.pow(team1.power, 2) / base;
 	let team2Power = Math.pow(team2.power, 2) / base;
 
-	let team1Luck = 3 * (Math.random() + Math.random());
-	let team2Luck = 3 * (Math.random() + Math.random());
+	// prorrogação tem menos gols
+	let totalGoals = 0.8;
 
-	let team1Score = Math.floor(team1Luck * team1Power);
-	let team2Score = Math.floor(team2Luck * team2Power);
+	// média esperada de gols
+	let team1Lambda = totalGoals * team1Power;
+	let team2Lambda = totalGoals * team2Power;
 
-	if (team1Score < 0) team1Score = 0;
-	if (team2Score < 0) team2Score = 0;
+	// evita lambda muito baixo
+	if (team1Lambda < 0.05) team1Lambda = 0.05;
+	if (team2Lambda < 0.05) team2Lambda = 0.05;
+
+	let team1Score = poisson(team1Lambda);
+	let team2Score = poisson(team2Lambda);
 
 	return [team1Score, team2Score];
 }
@@ -56,44 +77,61 @@ export function GetExtraTime(team1, team2) {
  * @param {Object} team2
  * @returns {[number, number]} [golsTeam1, golsTeam2]
  */
-export function GetPenalties(team1, team2) {
-	let base = Math.pow(team1.power, 2) + Math.pow(team2.power, 2);
-	let team1Power = Math.pow(team1.power, 2) / base;
-	let team2Power = Math.pow(team2.power, 2) / base;
-
-	let winner = false;
-	let team1goals = 0;
-	let team2goals = 0;
-	let count = 0;
-
-	while (!winner) {
-		count++;
-		let team1shooter = Math.random() * team1Power * 10;
-		let team2keeper = Math.random() * team2Power * 6;
-
-		if (team1shooter > team2keeper) team1goals++;
-
-		if (count <= 5 && Math.abs(team1goals - team2goals) > 6 - count) {
-			winner = true;
-			break;
-		}
-
-		let team2shooter = Math.random() * team2Power * 100;
-		let team1keeper = Math.random() * team1Power * 80;
-
-		if (team2shooter > team1keeper) team2goals++;
-
-		if (
-			(count > 5 && team1goals !== team2goals) ||
-			(count <= 5 && Math.abs(team1goals - team2goals) > 5 - count)
-		) {
-			winner = true;
-		}
-	}
-
-	return [team1goals, team2goals];
+function clamp(value, min, max) {
+	return Math.max(min, Math.min(max, value));
 }
 
+function penaltyChance(teamPower, opponentPower) {
+	const total = teamPower + opponentPower;
+	const strength = total > 0 ? teamPower / total : 0.5;
+
+	// taxa base de conversão em pênaltis
+	const baseChance = 0.75;
+
+	// ajuste pela força relativa do time
+	const chance = baseChance + (strength - 0.5) * 0.18;
+
+	return clamp(chance, 0.55, 0.9);
+}
+
+function isDecided(team1Goals, team2Goals, team1ShotsLeft, team2ShotsLeft) {
+	return (
+		team1Goals > team2Goals + team2ShotsLeft ||
+		team2Goals > team1Goals + team1ShotsLeft
+	);
+}
+
+export function GetPenalties(team1, team2) {
+	const base = Math.pow(team1.power, 2) + Math.pow(team2.power, 2);
+
+	const team1Power = Math.pow(team1.power, 2) / base;
+	const team2Power = Math.pow(team2.power, 2) / base;
+
+	const team1Chance = penaltyChance(team1Power, team2Power);
+	const team2Chance = penaltyChance(team2Power, team1Power);
+
+	let team1Goals = 0;
+	let team2Goals = 0;
+
+	for (let round = 1; round <= 5; round++) {
+		if (Math.random() < team1Chance) team1Goals++;
+
+		// depois da cobrança do time1, o time2 ainda tem a cobrança da rodada + as futuras
+		if (isDecided(team1Goals, team2Goals, 5 - round, 6 - round)) break;
+
+		if (Math.random() < team2Chance) team2Goals++;
+
+		// depois da cobrança do time2, ambos têm o mesmo número de cobranças restantes
+		if (isDecided(team1Goals, team2Goals, 5 - round, 5 - round)) break;
+	}
+
+	while (team1Goals === team2Goals) {
+		if (Math.random() < team1Chance) team1Goals++;
+		if (Math.random() < team2Chance) team2Goals++;
+	}
+
+	return [team1Goals, team2Goals];
+}
 /**
  * Simula um confronto eliminatório completo (ida e volta ou jogo único),
  * com prorrogação e pênaltis se necessário.
