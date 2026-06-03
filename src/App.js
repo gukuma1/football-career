@@ -124,7 +124,7 @@ function App() {
 
 	const [history, setHistory] = useState([]);
 
-	const [year, setYear] = useState(2025);
+	const [year, setYear] = useState(2026);
 
 	const [contract, setContract] = useState(0);
 
@@ -132,7 +132,7 @@ function App() {
 
 	const [transfers, setTransfers] = useState([]);
 
-	const [uefaWinners, setUefaWinners] = useState([]); //incluir aqui os ganhadores passados
+	const [uefaWinners, setUefaWinners] = useState([{ name: "Arsenal", country: "Inglaterra" }]);
 
 	const [renew, setRenew] = useState({ duration: 0, addition: null, position: null });
 

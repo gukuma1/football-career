@@ -1,8 +1,8 @@
 [
-	{ "year": 2014, "hosts": ["Brasil"] },
-	{ "year": 2018, "hosts": ["Rússia"] },
-	{ "year": 2022, "hosts": ["Catar"] },
-	{ "year": 2026, "hosts": ["Estados Unidos", "Canadá", "México"] },
-	{ "year": 2030, "hosts": ["Espanha", "Portugal", "Marrocos"] },
-	{ "year": 2034, "hosts": ["Arábia Saudita"] }
+  { "year": 2014, "hosts": ["Brasil"] },
+  { "year": 2018, "hosts": ["Rússia"] },
+  { "year": 2022, "hosts": ["Catar"] },
+  { "year": 2026, "hosts": ["Estados Unidos", "Canadá", "México"] },
+  { "year": 2030, "hosts": ["Espanha", "Portugal", "Marrocos"] },
+  { "year": 2034, "hosts": ["Arábia Saudita"] }
 ]

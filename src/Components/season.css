@@ -1,143 +1,143 @@
 .season {
-	border-radius: 1rem;
-	background-color: var(--color-dark);
-	width: 100%;
-	max-width: 450px;
-	min-width: 300px;
-	box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
+  border-radius: 1rem;
+  background-color: var(--color-dark);
+  width: 100%;
+  max-width: 450px;
+  min-width: 300px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
 }
 
 .season-details {
-	padding: 0.75rem 1rem 1rem;
-	border-top: 1px solid rgba(193, 223, 157, 0.15);
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid rgba(193, 223, 157, 0.15);
 }
 
 .season-title {
-	font-family: "Nunito", sans-serif;
-	padding: 0.75rem 1rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	color: var(--color-contrast);
-	font-size: 1rem;
-	font-weight: bold;
-	border-radius: 1rem;
-	background-color: rgba(66, 100, 58, 0.2);
+  font-family: "Nunito", sans-serif;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-contrast);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: rgba(66, 100, 58, 0.2);
 }
 
 .season-title div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
 }
 
 .overal {
-	border-radius: 1rem;
-	border: 1px var(--color-contrast) solid;
-	padding: 0.5rem 0.75rem;
-	min-width: 4rem;
-	text-align: center;
+  border-radius: 1rem;
+  border: 1px var(--color-contrast) solid;
+  padding: 0.5rem 0.75rem;
+  min-width: 4rem;
+  text-align: center;
 }
 
 .season-stats {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--color-light);
 }
 
 .double-column {
-	display: flex;
-	gap: 0.75rem;
-	flex-wrap: wrap;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .double-column div {
-	flex: 1;
-	min-width: 120px;
+  flex: 1;
+  min-width: 120px;
 }
 
 .season-titles {
-	display: flex;
-	flex-direction: column;
-	color: var(--color-contrast);
-	margin-top: 0.75rem;
-	font-family: "Nunito", sans-serif;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-contrast);
+  margin-top: 0.75rem;
+  font-family: "Nunito", sans-serif;
 }
 
 .season-titles-list {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	gap: 0.4rem;
-	margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 summary {
-	font-family: "Nunito", sans-serif;
-	cursor: pointer;
-	list-style: none;
-	position: relative;
-	padding-left: 1.25rem;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-left: 1.25rem;
 }
 
 .season-titles-list details summary::before {
-	content: "▸";
-	position: absolute;
-	left: 0;
-	color: var(--color-contrast);
-	transition: transform 0.2s ease;
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--color-contrast);
+  transition: transform 0.2s ease;
 }
 
 .season-titles-list details[open] > summary::before {
-	transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 summary::-webkit-details-marker {
-	display: none;
+  display: none;
 }
 
 .single-title {
-	margin-top: 0.2rem;
-	font-size: 0.95rem;
-	font-weight: 600;
-	color: var(--color-contrast);
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-contrast);
 }
 
 .season-titles-list details {
-	border: 1px solid rgba(193, 223, 157, 0.15);
-	border-radius: 1rem;
-	padding: 0.25rem 0.5rem;
-	background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(193, 223, 157, 0.15);
+  border-radius: 1rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .season-titles-list details summary {
-	display: block;
-	margin: 0;
-	border-radius: 1rem;
-	padding: 0.2rem 1rem;
+  display: block;
+  margin: 0;
+  border-radius: 1rem;
+  padding: 0.2rem 1rem;
 }
 
 .season-titles-list details details {
-	margin-top: 0.25rem;
-	padding-left: 0.5rem;
+  margin-top: 0.25rem;
+  padding-left: 0.5rem;
 }
 
 .season-titles-list details details summary {
-	margin: 0;
-	padding-left: 1rem;
+  margin: 0;
+  padding-left: 1rem;
 }
 
 .season-titles-list p {
-	font-size: 0.95rem;
-	padding: 0.15rem 0.75rem;
-	color: var(--color-light);
-	margin: 0;
+  font-size: 0.95rem;
+  padding: 0.15rem 0.75rem;
+  color: var(--color-light);
+  margin: 0;
 }
 
 .season-titles-list details > *:not(summary) {
-	font-size: 0.88rem;
-	padding-left: 0.75rem;
+  font-size: 0.88rem;
+  padding-left: 0.75rem;
 }

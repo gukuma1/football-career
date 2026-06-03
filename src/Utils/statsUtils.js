@@ -18,77 +18,77 @@
 import { DeepClone, shuffleArray } from "../Utils";
 
 /**
- * Recalcula o poder de todos os times das ligas principais e secundárias.
+ * Recalcula o poder de todos os times das ligas principais e secundárias
  *
  * @param {Array}  leagues - Estado atual das ligas
  * @param {number} limit   - Amplitude máxima de variação (ex: 20.0 ou 40.0)
  * @returns {{ newTeams: Array, topGains: Array, topLosses: Array }}
  */
 export function computeTeamsStats(leagues, limit) {
-	let newTeams = DeepClone([...leagues]);
-	let gains = [];
-	let losses = [];
+  let newTeams = DeepClone([...leagues]);
+  let gains = [];
+  let losses = [];
 
-	for (let leagueID = 0; leagueID < newTeams.length; leagueID++) {
-		let last = Math.random();
+  for (let leagueID = 0; leagueID < newTeams.length; leagueID++) {
+    let last = Math.random();
 
-		// Liga principal
-		let topTeams = newTeams[leagueID].highestLeague.teams;
-		let topTeamIndices = shuffleArray(Array.from({ length: topTeams.length }, (_, i) => i));
+    // Liga principal
+    let topTeams = newTeams[leagueID].highestLeague.teams;
+    let topTeamIndices = shuffleArray(Array.from({ length: topTeams.length }, (_, i) => i));
 
-		for (let i = 0; i < topTeams.length; i++) {
-			let teamID = topTeamIndices[i];
-			let team = topTeams[teamID];
+    for (let i = 0; i < topTeams.length; i++) {
+      let teamID = topTeamIndices[i];
+      let team = topTeams[teamID];
 
-			let current = Math.random();
-			let change = Math.round(limit * (last - current)) / 100.0;
-			last = current;
+      let current = Math.random();
+      let change = Math.round(limit * (last - current)) / 100.0;
+      last = current;
 
-			let originalPower = team.power;
-			team.power = Math.round(100.0 * (team.power + change)) / 100;
-			if (team.power > 10) team.power = 10;
-			else if (team.power < 2) team.power = 2;
+      let originalPower = team.power;
+      team.power = Math.round(100.0 * (team.power + change)) / 100;
+      if (team.power > 10) team.power = 10;
+      else if (team.power < 2) team.power = 2;
 
-			let powerChange = team.power - originalPower;
-			if (powerChange > 0) gains.push({ team: team.name, change: powerChange });
-			else if (powerChange < 0) losses.push({ team: team.name, change: powerChange });
-		}
+      let powerChange = team.power - originalPower;
+      if (powerChange > 0) gains.push({ team: team.name, change: powerChange });
+      else if (powerChange < 0) losses.push({ team: team.name, change: powerChange });
+    }
 
-		topTeams.sort((a, b) => b.power - a.power);
+    topTeams.sort((a, b) => b.power - a.power);
 
-		// Liga secundária
-		let lowerTeams = newTeams[leagueID].lowerLeague.teams;
-		let lowerTeamIndices = shuffleArray(Array.from({ length: lowerTeams.length }, (_, i) => i));
+    // Liga secundária
+    let lowerTeams = newTeams[leagueID].lowerLeague.teams;
+    let lowerTeamIndices = shuffleArray(Array.from({ length: lowerTeams.length }, (_, i) => i));
 
-		for (let i = 0; i < lowerTeams.length; i++) {
-			let teamID = lowerTeamIndices[i];
-			let team = lowerTeams[teamID];
+    for (let i = 0; i < lowerTeams.length; i++) {
+      let teamID = lowerTeamIndices[i];
+      let team = lowerTeams[teamID];
 
-			let current = Math.random();
-			let change = Math.round(limit * (last - current)) / 100.0;
-			last = current;
+      let current = Math.random();
+      let change = Math.round(limit * (last - current)) / 100.0;
+      last = current;
 
-			let originalPower = team.power;
-			team.power = Math.round(100.0 * (team.power + change)) / 100;
-			if (team.power > 10) team.power = 10;
-			else if (team.power < 2) team.power = 2;
+      let originalPower = team.power;
+      team.power = Math.round(100.0 * (team.power + change)) / 100;
+      if (team.power > 10) team.power = 10;
+      else if (team.power < 2) team.power = 2;
 
-			let powerChange = team.power - originalPower;
-			if (powerChange > 0) gains.push({ team: team.name, change: powerChange });
-			else if (powerChange < 0) losses.push({ team: team.name, change: powerChange });
-		}
+      let powerChange = team.power - originalPower;
+      if (powerChange > 0) gains.push({ team: team.name, change: powerChange });
+      else if (powerChange < 0) losses.push({ team: team.name, change: powerChange });
+    }
 
-		lowerTeams.sort((a, b) => b.power - a.power);
-	}
+    lowerTeams.sort((a, b) => b.power - a.power);
+  }
 
-	gains.sort((a, b) => b.change - a.change);
-	losses.sort((a, b) => a.change - b.change);
+  gains.sort((a, b) => b.change - a.change);
+  losses.sort((a, b) => a.change - b.change);
 
-	return {
-		newTeams,
-		topGains: gains.slice(0, 10),
-		topLosses: losses.slice(0, 10),
-	};
+  return {
+    newTeams,
+    topGains: gains.slice(0, 10),
+    topLosses: losses.slice(0, 10)
+  };
 }
 
 /**
@@ -98,32 +98,32 @@ export function computeTeamsStats(leagues, limit) {
  * @returns {Array} nova lista de times extras atualizada
  */
 export function computeExtraTeamsStats(extrateams) {
-	let newTeams = DeepClone([...extrateams]);
+  let newTeams = DeepClone([...extrateams]);
 
-	for (let confID = 0; confID < newTeams.length; confID++) {
-		let last = Math.random();
-		let teamIndices = shuffleArray(
-			Array.from({ length: newTeams[confID].teams.length }, (_, index) => index)
-		);
+  for (let confID = 0; confID < newTeams.length; confID++) {
+    let last = Math.random();
+    let teamIndices = shuffleArray(
+      Array.from({ length: newTeams[confID].teams.length }, (_, index) => index)
+    );
 
-		for (let i = 0; i < newTeams[confID].teams.length; i++) {
-			let teamID = teamIndices[i];
+    for (let i = 0; i < newTeams[confID].teams.length; i++) {
+      let teamID = teamIndices[i];
 
-			let current = Math.random();
-			let change = Math.round(20.0 * (last - current)) / 100.0;
-			last = current;
+      let current = Math.random();
+      let change = Math.round(20.0 * (last - current)) / 100.0;
+      last = current;
 
-			let newPower = newTeams[confID].teams[teamID].power + change;
-			newTeams[confID].teams[teamID].power = Math.round(100.0 * newPower) / 100.0;
+      let newPower = newTeams[confID].teams[teamID].power + change;
+      newTeams[confID].teams[teamID].power = Math.round(100.0 * newPower) / 100.0;
 
-			if (newTeams[confID].teams[teamID].power > 10) newTeams[confID].teams[teamID].power = 10;
-			else if (newTeams[confID].teams[teamID].power < 2) newTeams[confID].teams[teamID].power = 2;
-		}
+      if (newTeams[confID].teams[teamID].power > 10) newTeams[confID].teams[teamID].power = 10;
+      else if (newTeams[confID].teams[teamID].power < 2) newTeams[confID].teams[teamID].power = 2;
+    }
 
-		newTeams[confID].teams.sort((a, b) => b.power - a.power);
-	}
+    newTeams[confID].teams.sort((a, b) => b.power - a.power);
+  }
 
-	return newTeams;
+  return newTeams;
 }
 
 /**
@@ -133,43 +133,43 @@ export function computeExtraTeamsStats(extrateams) {
  * @returns {{ allNations: Array, topGains: Array, topLosses: Array }}
  */
 export function computeNationsStats(nations) {
-	let allNations = DeepClone([...nations]);
-	let gains = [];
-	let losses = [];
+  let allNations = DeepClone([...nations]);
+  let gains = [];
+  let losses = [];
 
-	for (let regionID = 0; regionID < allNations.length; regionID++) {
-		let last = Math.random();
-		let nationIndices = shuffleArray(
-			Array.from({ length: allNations[regionID].teams.length }, (_, index) => index)
-		);
+  for (let regionID = 0; regionID < allNations.length; regionID++) {
+    let last = Math.random();
+    let nationIndices = shuffleArray(
+      Array.from({ length: allNations[regionID].teams.length }, (_, index) => index)
+    );
 
-		for (let i = 0; i < allNations[regionID].teams.length; i++) {
-			let nationID = nationIndices[i];
-			let nation = allNations[regionID].teams[nationID];
+    for (let i = 0; i < allNations[regionID].teams.length; i++) {
+      let nationID = nationIndices[i];
+      let nation = allNations[regionID].teams[nationID];
 
-			let current = Math.random();
-			let change = Math.round(40.0 * (last - current)) / 100.0;
-			last = current;
+      let current = Math.random();
+      let change = Math.round(40.0 * (last - current)) / 100.0;
+      last = current;
 
-			let originalPower = nation.power;
-			nation.power = Math.round(100.0 * (nation.power + change)) / 100.0;
-			if (nation.power > 10) nation.power = 10;
-			else if (nation.power < 2) nation.power = 2;
+      let originalPower = nation.power;
+      nation.power = Math.round(100.0 * (nation.power + change)) / 100.0;
+      if (nation.power > 10) nation.power = 10;
+      else if (nation.power < 2) nation.power = 2;
 
-			let powerChange = nation.power - originalPower;
-			if (powerChange > 0) gains.push({ nation: nation.name, change: powerChange });
-			else if (powerChange < 0) losses.push({ nation: nation.name, change: powerChange });
-		}
+      let powerChange = nation.power - originalPower;
+      if (powerChange > 0) gains.push({ nation: nation.name, change: powerChange });
+      else if (powerChange < 0) losses.push({ nation: nation.name, change: powerChange });
+    }
 
-		allNations[regionID].teams.sort((a, b) => b.power - a.power);
-	}
+    allNations[regionID].teams.sort((a, b) => b.power - a.power);
+  }
 
-	gains.sort((a, b) => b.change - a.change);
-	losses.sort((a, b) => a.change - b.change);
+  gains.sort((a, b) => b.change - a.change);
+  losses.sort((a, b) => a.change - b.change);
 
-	return {
-		allNations,
-		topGains: gains.slice(0, 10),
-		topLosses: losses.slice(0, 10),
-	};
+  return {
+    allNations,
+    topGains: gains.slice(0, 10),
+    topLosses: losses.slice(0, 10)
+  };
 }

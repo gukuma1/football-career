@@ -1,109 +1,107 @@
 [
-	{
-		"name": "AFC",
-		"clubWorldCupSpots": 4,
-		"teams": [
-			{"name":"Al Hilal","country":"Arábia Saudita","power":7.5},
-			{"name":"Al Ahli","country":"Arábia Saudita","power":7.2},
-			{"name":"Al Nassr","country":"Arábia Saudita","power":7.0},
-			{"name":"Kawasaki","country":"Japão","power":6.8},
-			{"name":"Vissel Kobe","country":"Japão","power":6.5},
-			{"name":"Yokohama Marinos","country":"Japão","power":6.2},	
-			{"name":"Gwangju FC","country":"Coreia do Sul","power":6.0},
-			{"name":"Sydney FC","country":"Austrália","power":5.8},
-			{"name":"Sanfrecce Hiroshima","country":"Japão","power":5.5},
-			{"name":"Guangzhou","country":"China","power":5.0}
-		]
-	},
-	{
-		"name": "CAF",
-		"clubWorldCupSpots": 4,
-		"teams": [
-			{"name":"Al Ahly","country":"Egito","power":7.5},
-			{"name":"Wydad Casablanca","country":"Marrocos","power":7.2},
-			{"name":"Mamelodi Sundowns","country":"África do Sul","power":7.0},
-			{"name":"Espérance Tunis","country":"Tunísia","power":6.5},
-			{"name":"Raja Casablanca","country":"Marrocos","power":6.2},
-			{"name":"Mazembe","country":"RD Congo","power":6.0},
-			{"name":"Pyramids FC","country":"Egito","power":5.8},
-			{"name":"Belouizdad","country":"Argélia","power":5.5},
-			{"name":"Mimosas","country":"Costa do Marfim","power":5.2},
-			{"name":"Rabat","country":"Marrocos","power":5.0}
-		]
-	},
-	{
-		"name": "CONCACAF",
-		"clubWorldCupSpots": 4,
-		"teams": [
-			{"name":"Club América","country":"México","power":7.5},
-			{"name":"Tigres","country":"México","power":7.2},
-			{"name":"Cruz Azul","country":"México","power":7.0},
-			{"name":"Los Angeles FC","country":"Estados Unidos","power":6.5},
-			{"name":"Toronto FC","country":"Canadá","power":6.2},
-			{"name":"Inter Miami","country":"Estados Unidos","power":6.0},
-			{"name":"Alajuelense","country":"Costa Rica","power":5.8},
-			{"name":"LA Galaxy","country":"Estados Unidos","power":5.5},
-			{"name":"Herediano","country":"Costa Rica","power":5.2},
-			{"name":"Pachuca","country":"México","power":5.0}
-		]
-	},
-	{
-		"name": "CONMEBOL",
-		"clubWorldCupSpots": 6,
-		"teams": [
-			{"name":"Palmeiras","country":"Brasil","power":8.0},
-			{"name":"Flamengo","country":"Brasil","power":7.9},
-			{"name":"River Plate","country":"Argentina","power":7.8},
-			{"name":"Atlético Mineiro","country":"Brasil","power":7.7},
-			{"name":"Botafogo","country":"Brasil","power":7.6},
-			{"name":"Peñarol","country":"Uruguai","power":7.5},
-			{"name":"São Paulo","country":"Brasil","power":7.4},
-			{"name":"Fluminense","country":"Brasil","power":7.3},
-			{"name":"Racing Club","country":"Argentina","power":7.2},
-			{"name":"Internacional","country":"Brasil","power":7.1},
-			{"name":"Boca Juniors","country":"Argentina","power":7.0},
-			{"name":"Corinthians","country":"Brasil","power":6.9},
-			{"name":"Colo-Colo","country":"Chile","power":6.8},
-			{"name":"Fortaleza","country":"Brasil","power":6.7},
-			{"name":"Atlético Nacional","country":"Colômbia","power":6.6},
-			{"name":"Bahia","country":"Brasil","power":6.5}
-		]
-	},
-	{
-		"name": "OFC",
-		"worldCupSpots": 1,
-		"teams": [
-			{"name":"Auckland City","country":"Nova Zelândia","power": 4.0}
-		]
-	},
-	{
-		"name": "UEFA",
-		"clubWorldCupSpots": 12,
-		"teams": [
-			{"name":"RB Salzburg","country":"Áustria","power":7.0},
-			{"name":"Galatasaray","country":"Turquia","power":6.9},
-			{"name":"Zenit","country":"Rússia","power":6.8},
-			{"name":"Shakhtar","country":"Ucrânia","power":6.7},
-			{"name":"Copenhagen","country":"Dinamarca","power":6.6},
-			{"name":"Celtic","country":"Escócia","power":6.5},
-			{"name":"Rangers","country":"Escócia","power":6.4},
-			{"name":"Olympiacos","country":"Grécia","power":6.3},
-			{"name":"CSKA","country":"Rússia","power":6.2},
-			{"name":"Besiktas","country":"Turquia","power":6.1},
-			{"name":"Malmö FF","country":"Suécia","power":6.0},
-			{"name":"Dynamo Kyiv","country":"Ucrânia","power":5.9},
-			{"name":"Young Boys","country":"Suíça","power":5.8},
-			{"name":"Basel","country":"Suíça","power":5.7},
-			{"name":"Fenerbahçe","country":"Turquia","power":5.6},
-			{"name":"Rapid Vienna","country":"Áustria","power":5.5},
-			{"name":"Rosenborg","country":"Noruega","power":5.4},
-			{"name":"Midtjylland","country":"Dinamarca","power":5.3},
-			{"name":"Dynamo Moscow","country":"Rússia","power":5.2},
-			{"name":"PAOK","country":"Grécia","power":5.1},
-			{"name":"Aberdeen","country":"Escócia","power":5.0},
-			{"name":"Trabzonspor","country":"Turquia","power":5.0},
-			{"name":"Spartak Moscou","country":"Rússia","power":5.0},
-			{"name":"Zorya Luhansk","country":"Ucrânia","power":5.0}
-		]
-	}
+  {
+    "name": "AFC",
+    "clubWorldCupSpots": 4,
+    "teams": [
+      { "name": "Al Hilal", "country": "Arábia Saudita", "power": 7.5 },
+      { "name": "Al Ahli", "country": "Arábia Saudita", "power": 7.2 },
+      { "name": "Al Nassr", "country": "Arábia Saudita", "power": 7.0 },
+      { "name": "Kawasaki", "country": "Japão", "power": 6.8 },
+      { "name": "Vissel Kobe", "country": "Japão", "power": 6.5 },
+      { "name": "Yokohama Marinos", "country": "Japão", "power": 6.2 },
+      { "name": "Gwangju FC", "country": "Coreia do Sul", "power": 6.0 },
+      { "name": "Sydney FC", "country": "Austrália", "power": 5.8 },
+      { "name": "Sanfrecce Hiroshima", "country": "Japão", "power": 5.5 },
+      { "name": "Guangzhou", "country": "China", "power": 5.0 }
+    ]
+  },
+  {
+    "name": "CAF",
+    "clubWorldCupSpots": 4,
+    "teams": [
+      { "name": "Al Ahly", "country": "Egito", "power": 7.5 },
+      { "name": "Wydad Casablanca", "country": "Marrocos", "power": 7.2 },
+      { "name": "Mamelodi Sundowns", "country": "África do Sul", "power": 7.0 },
+      { "name": "Espérance Tunis", "country": "Tunísia", "power": 6.5 },
+      { "name": "Raja Casablanca", "country": "Marrocos", "power": 6.2 },
+      { "name": "Mazembe", "country": "RD Congo", "power": 6.0 },
+      { "name": "Pyramids FC", "country": "Egito", "power": 5.8 },
+      { "name": "Belouizdad", "country": "Argélia", "power": 5.5 },
+      { "name": "Mimosas", "country": "Costa do Marfim", "power": 5.2 },
+      { "name": "Rabat", "country": "Marrocos", "power": 5.0 }
+    ]
+  },
+  {
+    "name": "CONCACAF",
+    "clubWorldCupSpots": 4,
+    "teams": [
+      { "name": "Club América", "country": "México", "power": 7.5 },
+      { "name": "Tigres", "country": "México", "power": 7.2 },
+      { "name": "Cruz Azul", "country": "México", "power": 7.0 },
+      { "name": "Los Angeles FC", "country": "Estados Unidos", "power": 6.5 },
+      { "name": "Toronto FC", "country": "Canadá", "power": 6.2 },
+      { "name": "Inter Miami", "country": "Estados Unidos", "power": 6.0 },
+      { "name": "Alajuelense", "country": "Costa Rica", "power": 5.8 },
+      { "name": "LA Galaxy", "country": "Estados Unidos", "power": 5.5 },
+      { "name": "Herediano", "country": "Costa Rica", "power": 5.2 },
+      { "name": "Pachuca", "country": "México", "power": 5.0 }
+    ]
+  },
+  {
+    "name": "CONMEBOL",
+    "clubWorldCupSpots": 6,
+    "teams": [
+      { "name": "Palmeiras", "country": "Brasil", "power": 8.0 },
+      { "name": "Flamengo", "country": "Brasil", "power": 7.9 },
+      { "name": "River Plate", "country": "Argentina", "power": 7.8 },
+      { "name": "Atlético Mineiro", "country": "Brasil", "power": 7.7 },
+      { "name": "Botafogo", "country": "Brasil", "power": 7.6 },
+      { "name": "Peñarol", "country": "Uruguai", "power": 7.5 },
+      { "name": "São Paulo", "country": "Brasil", "power": 7.4 },
+      { "name": "Fluminense", "country": "Brasil", "power": 7.3 },
+      { "name": "Racing Club", "country": "Argentina", "power": 7.2 },
+      { "name": "Internacional", "country": "Brasil", "power": 7.1 },
+      { "name": "Boca Juniors", "country": "Argentina", "power": 7.0 },
+      { "name": "Corinthians", "country": "Brasil", "power": 6.9 },
+      { "name": "Colo-Colo", "country": "Chile", "power": 6.8 },
+      { "name": "Fortaleza", "country": "Brasil", "power": 6.7 },
+      { "name": "Atlético Nacional", "country": "Colômbia", "power": 6.6 },
+      { "name": "Bahia", "country": "Brasil", "power": 6.5 }
+    ]
+  },
+  {
+    "name": "OFC",
+    "worldCupSpots": 1,
+    "teams": [{ "name": "Auckland City", "country": "Nova Zelândia", "power": 4.0 }]
+  },
+  {
+    "name": "UEFA",
+    "clubWorldCupSpots": 12,
+    "teams": [
+      { "name": "RB Salzburg", "country": "Áustria", "power": 7.0 },
+      { "name": "Galatasaray", "country": "Turquia", "power": 6.9 },
+      { "name": "Zenit", "country": "Rússia", "power": 6.8 },
+      { "name": "Shakhtar", "country": "Ucrânia", "power": 6.7 },
+      { "name": "Copenhagen", "country": "Dinamarca", "power": 6.6 },
+      { "name": "Celtic", "country": "Escócia", "power": 6.5 },
+      { "name": "Rangers", "country": "Escócia", "power": 6.4 },
+      { "name": "Olympiacos", "country": "Grécia", "power": 6.3 },
+      { "name": "CSKA", "country": "Rússia", "power": 6.2 },
+      { "name": "Besiktas", "country": "Turquia", "power": 6.1 },
+      { "name": "Malmö FF", "country": "Suécia", "power": 6.0 },
+      { "name": "Dynamo Kyiv", "country": "Ucrânia", "power": 5.9 },
+      { "name": "Young Boys", "country": "Suíça", "power": 5.8 },
+      { "name": "Basel", "country": "Suíça", "power": 5.7 },
+      { "name": "Fenerbahçe", "country": "Turquia", "power": 5.6 },
+      { "name": "Rapid Vienna", "country": "Áustria", "power": 5.5 },
+      { "name": "Rosenborg", "country": "Noruega", "power": 5.4 },
+      { "name": "Midtjylland", "country": "Dinamarca", "power": 5.3 },
+      { "name": "Dynamo Moscow", "country": "Rússia", "power": 5.2 },
+      { "name": "PAOK", "country": "Grécia", "power": 5.1 },
+      { "name": "Aberdeen", "country": "Escócia", "power": 5.0 },
+      { "name": "Trabzonspor", "country": "Turquia", "power": 5.0 },
+      { "name": "Spartak Moscou", "country": "Rússia", "power": 5.0 },
+      { "name": "Zorya Luhansk", "country": "Ucrânia", "power": 5.0 }
+    ]
+  }
 ]

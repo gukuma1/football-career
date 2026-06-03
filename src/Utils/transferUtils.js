@@ -21,24 +21,32 @@ import { RandomNumber } from "../Utils";
  * @param {number} baseValue         - Valor base do jogador (player.baseValue)
  * @returns {number}
  */
-export function GetTransferValue(performance, positionMultiplier, age, peak, clubPower, fame, baseValue) {
-	const performanceMultiplier = 1.5 + performance / 2; // 1.0 em -1, 2.0 em +1
+export function GetTransferValue(
+  performance,
+  positionMultiplier,
+  age,
+  peak,
+  clubPower,
+  fame,
+  baseValue
+) {
+  const performanceMultiplier = 1.5 + performance / 2; // 1.0 em -1, 2.0 em +1
 
-	const ageFactor = Math.max(1, 8.0 - Math.abs(peak - 4 - age) * 0.5); // pico entre 22–26
+  const ageFactor = Math.max(1, 8.0 - Math.abs(peak - 4 - age) * 0.5); // pico entre 22–26
 
-	const clubMultiplier = clubPower / 5; // 0.4 em poder 2, 2.0 em poder 10
+  const clubMultiplier = clubPower / 5; // 0.4 em poder 2, 2.0 em poder 10
 
-	const fameMultiplier = Math.max(fame, 100) / ((age - 10) * 10);
+  const fameMultiplier = Math.max(fame, 100) / ((age - 10) * 10);
 
-	const transferValue =
-		positionMultiplier *
-		baseValue *
-		performanceMultiplier *
-		ageFactor *
-		clubMultiplier *
-		fameMultiplier;
+  const transferValue =
+    positionMultiplier *
+    baseValue *
+    performanceMultiplier *
+    ageFactor *
+    clubMultiplier *
+    fameMultiplier;
 
-	return Math.round(transferValue);
+  return Math.round(transferValue);
 }
 
 /**
@@ -49,38 +57,38 @@ export function GetTransferValue(performance, positionMultiplier, age, peak, clu
  * @returns {Array} lista de até 3 contratos
  */
 export function GetInitTeams(newTeams, currentPlayer) {
-	let allTeams = newTeams.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
+  let allTeams = newTeams.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
 
-	allTeams.sort((a, b) => b.power - a.power - Math.random());
-	allTeams = allTeams.slice(0, allTeams.length / 2);
+  allTeams.sort((a, b) => b.power - a.power - Math.random());
+  allTeams = allTeams.slice(0, allTeams.length / 2);
 
-	const selectedTeams = [];
-	const usedIndices = new Set();
+  const selectedTeams = [];
+  const usedIndices = new Set();
 
-	while (selectedTeams.length < 3) {
-		const randomIndex = Math.floor(Math.random() * allTeams.length);
-		if (!usedIndices.has(randomIndex)) {
-			usedIndices.add(randomIndex);
-			selectedTeams.push(allTeams[randomIndex]);
-		}
-	}
+  while (selectedTeams.length < 3) {
+    const randomIndex = Math.floor(Math.random() * allTeams.length);
+    if (!usedIndices.has(randomIndex)) {
+      usedIndices.add(randomIndex);
+      selectedTeams.push(allTeams[randomIndex]);
+    }
+  }
 
-	return selectedTeams.map((team) => {
-		let newPosition;
-		if (currentPlayer.position.abbreviation !== "GO" && Math.random() < 0.2) {
-			const relatedPositions = currentPlayer.position.related;
-			newPosition = relatedPositions[RandomNumber(0, relatedPositions.length - 1)];
-		} else {
-			newPosition = currentPlayer.position.abbreviation;
-		}
+  return selectedTeams.map((team) => {
+    let newPosition;
+    if (currentPlayer.position.abbreviation !== "GO" && Math.random() < 0.2) {
+      const relatedPositions = currentPlayer.position.related;
+      newPosition = relatedPositions[RandomNumber(0, relatedPositions.length - 1)];
+    } else {
+      newPosition = currentPlayer.position.abbreviation;
+    }
 
-		return {
-			team,
-			duration: RandomNumber(2, 6),
-			loan: false,
-			position: newPosition,
-		};
-	});
+    return {
+      team,
+      duration: RandomNumber(1, 4),
+      loan: false,
+      position: newPosition
+    };
+  });
 }
 
 /**
@@ -100,56 +108,56 @@ export function GetInitTeams(newTeams, currentPlayer) {
  * @returns {{ contracts: Array, newBaseValue: number }}
  */
 export function GetNewTeams(currentPlayer, leagues, history, currentSeasonPerformance) {
-	let allTeams = leagues.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
+  let allTeams = leagues.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
 
-	allTeams.sort((a, b) => b.power - a.power - Math.random());
-	allTeams = allTeams.slice(0, allTeams.length / (4 + currentPlayer.performance));
+  allTeams.sort((a, b) => b.power - a.power - Math.random());
+  allTeams = allTeams.slice(0, allTeams.length / (4 + currentPlayer.performance));
 
-	const interestedTeams = [];
-	const isDuplicate = (teamName) => history.some((t) => t.team === teamName);
+  const interestedTeams = [];
+  const isDuplicate = (teamName) => history.some((t) => t.team === teamName);
 
-	for (let i = 0; i < 3; i++) {
-		let teamID = RandomNumber(0, allTeams.length - 1);
+  for (let i = 0; i < 3; i++) {
+    let teamID = RandomNumber(0, allTeams.length - 1);
 
-		while (isDuplicate(allTeams[teamID].name)) {
-			teamID = RandomNumber(0, allTeams.length - 1);
-		}
+    while (isDuplicate(allTeams[teamID].name)) {
+      teamID = RandomNumber(0, allTeams.length - 1);
+    }
 
-		while (isDuplicate(allTeams[teamID].name)) {
-			teamID = RandomNumber(0, allTeams.length - 1);
-		}
+    while (isDuplicate(allTeams[teamID].name)) {
+      teamID = RandomNumber(0, allTeams.length - 1);
+    }
 
-		const chosenTeam = allTeams[teamID];
-		interestedTeams.push(chosenTeam);
-		allTeams = allTeams.filter((t) => t.name !== chosenTeam.name);
-	}
+    const chosenTeam = allTeams[teamID];
+    interestedTeams.push(chosenTeam);
+    allTeams = allTeams.filter((t) => t.name !== chosenTeam.name);
+  }
 
-	// Evolução do valor base — retornado para que o componente atualize player.baseValue
-	const newBaseValue = Math.floor(
-		currentPlayer.baseValue * Math.exp(currentSeasonPerformance * 0.1)
-	);
+  // Evolução do valor base — retornado para que o componente atualize player.baseValue
+  const newBaseValue = Math.floor(
+    currentPlayer.baseValue * Math.exp(currentSeasonPerformance * 0.1)
+  );
 
-	const contracts = [];
+  const contracts = [];
 
-	for (let index = 0; index < 3; index++) {
-		const team = interestedTeams[index];
-		if (team) {
-			let newPosition;
-			if (currentPlayer.position.abbreviation !== "GO" && Math.random() < 0.2) {
-				const relatedPositions = currentPlayer.position.related;
-				newPosition = relatedPositions[RandomNumber(0, relatedPositions.length - 1)];
-			} else {
-				newPosition = currentPlayer.position.abbreviation;
-			}
+  for (let index = 0; index < 3; index++) {
+    const team = interestedTeams[index];
+    if (team) {
+      let newPosition;
+      if (currentPlayer.position.abbreviation !== "GO" && Math.random() < 0.2) {
+        const relatedPositions = currentPlayer.position.related;
+        newPosition = relatedPositions[RandomNumber(0, relatedPositions.length - 1)];
+      } else {
+        newPosition = currentPlayer.position.abbreviation;
+      }
 
-			let duration = RandomNumber(1, 4);
-			duration += currentPlayer.age <= 28 ? RandomNumber(1, 2) : 0;
+      let duration = RandomNumber(1, 4);
+      duration += currentPlayer.age <= 28 ? RandomNumber(1, 2) : 0;
 
-			contracts.push({ team, duration, loan: false, position: newPosition });
-		} else {
-			contracts.push(null);
-		}
-	}
+      contracts.push({ team, duration, loan: false, position: newPosition });
+    } else {
+      contracts.push(null);
+    }
+  }
 
-	return { contracts, newBaseValue };
+  return { contracts, newBaseValue };
 }

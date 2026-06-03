@@ -1,132 +1,132 @@
 [
-	{
-		"title": "Centroavante",
-		"abbreviation": "CA",
-		"goalsMultiplier": 1.0,
-		"assistsMultiplier": 0.25,
-		"value": 5,
-		"related": ["SA", "PE", "PD"],
-		"peak": 30,
-		"subRate": 0.2
-	},
-	{
-		"title": "Segundo Atacante",
-		"abbreviation": "SA",
-		"goalsMultiplier": 0.9,
-		"assistsMultiplier": 0.35,
-		"value": 4.5,
-		"related": ["CA", "MA", "PE", "PD"],
-		"peak": 30,
-		"subRate": 0.4
-	},
-	{
-		"title": "Ponta Esquerda",
-		"abbreviation": "PE",
-		"goalsMultiplier": 0.8,
-		"assistsMultiplier": 0.45,
-		"value": 5.0,
-		"related": ["SA", "CA", "PD", "ME"],
-		"peak": 28,
-		"subRate": 0.6
-	},
-	{
-		"title": "Ponta Direita",
-		"abbreviation": "PD",
-		"goalsMultiplier": 0.8,
-		"assistsMultiplier": 0.45,
-		"value": 5.0,
-		"related": ["SA", "CA", "PE", "MD"],
-		"peak": 28,
-		"subRate": 0.6
-	},
-	{
-		"title": "Meia-Atacante",
-		"abbreviation": "MA",
-		"goalsMultiplier": 0.4,
-		"assistsMultiplier": 0.75,
-		"value": 4.5,
-		"related": ["SA", "MC", "ME", "MD"],
-		"peak": 30,
-		"subRate": 0.5
-	},
-	{
-		"title": "Meia Esquerda",
-		"abbreviation": "ME",
-		"goalsMultiplier": 0.35,
-		"assistsMultiplier": 0.5,
-		"value": 4.0,
-		"related": ["MA", "MC", "PE", "LE"],
-		"peak": 28,
-		"subRate": 0.5
-	},
-	{
-		"title": "Meia Central",
-		"abbreviation": "MC",
-		"goalsMultiplier": 0.35,
-		"assistsMultiplier": 0.5,
-		"value": 4.0,
-		"related": ["MA", "ME", "MD", "VO"],
-		"peak": 30,
-		"subRate": 0.6
-	},
-	{
-		"title": "Meia Direita",
-		"abbreviation": "MD",
-		"goalsMultiplier": 0.35,
-		"assistsMultiplier": 0.5,
-		"value": 4.0,
-		"related": ["MA", "MC", "PD", "LD"],
-		"peak": 28,
-		"subRate": 0.5
-	},
-	{
-		"title": "Volante",
-		"abbreviation": "VO",
-		"goalsMultiplier": 0.25,
-		"assistsMultiplier": 0.4,
-		"value": 3.5,
-		"related": ["MC", "ZC", "LE", "LD"],
-		"peak": 30,
-		"subRate": 0.4
-	},
-	{
-		"title": "Lateral Esquerdo",
-		"abbreviation": "LE",
-		"goalsMultiplier": 0.2,
-		"assistsMultiplier": 0.35,
-		"value": 3.0,
-		"related": ["LD", "ME", "VO", "ZC"],
-		"peak": 28,
-		"subRate": 0.4
-	},
-	{
-		"title": "Lateral Direito",
-		"abbreviation": "LD",
-		"goalsMultiplier": 0.2,
-		"assistsMultiplier": 0.35,
-		"value": 3.0,
-		"related": ["LE", "MD", "VO", "ZC"],
-		"peak": 28,
-		"subRate": 0.4
-	},
-	{
-		"title": "Zagueiro Central",
-		"abbreviation": "ZC",
-		"goalsMultiplier": 0.2,
-		"assistsMultiplier": 0.15,
-		"value": 2.5,
-		"related": ["VO", "LE", "LD"],
-		"peak": 30,
-		"subRate": 0.2
-	},
-	{
-		"title": "Goleiro",
-		"abbreviation": "GO",
-		"goalsMultiplier": 0.04,
-		"assistsMultiplier": 0.07,
-		"value": 2.5,
-		"related": [],
-		"peak": 30,
-		"subRate": 0.02
-	}
+  {
+    "title": "Centroavante",
+    "abbreviation": "CA",
+    "goalsMultiplier": 1.0,
+    "assistsMultiplier": 0.25,
+    "value": 5,
+    "related": ["SA", "PE", "PD"],
+    "peak": 30,
+    "subRate": 0.2
+  },
+  {
+    "title": "Segundo Atacante",
+    "abbreviation": "SA",
+    "goalsMultiplier": 0.9,
+    "assistsMultiplier": 0.35,
+    "value": 4.5,
+    "related": ["CA", "MA", "PE", "PD"],
+    "peak": 30,
+    "subRate": 0.4
+  },
+  {
+    "title": "Ponta Esquerda",
+    "abbreviation": "PE",
+    "goalsMultiplier": 0.8,
+    "assistsMultiplier": 0.45,
+    "value": 5.0,
+    "related": ["SA", "CA", "PD", "ME"],
+    "peak": 28,
+    "subRate": 0.6
+  },
+  {
+    "title": "Ponta Direita",
+    "abbreviation": "PD",
+    "goalsMultiplier": 0.8,
+    "assistsMultiplier": 0.45,
+    "value": 5.0,
+    "related": ["SA", "CA", "PE", "MD"],
+    "peak": 28,
+    "subRate": 0.6
+  },
+  {
+    "title": "Meia-Atacante",
+    "abbreviation": "MA",
+    "goalsMultiplier": 0.4,
+    "assistsMultiplier": 0.75,
+    "value": 4.5,
+    "related": ["SA", "MC", "ME", "MD"],
+    "peak": 30,
+    "subRate": 0.5
+  },
+  {
+    "title": "Meia Esquerda",
+    "abbreviation": "ME",
+    "goalsMultiplier": 0.35,
+    "assistsMultiplier": 0.5,
+    "value": 4.0,
+    "related": ["MA", "MC", "PE", "LE"],
+    "peak": 28,
+    "subRate": 0.5
+  },
+  {
+    "title": "Meia Central",
+    "abbreviation": "MC",
+    "goalsMultiplier": 0.35,
+    "assistsMultiplier": 0.5,
+    "value": 4.0,
+    "related": ["MA", "ME", "MD", "VO"],
+    "peak": 30,
+    "subRate": 0.6
+  },
+  {
+    "title": "Meia Direita",
+    "abbreviation": "MD",
+    "goalsMultiplier": 0.35,
+    "assistsMultiplier": 0.5,
+    "value": 4.0,
+    "related": ["MA", "MC", "PD", "LD"],
+    "peak": 28,
+    "subRate": 0.5
+  },
+  {
+    "title": "Volante",
+    "abbreviation": "VO",
+    "goalsMultiplier": 0.25,
+    "assistsMultiplier": 0.4,
+    "value": 3.5,
+    "related": ["MC", "ZC", "LE", "LD"],
+    "peak": 30,
+    "subRate": 0.4
+  },
+  {
+    "title": "Lateral Esquerdo",
+    "abbreviation": "LE",
+    "goalsMultiplier": 0.2,
+    "assistsMultiplier": 0.35,
+    "value": 3.0,
+    "related": ["LD", "ME", "VO", "ZC"],
+    "peak": 28,
+    "subRate": 0.4
+  },
+  {
+    "title": "Lateral Direito",
+    "abbreviation": "LD",
+    "goalsMultiplier": 0.2,
+    "assistsMultiplier": 0.35,
+    "value": 3.0,
+    "related": ["LE", "MD", "VO", "ZC"],
+    "peak": 28,
+    "subRate": 0.4
+  },
+  {
+    "title": "Zagueiro Central",
+    "abbreviation": "ZC",
+    "goalsMultiplier": 0.2,
+    "assistsMultiplier": 0.15,
+    "value": 2.5,
+    "related": ["VO", "LE", "LD"],
+    "peak": 30,
+    "subRate": 0.2
+  },
+  {
+    "title": "Goleiro",
+    "abbreviation": "GO",
+    "goalsMultiplier": 0.04,
+    "assistsMultiplier": 0.07,
+    "value": 2.5,
+    "related": [],
+    "peak": 30,
+    "subRate": 0.02
+  }
 ]

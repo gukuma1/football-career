@@ -1,167 +1,170 @@
 header {
-	background-color: var(--color-dark);
-	color: var(--color-contrast);
-	width: 100%;
-	min-width: 300px;
-	padding: 1rem;
+  background-color: var(--color-dark);
+  color: var(--color-contrast);
+  width: 100%;
+  min-width: 300px;
+  padding: 1rem;
 }
 
-header h1, header h2, header h3 {
-	font-family: "Nunito", sans-serif;
+header h1,
+header h2,
+header h3 {
+  font-family: "Nunito", sans-serif;
 }
 
 header ol {
-	color: var(--color-light);
+  color: var(--color-light);
 }
 
 footer {
-	display: flex;
-	position: fixed;
-	bottom: 0;
-	justify-content: center;
-	align-items: center;
-	background-color: var(--color-dark);
-	color: var(--color-light);
-	width: 100%;
-	padding: 1rem;
-	min-width: 300px;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  width: 100%;
+  padding: 1rem;
+  min-width: 300px;
 }
 
 main {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
 }
 
 section {
-	padding: 1rem 1rem 0 1rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	max-width: 450px;
-	min-width: 300px;
+  padding: 1rem 1rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 450px;
+  min-width: 300px;
 }
 
 .season-container {
-	width: 100%;
-	padding-top: 1rem;
+  width: 100%;
+  padding-top: 1rem;
 }
 
 .choices h3 {
-	color: var(--color-contrast);
+  color: var(--color-contrast);
 }
 
 .choices button,
 .choices select {
-	font-family: "Nunito", serif;
-	margin-bottom: 1rem;
-	padding: 1rem;
-	color: var(--color-contrast);
-	background-color: var(--color-medium);
-	border-radius: 1rem;
-	border: 1px solid var(--color-contrast);
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+  font-family: "Nunito", serif;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  color: var(--color-contrast);
+  background-color: var(--color-medium);
+  border-radius: 1rem;
+  border: 1px solid var(--color-contrast);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.choices select, .choices button p {
-	font-family: "Lora", serif;
+.choices select,
+.choices button p {
+  font-family: "Lora", serif;
 }
 
 .choices {
-	margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .choices button:hover {
-	background-color: var(--color-light);
-	cursor: pointer;
+  background-color: var(--color-light);
+  cursor: pointer;
 }
 
 .choices .contract {
-	margin-bottom: 1.5rem;
-	padding: 1rem 1rem 0 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .contract-info {
-	display: flex;
-	justify-content: space-between;
-	position: relative;
-	top: 0.5rem;
-	gap: 0.5rem;
-	width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 0.5rem;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .contract-info div {
-	flex: 1;
-	justify-content: center;
-	background-color: var(--color-dark);
-	text-align: center;
-	font-size: small;
-	display: flex;
-	align-items: center;
-	padding: 0.2rem 0.4rem;
-	border-radius: 1rem;
-	border: 1px var(--color-contrast) solid;
+  flex: 1;
+  justify-content: center;
+  background-color: var(--color-dark);
+  text-align: center;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0.4rem;
+  border-radius: 1rem;
+  border: 1px var(--color-contrast) solid;
 }
 
 .chart {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .chart div {
-	width: 100%;
-	max-width: 450px;
-	margin: 0.5rem;
-	padding: 0.5rem;
+  width: 100%;
+  max-width: 450px;
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
 
 .stats {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-	color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-light);
 }
 
 .stats-div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
-	width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .stats-div-div {
-	padding: 0.5rem 1rem;
-	border: 1px solid var(--color-dark);
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	width: 100%;
-	border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  border-radius: 1rem;
 }
 
 .stats-div-div details summary {
-	padding: 0 0.5rem;
-	border-radius: 1rem;
+  padding: 0 0.5rem;
+  border-radius: 1rem;
 }
 
 .stats-div-div details div {
-	padding-left: 1rem;
-	font-family: "Nunito", sans-serif;
+  padding-left: 1rem;
+  font-family: "Nunito", sans-serif;
 }
 
 .stats-div-div details summary:hover {
-	background-color: var(--color-medium);
+  background-color: var(--color-medium);
 }
