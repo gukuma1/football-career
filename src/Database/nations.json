@@ -1,610 +1,610 @@
 [
-	{
-		"name": "AFC",
-		"worldCupSpots": 7,
-		"teams": [
-			{
-				"name": "Arábia Saudita",
-				"continent": "AFC",
-				"power": 4.4,
-				"borders": ["Egito", "Jordânia"],
-				"can_host": true
-			},
-			{
-				"name": "Austrália",
-				"continent": "AFC",
-				"power": 6.7,
-				"borders": [],
-				"can_host": true
-			},
-			{
-				"name": "Catar",
-				"continent": "AFC",
-				"power": 4.7,
-				"borders": ["Arábia Saudita", "Emirados Árabes Unidos"],
-				"can_host": false
-			},
-			{
-				"name": "China",
-				"continent": "AFC",
-				"power": 3.5,
-				"borders": ["Coreia do Sul", "Japão"],
-				"can_host": true
-			},
-			{
-				"name": "Coreia do Sul",
-				"continent": "AFC",
-				"power": 6.8,
-				"borders": ["China", "Japão"],
-				"can_host": true
-			},
-			{
-				"name": "Emirados Árabes Unidos",
-				"continent": "AFC",
-				"power": 3.8,
-				"borders": ["Arábia Saudita", "Omã", "Catar"],
-				"can_host": false
-			},
-			{
-				"name": "Irã",
-				"continent": "AFC",
-				"power": 7.2,
-				"borders": ["Iraque"],
-				"can_host": false
-			},
-			{
-				"name": "Iraque",
-				"continent": "AFC",
-				"power": 4.6,
-				"borders": ["Arábia Saudita", "Irã"],
-				"can_host": false
-			},
-			{
-				"name": "Japão",
-				"continent": "AFC",
-				"power": 7.6,
-				"borders": ["China", "Coreia do Sul"],
-				"can_host": true
-			},
-			{
-				"name": "Jordânia",
-				"continent": "AFC",
-				"power": 4.2,
-				"borders": ["Arábia Saudita", "Egito"],
-				"can_host": false
-			},
-			{
-				"name": "Omã",
-				"continent": "AFC",
-				"power": 3.7,
-				"borders": ["Emirados Árabes Unidos"],
-				"can_host": false
-			},
-			{
-				"name": "Uzbequistão",
-				"continent": "AFC",
-				"power": 4.9,
-				"borders": [],
-				"can_host": false
-			}
-		]
-	},
-	{
-		"name": "CAF",
-		"worldCupSpots": 9,
-		"teams": [
-			{
-				"name": "África do Sul",
-				"continent": "CAF",
-				"power": 4.4,
-				"borders": [],
-				"can_host": true
-			},
-			{
-				"name": "Argélia",
-				"continent": "CAF",
-				"power": 6.4,
-				"borders": ["Tunísia", "Marrocos", "Espanha"],
-				"can_host": true
-			},
-			{
-				"name": "Burkina Faso",
-				"continent": "CAF",
-				"power": 4.3,
-				"borders": ["Costa do Marfim", "Mali", "Gana"],
-				"can_host": false
-			},
-			{
-				"name": "Cabo Verde",
-				"continent": "CAF",
-				"power": 4.1,
-				"borders": ["Senegal"],
-				"can_host": false
-			},
-			{
-				"name": "Camarões",
-				"continent": "CAF",
-				"power": 5.1,
-				"borders": ["Nigéria"],
-				"can_host": false
-			},
-			{
-				"name": "Costa do Marfim",
-				"continent": "CAF",
-				"power": 5.9,
-				"borders": ["Gana", "Burkina Faso", "Mali"],
-				"can_host": true
-			},
-			{
-				"name": "Egito",
-				"continent": "CAF",
-				"power": 6.6,
-				"borders": ["Jordânia"],
-				"can_host": true
-			},
-			{
-				"name": "Gana",
-				"continent": "CAF",
-				"power": 3.9,
-				"borders": ["Costa do Marfim", "Burkina Faso"],
-				"can_host": false
-			},
-			{
-				"name": "Mali",
-				"continent": "CAF",
-				"power": 4.8,
-				"borders": ["Costa do Marfim","Burkina Faso", "Senegal"],
-				"can_host": false
-			},
-			{
-				"name": "Marrocos",
-				"continent": "CAF",
-				"power": 8.4,
-				"borders": ["Argélia", "Espanha"],
-				"can_host": true
-			},
-			{
-				"name": "Nigéria",
-				"continent": "CAF",
-				"power": 6.5,
-				"borders": ["Camarões"],
-				"can_host": false
-			},
-			{
-				"name": "RD Congo",
-				"continent": "CAF",
-				"power": 5.1,
-				"borders": [],
-				"can_host": false
-			},
-			{
-				"name": "Senegal",
-				"continent": "CAF",
-				"power": 7.9,
-				"borders": ["Mali"],
-				"can_host": false
-			},
-			{
-				"name": "Tunísia",
-				"continent": "CAF",
-				"power": 5.2,
-				"borders": ["Argélia", "Itália"],
-				"can_host": true
-			}
-		]
-	},
-	{
-		"name": "CONCACAF",
-		"worldCupSpots": 5,
-		"teams": [
-			{
-				"name": "Canadá",
-				"continent": "CONCACAF",
-				"power": 6.3,
-				"borders": ["Estados Unidos"],
-				"can_host": true
-			},
-			{
-				"name": "Costa Rica",
-				"continent": "CONCACAF",
-				"power": 4.9,
-				"borders": ["Panamá"],
-				"can_host": false
-			},
-			{
-				"name": "Curaçao",
-				"continent": "CONCACAF",
-				"power": 3.6,
-				"borders": ["Venezuela"],
-				"can_host": false
-			},
-			{
-				"name": "Estados Unidos",
-				"continent": "CONCACAF",
-				"power": 7.7,
-				"borders": ["Canadá", "México"],
-				"can_host": true
-			},
-			{
-				"name": "Honduras",
-				"continent": "CONCACAF",
-				"power": 4.1,
-				"borders": [],
-				"can_host": false
-			},
-			{
-				"name": "Haiti",
-				"continent": "CONCACAF",
-				"power": 3.6,
-				"borders": [],
-				"can_host": false
-			},
-			{
-				"name": "Jamaica",
-				"continent": "CONCACAF",
-				"power": 4.0,
-				"borders": [],
-				"can_host": false
-			},
-			{
-				"name": "México",
-				"continent": "CONCACAF",
-				"power": 7.8,
-				"borders": ["Estados Unidos"],
-				"can_host": true
-			},
-			{
-				"name": "Panamá",
-				"continent": "CONCACAF",
-				"power": 6.1,
-				"borders": ["Costa Rica", "Colômbia"],
-				"can_host": false
-			}
-		]
-	},
-	{
-		"name": "CONMEBOL",
-		"worldCupSpots": 6,
-		"teams": [
-			{
-				"name": "Argentina",
-				"continent": "CONMEBOL",
-				"power": 9.0,
-				"borders": ["Chile", "Bolívia", "Paraguai", "Brasil"],
-				"can_host": true
-			},
-			{
-				"name": "Bolívia",
-				"continent": "CONMEBOL",
-				"power": 3.7,
-				"borders": ["Argentina", "Chile", "Paraguai", "Brasil", "Peru"],
-				"can_host": false
-			},
-			{
-				"name": "Brasil",
-				"continent": "CONMEBOL",
-				"power": 8.8,
-				"borders": [
-					"Argentina",
-					"Bolívia",
-					"Chile",
-					"Colômbia",
-					"Equador",
-					"Paraguai",
-					"Peru",
-					"Venezuela"
-				],
-				"can_host": true
-			},
-			{
-				"name": "Chile",
-				"continent": "CONMEBOL",
-				"power": 4.7,
-				"borders": ["Argentina", "Bolívia"],
-				"can_host": true
-			},
-			{
-				"name": "Colômbia",
-				"continent": "CONMEBOL",
-				"power": 8.0,
-				"borders": ["Venezuela", "Brasil", "Peru", "Equador"],
-				"can_host": true
-			},
-			{
-				"name": "Equador",
-				"continent": "CONMEBOL",
-				"power": 6.9,
-				"borders": ["Colômbia", "Peru"],
-				"can_host": false
-			},
-			{
-				"name": "Paraguai",
-				"continent": "CONMEBOL",
-				"power": 5.4,
-				"borders": ["Argentina", "Bolívia", "Brasil"],
-				"can_host": false
-			},
-			{
-				"name": "Peru",
-				"continent": "CONMEBOL",
-				"power": 4.8,
-				"borders": ["Colômbia", "Brasil", "Bolívia", "Chile", "Equador"],
-				"can_host": false
-			},
-			{
-				"name": "Uruguai",
-				"continent": "CONMEBOL",
-				"power": 7.4,
-				"borders": ["Argentina", "Brasil"],
-				"can_host": true
-			},
-			{
-				"name": "Venezuela",
-				"continent": "CONMEBOL",
-				"power": 5.0,
-				"borders": ["Colômbia", "Brasil", "Guyana"],
-				"can_host": false
-			}
-		]
-	},
-	{
-		"name": "OFC",
-		"worldCupSpots": 1,
-		"teams": [
-			{
-				"name": "Nova Zelândia",
-				"continent": "OFC",
-				"power": 3.5,
-				"borders": [],
-				"can_host": false
-			}
-		]
-	},
-	{
-		"name": "UEFA",
-		"worldCupSpots": 16,
-		"teams": [
-			{
-				"name": "Albania",
-				"continent": "UEFA",
-				"power": 4.3,
-				"borders": ["Grécia", "Macedônia do Norte"],
-				"can_host": false
-			},
-			{
-				"name": "Alemanha",
-				"continent": "UEFA",
-				"power": 8.5,
-				"borders": [
-					"Dinamarca",
-					"Polônia",
-					"República Tcheca",
-					"Áustria",
-					"Suíça",
-					"França",
-					"Bélgica",
-					"Países Baixos"
-				],
-				"can_host": true
-			},
-			{
-				"name": "Áustria",
-				"continent": "UEFA",
-				"power": 7.0,
-				"borders": ["Alemanha", "República Tcheca", "Eslováquia", "Hungria", "Eslovênia", "Itália"],
-				"can_host": true
-			},
-			{
-				"name": "Bélgica",
-				"continent": "UEFA",
-				"power": 8.3,
-				"borders": ["França", "Países Baixos", "Alemanha", "Inglaterra"],
-				"can_host": true
-			},
-			{
-				"name": "Bósnia",
-				"continent": "UEFA",
-				"power": 4.2,
-				"borders": ["Croácia", "Sérvia"],
-				"can_host": false
-			},
-			{
-				"name": "Croácia",
-				"continent": "UEFA",
-				"power": 8.2,
-				"borders": ["Eslovênia", "Bósnia", "Hungria", "Sérvia"],
-				"can_host": false
-			},
-			{
-				"name": "Dinamarca",
-				"continent": "UEFA",
-				"power": 7.3,
-				"borders": ["Alemanha", "Suécia", "Noruega"],
-				"can_host": true
-			},
-			{
-				"name": "Escócia",
-				"continent": "UEFA",
-				"power": 5.3,
-				"borders": ["Inglaterra"],
-				"can_host": false
-			},
-			{
-				"name": "Eslováquia",
-				"continent": "UEFA",
-				"power": 5.0,
-				"borders": ["República Tcheca", "Polônia", "Ucrânia", "Hungria", "Áustria"],
-				"can_host": false
-			},
-			{
-				"name": "Eslovênia",
-				"continent": "UEFA",
-				"power": 4.5,
-				"borders": ["Áustria", "Itália", "Croácia", "Hungria"],
-				"can_host": false
-			},
-			{
-				"name": "Espanha",
-				"continent": "UEFA",
-				"power": 9.4,
-				"borders": ["França", "Portugal"],
-				"can_host": true
-			},
-			{
-				"name": "França",
-				"continent": "UEFA",
-				"power": 9.6,
-				"borders": ["Bélgica", "Alemanha", "Suíça", "Itália", "Espanha", "Inglaterra"],
-				"can_host": true
-			},
-			{
-				"name": "Geórgia",
-				"continent": "UEFA",
-				"power": 3.9,
-				"borders": [],
-				"can_host": false
-			},
-			{
-				"name": "Grécia",
-				"continent": "UEFA",
-				"power": 5.2,
-				"borders": ["Albânia", "Turquia", "Macedônia do Norte"],
-				"can_host": true
-			},
-			{
-				"name": "Hungria",
-				"continent": "UEFA",
-				"power": 5.4,
-				"borders": [
-					"Áustria",
-					"Eslováquia",
-					"Ucrânia",
-					"Romênia",
-					"Sérvia",
-					"Croácia",
-					"Eslovênia"
-				],
-				"can_host": false
-			},
-			{
-				"name": "Inglaterra",
-				"continent": "UEFA",
-				"power": 9.2,
-				"borders": ["Escócia", "País de Gales", "Irlanda", "França", "Bélgica", "Países Baixos"],
-				"can_host": true
-			},
-			{
-				"name": "Irlanda",
-				"continent": "UEFA",
-				"power": 4.5,
-				"borders": ["Inglaterra", "País de Gales"],
-				"can_host": false
-			},
-			{
-				"name": "Irlanda do Norte",
-				"continent": "UEFA",
-				"power": 4.0,
-				"borders": [],
-				"can_host": false
-			},
-			{
-				"name": "Itália",
-				"continent": "UEFA",
-				"power": 8.1,
-				"borders": ["França", "Suíça", "Áustria", "Eslovênia", "Tunísia", "Croácia"],
-				"can_host": true
-			},
-			{
-				"name": "Macedônia do Norte",
-				"continent": "UEFA",
-				"power": 3.8,
-				"borders": ["Grécia", "Albânia", "Sérvia"],
-				"can_host": false
-			},
-			{
-				"name": "Noruega",
-				"continent": "UEFA",
-				"power": 6.0,
-				"borders": ["Suécia", "Dinamarca"],
-				"can_host": false
-			},
-			{
-				"name": "País de Gales",
-				"continent": "UEFA",
-				"power": 5.7,
-				"borders": ["Inglaterra", "Irlanda"],
-				"can_host": false
-			},
-			{
-				"name": "Países Baixos",
-				"continent": "UEFA",
-				"power": 8.6,
-				"borders": ["Bélgica", "Alemanha", "Inglaterra"],
-				"can_host": true
-			},
-			{
-				"name": "Polônia",
-				"continent": "UEFA",
-				"power": 5.8,
-				"borders": ["Alemanha", "República Tcheca", "Eslováquia", "Ucrânia"],
-				"can_host": false
-			},
-			{
-				"name": "Portugal",
-				"continent": "UEFA",
-				"power": 8.7,
-				"borders": ["Espanha", "Marrocos"],
-				"can_host": true
-			},
-			{
-				"name": "República Tcheca",
-				"continent": "UEFA",
-				"power": 5.3,
-				"borders": ["Alemanha", "Polônia", "Eslováquia", "Áustria"],
-				"can_host": false
-			},
-			{
-				"name": "Romênia",
-				"continent": "UEFA",
-				"power": 4.6,
-				"borders": ["Ucrânia", "Sérvia", "Hungria"],
-				"can_host": false
-			},
-			{
-				"name": "Sérvia",
-				"continent": "UEFA",
-				"power": 5.5,
-				"borders": ["Hungria", "Bósnia", "Romênia", "Macedônia do Norte"],
-				"can_host": false
-			},
-			{
-				"name": "Suécia",
-				"continent": "UEFA",
-				"power": 5.6,
-				"borders": ["Noruega", "Dinamarca"],
-				"can_host": false
-			},
-			{
-				"name": "Suíça",
-				"continent": "UEFA",
-				"power": 7.5,
-				"borders": ["França", "Alemanha", "Áustria", "Itália"],
-				"can_host": true
-			},
-			{
-				"name": "Turquia",
-				"continent": "UEFA",
-				"power": 7.1,
-				"borders": ["Grécia"],
-				"can_host": true
-			},
-			{
-				"name": "Ucrânia",
-				"continent": "UEFA",
-				"power": 6.2,
-				"borders": ["Polônia", "República Tcheca", "Eslováquia", "Hungria", "Romênia"],
-				"can_host": false
-			}
-		]
-	}
+  {
+    "name": "AFC",
+    "worldCupSpots": 7,
+    "teams": [
+      {
+        "name": "Arábia Saudita",
+        "continent": "AFC",
+        "power": 3.3,
+        "borders": ["Egito", "Jordânia"],
+        "can_host": true
+      },
+      {
+        "name": "Austrália",
+        "continent": "AFC",
+        "power": 6.7,
+        "borders": [],
+        "can_host": true
+      },
+      {
+        "name": "Catar",
+        "continent": "AFC",
+        "power": 3.9,
+        "borders": ["Arábia Saudita", "Emirados Árabes Unidos"],
+        "can_host": false
+      },
+      {
+        "name": "China",
+        "continent": "AFC",
+        "power": 1.5,
+        "borders": ["Coreia do Sul", "Japão"],
+        "can_host": true
+      },
+      {
+        "name": "Coreia do Sul",
+        "continent": "AFC",
+        "power": 6.8,
+        "borders": ["China", "Japão"],
+        "can_host": true
+      },
+      {
+        "name": "Emirados Árabes Unidos",
+        "continent": "AFC",
+        "power": 2.3,
+        "borders": ["Arábia Saudita", "Omã", "Catar"],
+        "can_host": false
+      },
+      {
+        "name": "Irã",
+        "continent": "AFC",
+        "power": 7.2,
+        "borders": ["Iraque"],
+        "can_host": false
+      },
+      {
+        "name": "Iraque",
+        "continent": "AFC",
+        "power": 3.7,
+        "borders": ["Arábia Saudita", "Irã"],
+        "can_host": false
+      },
+      {
+        "name": "Japão",
+        "continent": "AFC",
+        "power": 7.6,
+        "borders": ["China", "Coreia do Sul"],
+        "can_host": true
+      },
+      {
+        "name": "Jordânia",
+        "continent": "AFC",
+        "power": 3.0,
+        "borders": ["Arábia Saudita", "Egito"],
+        "can_host": false
+      },
+      {
+        "name": "Omã",
+        "continent": "AFC",
+        "power": 2.0,
+        "borders": ["Emirados Árabes Unidos"],
+        "can_host": false
+      },
+      {
+        "name": "Uzbequistão",
+        "continent": "AFC",
+        "power": 4.4,
+        "borders": [],
+        "can_host": false
+      }
+    ]
+  },
+  {
+    "name": "CAF",
+    "worldCupSpots": 9,
+    "teams": [
+      {
+        "name": "África do Sul",
+        "continent": "CAF",
+        "power": 3.4,
+        "borders": [],
+        "can_host": true
+      },
+      {
+        "name": "Argélia",
+        "continent": "CAF",
+        "power": 6.4,
+        "borders": ["Tunísia", "Marrocos", "Espanha"],
+        "can_host": true
+      },
+      {
+        "name": "Burkina Faso",
+        "continent": "CAF",
+        "power": 3.2,
+        "borders": ["Costa do Marfim", "Mali", "Gana"],
+        "can_host": false
+      },
+      {
+        "name": "Cabo Verde",
+        "continent": "CAF",
+        "power": 2.8,
+        "borders": ["Senegal"],
+        "can_host": false
+      },
+      {
+        "name": "Camarões",
+        "continent": "CAF",
+        "power": 4.8,
+        "borders": ["Nigéria"],
+        "can_host": false
+      },
+      {
+        "name": "Costa do Marfim",
+        "continent": "CAF",
+        "power": 5.9,
+        "borders": ["Gana", "Burkina Faso", "Mali"],
+        "can_host": true
+      },
+      {
+        "name": "Egito",
+        "continent": "CAF",
+        "power": 6.6,
+        "borders": ["Jordânia"],
+        "can_host": true
+      },
+      {
+        "name": "Gana",
+        "continent": "CAF",
+        "power": 2.4,
+        "borders": ["Costa do Marfim", "Burkina Faso"],
+        "can_host": false
+      },
+      {
+        "name": "Mali",
+        "continent": "CAF",
+        "power": 4.2,
+        "borders": ["Costa do Marfim", "Burkina Faso", "Senegal"],
+        "can_host": false
+      },
+      {
+        "name": "Marrocos",
+        "continent": "CAF",
+        "power": 8.4,
+        "borders": ["Argélia", "Espanha"],
+        "can_host": true
+      },
+      {
+        "name": "Nigéria",
+        "continent": "CAF",
+        "power": 6.5,
+        "borders": ["Camarões"],
+        "can_host": false
+      },
+      {
+        "name": "RD Congo",
+        "continent": "CAF",
+        "power": 5.1,
+        "borders": [],
+        "can_host": false
+      },
+      {
+        "name": "Senegal",
+        "continent": "CAF",
+        "power": 7.9,
+        "borders": ["Mali"],
+        "can_host": false
+      },
+      {
+        "name": "Tunísia",
+        "continent": "CAF",
+        "power": 5.0,
+        "borders": ["Argélia", "Itália"],
+        "can_host": true
+      }
+    ]
+  },
+  {
+    "name": "CONCACAF",
+    "worldCupSpots": 5,
+    "teams": [
+      {
+        "name": "Canadá",
+        "continent": "CONCACAF",
+        "power": 6.3,
+        "borders": ["Estados Unidos"],
+        "can_host": true
+      },
+      {
+        "name": "Costa Rica",
+        "continent": "CONCACAF",
+        "power": 4.3,
+        "borders": ["Panamá"],
+        "can_host": false
+      },
+      {
+        "name": "Curaçao",
+        "continent": "CONCACAF",
+        "power": 1.8,
+        "borders": ["Venezuela"],
+        "can_host": false
+      },
+      {
+        "name": "Estados Unidos",
+        "continent": "CONCACAF",
+        "power": 7.7,
+        "borders": ["Canadá", "México"],
+        "can_host": true
+      },
+      {
+        "name": "Haiti",
+        "continent": "CONCACAF",
+        "power": 1.7,
+        "borders": [],
+        "can_host": false
+      },
+      {
+        "name": "Honduras",
+        "continent": "CONCACAF",
+        "power": 2.7,
+        "borders": [],
+        "can_host": false
+      },
+      {
+        "name": "Jamaica",
+        "continent": "CONCACAF",
+        "power": 2.6,
+        "borders": [],
+        "can_host": false
+      },
+      {
+        "name": "México",
+        "continent": "CONCACAF",
+        "power": 7.8,
+        "borders": ["Estados Unidos"],
+        "can_host": true
+      },
+      {
+        "name": "Panamá",
+        "continent": "CONCACAF",
+        "power": 6.1,
+        "borders": ["Costa Rica", "Colômbia"],
+        "can_host": false
+      }
+    ]
+  },
+  {
+    "name": "CONMEBOL",
+    "worldCupSpots": 6,
+    "teams": [
+      {
+        "name": "Argentina",
+        "continent": "CONMEBOL",
+        "power": 9.0,
+        "borders": ["Chile", "Bolívia", "Paraguai", "Brasil"],
+        "can_host": true
+      },
+      {
+        "name": "Bolívia",
+        "continent": "CONMEBOL",
+        "power": 1.9,
+        "borders": ["Argentina", "Chile", "Paraguai", "Brasil", "Peru"],
+        "can_host": false
+      },
+      {
+        "name": "Brasil",
+        "continent": "CONMEBOL",
+        "power": 8.8,
+        "borders": [
+          "Argentina",
+          "Bolívia",
+          "Chile",
+          "Colômbia",
+          "Equador",
+          "Paraguai",
+          "Peru",
+          "Venezuela"
+        ],
+        "can_host": true
+      },
+      {
+        "name": "Chile",
+        "continent": "CONMEBOL",
+        "power": 4.0,
+        "borders": ["Argentina", "Bolívia"],
+        "can_host": true
+      },
+      {
+        "name": "Colômbia",
+        "continent": "CONMEBOL",
+        "power": 8.0,
+        "borders": ["Venezuela", "Brasil", "Peru", "Equador"],
+        "can_host": true
+      },
+      {
+        "name": "Equador",
+        "continent": "CONMEBOL",
+        "power": 6.9,
+        "borders": ["Colômbia", "Peru"],
+        "can_host": false
+      },
+      {
+        "name": "Paraguai",
+        "continent": "CONMEBOL",
+        "power": 5.4,
+        "borders": ["Argentina", "Bolívia", "Brasil"],
+        "can_host": false
+      },
+      {
+        "name": "Peru",
+        "continent": "CONMEBOL",
+        "power": 4.1,
+        "borders": ["Colômbia", "Brasil", "Bolívia", "Chile", "Equador"],
+        "can_host": false
+      },
+      {
+        "name": "Uruguai",
+        "continent": "CONMEBOL",
+        "power": 7.4,
+        "borders": ["Argentina", "Brasil"],
+        "can_host": true
+      },
+      {
+        "name": "Venezuela",
+        "continent": "CONMEBOL",
+        "power": 4.5,
+        "borders": ["Colômbia", "Brasil", "Guyana"],
+        "can_host": false
+      }
+    ]
+  },
+  {
+    "name": "OFC",
+    "worldCupSpots": 1,
+    "teams": [
+      {
+        "name": "Nova Zelândia",
+        "continent": "OFC",
+        "power": 1.6,
+        "borders": [],
+        "can_host": false
+      }
+    ]
+  },
+  {
+    "name": "UEFA",
+    "worldCupSpots": 16,
+    "teams": [
+      {
+        "name": "Albania",
+        "continent": "UEFA",
+        "power": 3.1,
+        "borders": ["Grécia", "Macedônia do Norte"],
+        "can_host": false
+      },
+      {
+        "name": "Alemanha",
+        "continent": "UEFA",
+        "power": 8.5,
+        "borders": [
+          "Dinamarca",
+          "Polônia",
+          "República Tcheca",
+          "Áustria",
+          "Suíça",
+          "França",
+          "Bélgica",
+          "Países Baixos"
+        ],
+        "can_host": true
+      },
+      {
+        "name": "Áustria",
+        "continent": "UEFA",
+        "power": 7.0,
+        "borders": ["Alemanha", "República Tcheca", "Eslováquia", "Hungria", "Eslovênia", "Itália"],
+        "can_host": true
+      },
+      {
+        "name": "Bélgica",
+        "continent": "UEFA",
+        "power": 8.3,
+        "borders": ["França", "Países Baixos", "Alemanha", "Inglaterra"],
+        "can_host": true
+      },
+      {
+        "name": "Bósnia",
+        "continent": "UEFA",
+        "power": 2.9,
+        "borders": ["Croácia", "Sérvia"],
+        "can_host": false
+      },
+      {
+        "name": "Croácia",
+        "continent": "UEFA",
+        "power": 8.2,
+        "borders": ["Eslovênia", "Bósnia", "Hungria", "Sérvia"],
+        "can_host": false
+      },
+      {
+        "name": "Dinamarca",
+        "continent": "UEFA",
+        "power": 7.3,
+        "borders": ["Alemanha", "Suécia", "Noruega"],
+        "can_host": true
+      },
+      {
+        "name": "Escócia",
+        "continent": "UEFA",
+        "power": 5.1,
+        "borders": ["Inglaterra"],
+        "can_host": false
+      },
+      {
+        "name": "Eslováquia",
+        "continent": "UEFA",
+        "power": 4.6,
+        "borders": ["República Tcheca", "Polônia", "Ucrânia", "Hungria", "Áustria"],
+        "can_host": false
+      },
+      {
+        "name": "Eslovênia",
+        "continent": "UEFA",
+        "power": 3.6,
+        "borders": ["Áustria", "Itália", "Croácia", "Hungria"],
+        "can_host": false
+      },
+      {
+        "name": "Espanha",
+        "continent": "UEFA",
+        "power": 9.4,
+        "borders": ["França", "Portugal"],
+        "can_host": true
+      },
+      {
+        "name": "França",
+        "continent": "UEFA",
+        "power": 9.6,
+        "borders": ["Bélgica", "Alemanha", "Suíça", "Itália", "Espanha", "Inglaterra"],
+        "can_host": true
+      },
+      {
+        "name": "Geórgia",
+        "continent": "UEFA",
+        "power": 2.2,
+        "borders": [],
+        "can_host": false
+      },
+      {
+        "name": "Grécia",
+        "continent": "UEFA",
+        "power": 4.9,
+        "borders": ["Albânia", "Turquia", "Macedônia do Norte"],
+        "can_host": true
+      },
+      {
+        "name": "Hungria",
+        "continent": "UEFA",
+        "power": 5.3,
+        "borders": [
+          "Áustria",
+          "Eslováquia",
+          "Ucrânia",
+          "Romênia",
+          "Sérvia",
+          "Croácia",
+          "Eslovênia"
+        ],
+        "can_host": false
+      },
+      {
+        "name": "Inglaterra",
+        "continent": "UEFA",
+        "power": 9.2,
+        "borders": ["Escócia", "País de Gales", "Irlanda", "França", "Bélgica", "Países Baixos"],
+        "can_host": true
+      },
+      {
+        "name": "Irlanda",
+        "continent": "UEFA",
+        "power": 3.5,
+        "borders": ["Inglaterra", "País de Gales"],
+        "can_host": false
+      },
+      {
+        "name": "Irlanda do Norte",
+        "continent": "UEFA",
+        "power": 2.5,
+        "borders": [],
+        "can_host": false
+      },
+      {
+        "name": "Itália",
+        "continent": "UEFA",
+        "power": 8.1,
+        "borders": ["França", "Suíça", "Áustria", "Eslovênia", "Tunísia", "Croácia"],
+        "can_host": true
+      },
+      {
+        "name": "Macedônia do Norte",
+        "continent": "UEFA",
+        "power": 2.1,
+        "borders": ["Grécia", "Albânia", "Sérvia"],
+        "can_host": false
+      },
+      {
+        "name": "Noruega",
+        "continent": "UEFA",
+        "power": 6.0,
+        "borders": ["Suécia", "Dinamarca"],
+        "can_host": false
+      },
+      {
+        "name": "País de Gales",
+        "continent": "UEFA",
+        "power": 5.7,
+        "borders": ["Inglaterra", "Irlanda"],
+        "can_host": false
+      },
+      {
+        "name": "Países Baixos",
+        "continent": "UEFA",
+        "power": 8.6,
+        "borders": ["Bélgica", "Alemanha", "Inglaterra"],
+        "can_host": true
+      },
+      {
+        "name": "Polônia",
+        "continent": "UEFA",
+        "power": 5.8,
+        "borders": ["Alemanha", "República Tcheca", "Eslováquia", "Ucrânia"],
+        "can_host": false
+      },
+      {
+        "name": "Portugal",
+        "continent": "UEFA",
+        "power": 8.7,
+        "borders": ["Espanha", "Marrocos"],
+        "can_host": true
+      },
+      {
+        "name": "República Tcheca",
+        "continent": "UEFA",
+        "power": 5.2,
+        "borders": ["Alemanha", "Polônia", "Eslováquia", "Áustria"],
+        "can_host": false
+      },
+      {
+        "name": "Romênia",
+        "continent": "UEFA",
+        "power": 3.8,
+        "borders": ["Ucrânia", "Sérvia", "Hungria"],
+        "can_host": false
+      },
+      {
+        "name": "Sérvia",
+        "continent": "UEFA",
+        "power": 5.5,
+        "borders": ["Hungria", "Bósnia", "Romênia", "Macedônia do Norte"],
+        "can_host": false
+      },
+      {
+        "name": "Suécia",
+        "continent": "UEFA",
+        "power": 5.6,
+        "borders": ["Noruega", "Dinamarca"],
+        "can_host": false
+      },
+      {
+        "name": "Suíça",
+        "continent": "UEFA",
+        "power": 7.5,
+        "borders": ["França", "Alemanha", "Áustria", "Itália"],
+        "can_host": true
+      },
+      {
+        "name": "Turquia",
+        "continent": "UEFA",
+        "power": 7.1,
+        "borders": ["Grécia"],
+        "can_host": true
+      },
+      {
+        "name": "Ucrânia",
+        "continent": "UEFA",
+        "power": 6.2,
+        "borders": ["Polônia", "República Tcheca", "Eslováquia", "Hungria", "Romênia"],
+        "can_host": false
+      }
+    ]
+  }
 ]

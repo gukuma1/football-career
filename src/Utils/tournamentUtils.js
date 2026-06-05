@@ -100,10 +100,6 @@ export function africanAsianCupDraw(firstPlaces, secondPlaces, thirdPlaces) {
 }
 
 export function worldCupDraw(firstPlaces, secondPlaces, thirdPlaces) {
-  console.log("Primeiros colocados:", firstPlaces);
-  console.log("Segundos colocados:", secondPlaces);
-  console.log("Terceiros colocados:", thirdPlaces);
-
   const setMapping = ["T1", "T1", "T2", "T2", "T2", "T2", "T1", "T1", "T1", "T1", "T2", "T2"];
   const subsetsMapping = ["S1", "S2", "S2", "S1", "S1", "S2"];
   const allocationPriority = {
