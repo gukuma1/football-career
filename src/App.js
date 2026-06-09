@@ -49,6 +49,155 @@ const TournamentPath = [
 	"Vencedor",
 ];
 
+/*
+// Simula uma única Champions League e retorna o campeão e vice-campeão
+function simulateChampionsLeagueSingle(leagues, extrateams, lastLeagueResults) {
+	let qualifiedToChampions = [];
+
+	// Obter os principais times de cada liga
+	for (let leagueID = 0; leagueID < leagues.length; leagueID++) {
+		let league = DeepClone([...leagues[leagueID].highestLeague.teams]);
+
+		let leagueTableNames = lastLeagueResults[leagueID].table.map((team) => team.name);
+		let leagueQualifiedNames = leagueTableNames.splice(
+			0,
+			lastLeagueResults[leagueID].championsSpots
+		);
+
+		let leagueQualified = league.filter((team) => leagueQualifiedNames.includes(team.name));
+
+		for (let teamID = 0; teamID < lastLeagueResults[leagueID].championsSpots; teamID++) {
+			qualifiedToChampions.push(leagueQualified[teamID]);
+		}
+	}
+
+	// Adicionar as equipes extras aos times qualificados
+	qualifiedToChampions = qualifiedToChampions.concat(
+		extrateams.find((conf) => conf.name === "UEFA").teams.slice(0, 8)
+	);
+
+	// Obter a posição dos campeões em um grupo específico
+	let championsGroup = GetChampionsPosition(qualifiedToChampions, null);
+
+	// Obter as equipes classificadas para os playoffs e limitar para 24 equipes
+	let playoffsClassif = DeepClone([...championsGroup.table]).splice(0, 24);
+
+	// Sortear confrontos
+	for (let index = 0; index < playoffsClassif.length; index += 2) {
+		if (Math.random() < 0.5) {
+			let temp = playoffsClassif[index];
+			playoffsClassif[index] = playoffsClassif[index + 1];
+			playoffsClassif[index + 1] = temp;
+		}
+	}
+
+	// Selecionar as primeiras 8 equipes classificadas para os playoffs
+	let classifToKnockout = playoffsClassif.splice(0, 8);
+
+	// Playoffs (16 vs 8)
+	for (let matchID = 0; matchID < playoffsClassif.length / 2; matchID++) {
+		let team1 = playoffsClassif[matchID];
+		let team2 = playoffsClassif[playoffsClassif.length - (matchID + 1)];
+		let game = GetKnockoutResult(team1, team2, true);
+
+		if (game.result) {
+			classifToKnockout.push(team1);
+		} else {
+			classifToKnockout.push(team2);
+		}
+	}
+
+	// Loop principal para simular os jogos até a final
+	let end = false;
+	let runnerUp = null;
+
+	while (!end) {
+		let newClassif = [];
+
+		// Se chegou na final, guarda o vice antes de processar
+		if (classifToKnockout.length === 2) {
+			runnerUp = classifToKnockout[1]; // Será atualizado após o jogo
+		}
+
+		// Loop pelos jogos do torneio atual
+		for (let matchID = 0; matchID < classifToKnockout.length / 2; matchID++) {
+			let team1 = classifToKnockout[matchID];
+			let team2 = classifToKnockout[classifToKnockout.length - (matchID + 1)];
+
+			let game = GetKnockoutResult(
+				team1,
+				team2,
+				classifToKnockout.length > 2 ? true : false
+			);
+
+			if (game.result) {
+				newClassif.push(team1);
+			} else {
+				newClassif.push(team2);
+			}
+		}
+
+		classifToKnockout = newClassif;
+
+		// Verificar se o torneio chegou ao fim
+		if (classifToKnockout.length === 1) {
+			end = true;
+		}
+	}
+
+	return {
+		champion: classifToKnockout[0].name,
+		runnerUp: runnerUp ? runnerUp.name : null,
+	};
+}
+
+// Executa 1000 simulações da Champions League e exibe os resultados
+function simulateChampionsLeagueMultiple(leagues, extrateams, lastLeagueResults, iterations = 1000) {
+	const champions = {};
+	const runnerUps = {};
+
+	console.time("Champions League Simulations");
+
+	for (let i = 0; i < iterations; i++) {
+		const result = simulateChampionsLeagueSingle(
+			DeepClone(leagues),
+			DeepClone(extrateams),
+			DeepClone(lastLeagueResults)
+		);
+
+		champions[result.champion] = (champions[result.champion] || 0) + 1;
+		runnerUps[result.runnerUp] = (runnerUps[result.runnerUp] || 0) + 1;
+	}
+
+	console.timeEnd("Champions League Simulations");
+
+	// Ordena e exibe resultados
+	const sortedChampions = Object.entries(champions)
+		.sort((a, b) => b[1] - a[1])
+		.slice(0, 20);
+
+	const sortedRunnerUps = Object.entries(runnerUps)
+		.sort((a, b) => b[1] - a[1])
+		.slice(0, 20);
+
+	console.log("\n========== CAMPEÕES (TOP 20) ==========");
+	sortedChampions.forEach(([team, count], index) => {
+		const percentage = ((count / iterations) * 100).toFixed(2);
+		console.log(`${index + 1}. ${team}: ${count}x (${percentage}%)`);
+	});
+
+	console.log("\n========== VICE-CAMPEÕES (TOP 20) ==========");
+	sortedRunnerUps.forEach(([team, count], index) => {
+		const percentage = ((count / iterations) * 100).toFixed(2);
+		console.log(`${index + 1}. ${team}: ${count}x (${percentage}%)`);
+	});
+
+	console.log(`\n✓ Simulação de ${iterations}x Champions League concluída!`);
+
+	return { champions, runnerUps };
+}
+*/
+
 function App() {
 	const [worldCupHistoryHosts, setWorldCupHistoryHosts] = useState([...WorldCupHistoryHosts]);
 	const [leagues, setLeagues] = useState([...Leagues]);
@@ -2116,6 +2265,17 @@ function App() {
 						onClick={() => Continue()}>
 						Simular ({contract} {contract > 1 ? "anos restantes" : "ano restante"})
 					</button>
+					{/*
+					<button
+						className="d-alert"
+						style={{ marginTop: "1rem" }}
+						onClick={() => {
+							console.log("\n🏆 Iniciando simulação de 1000x Champions League...\n");
+							simulateChampionsLeagueMultiple(leagues, extrateams, lastLeagueResults, 1000);
+						}}>
+						Testar Balanceamento (Champions)
+					</button>
+					*/}
 				</section>
 				<section
 					className="chart"
