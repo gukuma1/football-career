@@ -47,7 +47,7 @@ export function computeTeamsStats(leagues, limit) {
       let originalPower = team.power;
       team.power = Math.round(100.0 * (team.power + change)) / 100;
       if (team.power > 10) team.power = 10;
-      else if (team.power < 2) team.power = 2;
+      else if (team.power < 1) team.power = 1;
 
       let powerChange = team.power - originalPower;
       if (powerChange > 0) gains.push({ team: team.name, change: powerChange });
@@ -71,7 +71,7 @@ export function computeTeamsStats(leagues, limit) {
       let originalPower = team.power;
       team.power = Math.round(100.0 * (team.power + change)) / 100;
       if (team.power > 10) team.power = 10;
-      else if (team.power < 2) team.power = 2;
+      else if (team.power < 1) team.power = 1;
 
       let powerChange = team.power - originalPower;
       if (powerChange > 0) gains.push({ team: team.name, change: powerChange });
@@ -117,7 +117,7 @@ export function computeExtraTeamsStats(extrateams) {
       newTeams[confID].teams[teamID].power = Math.round(100.0 * newPower) / 100.0;
 
       if (newTeams[confID].teams[teamID].power > 10) newTeams[confID].teams[teamID].power = 10;
-      else if (newTeams[confID].teams[teamID].power < 2) newTeams[confID].teams[teamID].power = 2;
+      else if (newTeams[confID].teams[teamID].power < 1) newTeams[confID].teams[teamID].power = 1;
     }
 
     newTeams[confID].teams.sort((a, b) => b.power - a.power);
@@ -154,7 +154,7 @@ export function computeNationsStats(nations) {
       let originalPower = nation.power;
       nation.power = Math.round(100.0 * (nation.power + change)) / 100.0;
       if (nation.power > 10) nation.power = 10;
-      else if (nation.power < 2) nation.power = 2;
+      else if (nation.power < 1) nation.power = 1;
 
       let powerChange = nation.power - originalPower;
       if (powerChange > 0) gains.push({ nation: nation.name, change: powerChange });
