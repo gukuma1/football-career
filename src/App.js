@@ -411,7 +411,7 @@ function App() {
 
 		let opportunities = 0;
 		let awardRecord = [
-			{ name: "Performance", stat: (currentSeason.performance + 1.5) / 2.5, multiplier: 1.0 },
+			{ name: "Performance", stat: (currentSeason.performance + 1) / 2, multiplier: 1.0 },
 			{ name: "Starting", stat: currentSeason.starting / 100, multiplier: 1.0 },
 		];
 		let triplice = 0;
