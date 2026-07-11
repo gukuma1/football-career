@@ -6,6 +6,88 @@ const Season = (props) => {
   let season = props.season;
   let open = props.open;
 
+  const renderText = (text, key) => {
+    if (text.includes("-->")) {
+      const parts = text.split("-->");
+      return (
+        <details key={key}>
+          <summary>{parts[0]}</summary>
+          {parts.slice(1).map((part, index) => renderText(part, `${key}-${index}`))}
+        </details>
+      );
+    }
+
+    if (text.includes("->")) {
+      const parts = text.split("->");
+      return (
+        <details key={key}>
+          <summary
+            style={{
+              color:
+                parts[0].includes(season.team.name) || parts[0].includes(season.nation.name)
+                  ? "var(--color-contrast)"
+                  : "var(--color-light)"
+            }}>
+            {parts[0]}
+          </summary>
+          {parts.slice(1).map((innerMatch, index) => (
+            <p key={`${key}-${index}`} style={{ color: "var(--color-light)" }}>
+              {innerMatch}
+            </p>
+          ))}
+        </details>
+      );
+    }
+
+    return (
+      <p
+        key={key}
+        style={{
+          color:
+            text.includes(season.team.name) || text.includes(season.nation.name)
+              ? "var(--color-contrast)"
+              : "var(--color-light)"
+        }}>
+        {text}
+      </p>
+    );
+  };
+
+  const renderItem = (item, key) => {
+    if (typeof item === "string") {
+      return renderText(item, key);
+    }
+
+    if (Array.isArray(item)) {
+      if (item.length > 1) {
+        const [summary, ...stages] = item;
+        return (
+          <details key={key}>
+            <summary>{summary}</summary>
+            {stages.map((round, index) => renderItem(round, `${key}-${index}`))}
+          </details>
+        );
+      }
+
+      return (
+        <h1 className="single-title" key={key}>
+          {item[0]}
+        </h1>
+      );
+    }
+
+    if (item && typeof item === "object") {
+      return (
+        <details key={key}>
+          <summary>{item.title}</summary>
+          {item.children?.map((child, index) => renderItem(child, `${key}-${index}`))}
+        </details>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <details className="season" key={season.year} open={open}>
       <summary className="season-title">
@@ -235,78 +317,9 @@ const Season = (props) => {
                 ))}
               </details>
             </details>
-            {season.titles.map((title) => {
-              if (title.length > 1) {
-                let stages = title.slice(1);
-                return (
-                  <details key={season.year + title[0]}>
-                    <summary>{title[0]}</summary>
-                    {stages.map((round) => {
-                      let matchDetails = round.split("-->");
-                      if (matchDetails.length > 1) {
-                        let matches = matchDetails.slice(1);
-                        return (
-                          <details key={season.year + matchDetails[0]}>
-                            <summary>{matchDetails[0]}</summary>
-                            {matches.map((match) => {
-                              let innerDetails = match.split("->");
-                              if (innerDetails.length > 1) {
-                                let inners = innerDetails.slice(1);
-                                return (
-                                  <details key={season.year + innerDetails[0]}>
-                                    <summary
-                                      style={{
-                                        color:
-                                          innerDetails[0].includes(season.team.name) ||
-                                          innerDetails[0].includes(season.nation.name)
-                                            ? "var(--color-contrast)"
-                                            : "var(--color-light)"
-                                      }}>
-                                      {innerDetails[0]}
-                                    </summary>
-                                    {inners.map((innerMatch) => (
-                                      <p
-                                        key={season.year + innerMatch}
-                                        style={{
-                                          color: "var(--color-light)"
-                                        }}>
-                                        {innerMatch}
-                                      </p>
-                                    ))}
-                                  </details>
-                                );
-                              } else {
-                                return (
-                                  <p
-                                    key={season.year + match}
-                                    style={{
-                                      color:
-                                        match.includes(season.team.name) ||
-                                        match.includes(season.nation.name)
-                                          ? "var(--color-contrast)"
-                                          : "var(--color-light)"
-                                    }}>
-                                    {match}
-                                  </p>
-                                );
-                              }
-                            })}
-                          </details>
-                        );
-                      } else {
-                        return <p key={season.year + round}>{round}</p>;
-                      }
-                    })}
-                  </details>
-                );
-              } else {
-                return (
-                  <h1 className="single-title" key={season.year + title}>
-                    {title}
-                  </h1>
-                );
-              }
-            })}
+            {season.titles.map((title, titleIndex) =>
+              renderItem(title, `${season.year}-${titleIndex}`)
+            )}
           </div>
         </div>
       </div>
