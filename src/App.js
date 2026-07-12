@@ -1711,7 +1711,7 @@ function App() {
     if (currentSeason.awardPoints >= 0.8) {
       //POTS
       player.playerOfTheSeason.push(`${year} (${player.team.name})`);
-      player.fame += 50;
+      player.fame += 100;
       position = 1;
       let desc = `${
         player.position.title === "Goleiro" ? "Goleiro" : "Jogador"
