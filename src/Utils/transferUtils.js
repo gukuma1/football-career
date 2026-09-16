@@ -84,7 +84,7 @@ export function GetInitTeams(newTeams, currentPlayer) {
 
     return {
       team,
-      duration: RandomNumber(1, 4),
+      duration: RandomNumber(2, 5),
       loan: false,
       position: newPosition
     };
@@ -151,7 +151,7 @@ export function GetNewTeams(currentPlayer, leagues, history, currentSeasonPerfor
       }
 
       let duration = RandomNumber(1, 4);
-      duration += currentPlayer.age <= 28 ? RandomNumber(1, 2) : 0;
+      duration += currentPlayer.age <= currentPlayer.position.peak + 4 ? RandomNumber(1, 2) : 0;
 
       contracts.push({ team, duration, loan: false, position: newPosition });
     } else {
