@@ -1809,7 +1809,7 @@ function App() {
       //if played good middle contract
       player.performance > 0.5 &&
       med > 0 &&
-      (generalPerformance.length >= 2 || player.age < player.position.peak - 4) &&
+      generalPerformance.length >= 2 &&
       contract > 1 &&
       player.age < player.position.peak + 4
     ) {
