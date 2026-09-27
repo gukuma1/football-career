@@ -4,27 +4,27 @@
     "abbreviation": "CA",
     "goalsMultiplier": 1.0,
     "assistsMultiplier": 0.24,
-    "value": 5,
+    "value": 6,
     "related": ["SA", "PE", "PD"],
     "peak": 30,
-    "subRate": 0.2
+    "subRate": 0.4
   },
   {
     "title": "Segundo Atacante",
     "abbreviation": "SA",
     "goalsMultiplier": 0.9,
     "assistsMultiplier": 0.35,
-    "value": 4.5,
+    "value": 5.5,
     "related": ["CA", "MA", "PE", "PD"],
     "peak": 30,
-    "subRate": 0.4
+    "subRate": 0.5
   },
   {
     "title": "Ponta Esquerda",
     "abbreviation": "PE",
     "goalsMultiplier": 0.8,
     "assistsMultiplier": 0.42,
-    "value": 5.0,
+    "value": 6.0,
     "related": ["SA", "CA", "PD", "ME"],
     "peak": 28,
     "subRate": 0.6
@@ -34,7 +34,7 @@
     "abbreviation": "PD",
     "goalsMultiplier": 0.8,
     "assistsMultiplier": 0.42,
-    "value": 5.0,
+    "value": 6.0,
     "related": ["SA", "CA", "PE", "MD"],
     "peak": 28,
     "subRate": 0.6
@@ -44,7 +44,7 @@
     "abbreviation": "MA",
     "goalsMultiplier": 0.4,
     "assistsMultiplier": 0.65,
-    "value": 4.5,
+    "value": 5,
     "related": ["SA", "MC", "ME", "MD"],
     "peak": 30,
     "subRate": 0.5
@@ -54,7 +54,7 @@
     "abbreviation": "ME",
     "goalsMultiplier": 0.35,
     "assistsMultiplier": 0.5,
-    "value": 4.0,
+    "value": 4.5,
     "related": ["MA", "MC", "PE", "LE"],
     "peak": 28,
     "subRate": 0.5
@@ -64,7 +64,7 @@
     "abbreviation": "MC",
     "goalsMultiplier": 0.35,
     "assistsMultiplier": 0.5,
-    "value": 4.0,
+    "value": 4.5,
     "related": ["MA", "ME", "MD", "VO"],
     "peak": 30,
     "subRate": 0.6
@@ -74,7 +74,7 @@
     "abbreviation": "MD",
     "goalsMultiplier": 0.35,
     "assistsMultiplier": 0.5,
-    "value": 4.0,
+    "value": 4.5,
     "related": ["MA", "MC", "PD", "LD"],
     "peak": 28,
     "subRate": 0.5
@@ -84,7 +84,7 @@
     "abbreviation": "VO",
     "goalsMultiplier": 0.25,
     "assistsMultiplier": 0.4,
-    "value": 3.5,
+    "value": 4,
     "related": ["MC", "ZC", "LE", "LD"],
     "peak": 30,
     "subRate": 0.4
@@ -94,7 +94,7 @@
     "abbreviation": "LE",
     "goalsMultiplier": 0.2,
     "assistsMultiplier": 0.35,
-    "value": 3.0,
+    "value": 3.5,
     "related": ["LD", "ME", "VO", "ZC"],
     "peak": 28,
     "subRate": 0.4
@@ -104,7 +104,7 @@
     "abbreviation": "LD",
     "goalsMultiplier": 0.2,
     "assistsMultiplier": 0.35,
-    "value": 3.0,
+    "value": 3.5,
     "related": ["LE", "MD", "VO", "ZC"],
     "peak": 28,
     "subRate": 0.4
@@ -114,7 +114,7 @@
     "abbreviation": "ZC",
     "goalsMultiplier": 0.2,
     "assistsMultiplier": 0.15,
-    "value": 2.5,
+    "value": 3,
     "related": ["VO", "LE", "LD"],
     "peak": 30,
     "subRate": 0.2
@@ -124,7 +124,7 @@
     "abbreviation": "GO",
     "goalsMultiplier": 0.04,
     "assistsMultiplier": 0.07,
-    "value": 2.5,
+    "value": 3,
     "related": [],
     "peak": 30,
     "subRate": 0.02
