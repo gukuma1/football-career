@@ -23,6 +23,35 @@ export function customReverse(arr) {
   return chunks.flat();
 }
 
+export function prioritizeChampionQualification(qualifiedTeams, champion, eligibleTeams, spots) {
+  const uniqueTeams = qualifiedTeams
+    .filter(
+      (team, index, teams) =>
+        team &&
+        teams.findIndex(
+          (candidate) => candidate.name === team.name && candidate.country === team.country
+        ) === index
+    )
+    .slice(0, spots);
+
+  if (!champion || spots <= 0) return uniqueTeams;
+
+  const championTeam = eligibleTeams.find(
+    (team) => team.name === champion.name && team.country === champion.country
+  );
+  if (
+    !championTeam ||
+    uniqueTeams.some((team) => team.name === champion.name && team.country === champion.country)
+  ) {
+    return uniqueTeams;
+  }
+
+  if (uniqueTeams.length === spots) uniqueTeams[spots - 1] = championTeam;
+  else uniqueTeams.push(championTeam);
+
+  return uniqueTeams;
+}
+
 // ─── Funções de sorteio de chaveamento ───────────────────────────────────────
 
 export function euroCupDraw(firstPlaces, secondPlaces, thirdPlaces) {
@@ -279,6 +308,24 @@ export function GetLeaguePosition(teams) {
   }
 
   return { sortedTeams, desc };
+}
+
+/**
+ * Sorteia resultados domésticos simplificados para clubes sem liga simulada.
+ * A escala de poder atual (1–10) define uma colocação esperada em 18 times.
+ */
+export function GetUnmodeledClubSeason(team) {
+  const power = Math.max(1, Math.min(10, team.power));
+  const expectedPosition = 18 - ((power - 1) / 9) * 17;
+  const positionNoise = (Math.random() + Math.random() - 1) * 4;
+  const leaguePosition = Math.max(1, Math.min(15, Math.round(expectedPosition + positionNoise)));
+
+  const cupRounds = 4;
+  const advancementChance = Math.max(0.2, Math.min(0.8, 0.25 + power * 0.055));
+  let cupWins = 0;
+  while (cupWins < cupRounds && Math.random() < advancementChance) cupWins++;
+
+  return { leaguePosition, cupWins, cupRounds };
 }
 
 /**

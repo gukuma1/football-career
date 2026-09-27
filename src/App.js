@@ -21,492 +21,562 @@ import {
   worldCupDraw,
   clubWorldCupDraw,
   DrawClubWorldCupGroups,
+  GetUnmodeledClubSeason,
+  prioritizeChampionQualification
 } from "./Utils/tournamentUtils";
 import { GetInitTeams, GetNewTeams, GetTransferValue } from "./Utils/transferUtils";
 import { computeTeamsStats, computeExtraTeamsStats, computeNationsStats } from "./Utils/statsUtils";
 
 const StarPath = [
-	"Esquecido", //0
-	"Ruim", //100
-	"Não Foi", //200
-	"Ok", //300
-	"Bom", //400
-	"Ótimo", //500
-	"Deixou sua marca", //600
-	"Estrela", //700
-	"Ídolo", //800
-	"Lenda", //900
-	"GOAT", //1000
+  "Esquecido", //0
+  "Ruim", //100
+  "Não Foi", //200
+  "Ok", //300
+  "Bom", //400
+  "Ótimo", //500
+  "Deixou sua marca", //600
+  "Estrela", //700
+  "Ídolo", //800
+  "Lenda", //900
+  "GOAT" //1000
 ];
 
 const TournamentPath = [
-	"Grupos",
-	"Playoffs",
-	"Oitavas",
-	"Quartas",
-	"Semi-finais",
-	"Final",
-	"Vencedor",
+  "Grupos",
+  "Playoffs",
+  "Oitavas",
+  "Quartas",
+  "Semi-finais",
+  "Final",
+  "Vencedor"
 ];
 
 function App() {
-	const [worldCupHistoryHosts, setWorldCupHistoryHosts] = useState([...WorldCupHistoryHosts]);
-	const [leagues, setLeagues] = useState([...Leagues]);
-	const [extrateams, setExtraTeams] = useState([...ExtraTeams]);
-	const [nations, setNations] = useState([...Nations]);
+  const [worldCupHistoryHosts, setWorldCupHistoryHosts] = useState([...WorldCupHistoryHosts]);
+  const [leagues, setLeagues] = useState([...Leagues]);
+  const [extrateams, setExtraTeams] = useState([...ExtraTeams]);
+  const [nations, setNations] = useState([...Nations]);
 
-	const [seasons, setSeasons] = useState([]);
+  const [seasons, setSeasons] = useState([]);
 
-	const parentRef = useRef(null);
-	useEffect(() => {
-		const parent = parentRef.current;
-		if (!parent) return;
+  const parentRef = useRef(null);
+  useEffect(() => {
+    const parent = parentRef.current;
+    if (!parent) return;
 
-		const target = parent.lastElementChild;
-		if (target)
-			target.scrollIntoView({
-				alignToTop: true,
-				behavior: "smooth",
-				block: "start",
-				inline: "center",
-			});
-	}, [seasons]);
+    const target = parent.lastElementChild;
+    if (target)
+      target.scrollIntoView({
+        alignToTop: true,
+        behavior: "smooth",
+        block: "start",
+        inline: "center"
+      });
+  }, [seasons]);
 
-	const [currentSeason, setCurrentSeason] = useState({
-		year: null,
-		top10: null,
-		topNations: null,
-		topGains: null,
-		topLoss: null,
-		topNationsGains: null,
-		topNationsLoss: null,
-		age: null,
-		positionInClub: null,
-		team: null,
-		starting: null,
-		subbed: null,
-		titles: null,
-		goals: null,
-		assists: null,
-		performance: null,
-		awardPoints: null,
-		leagueTable: null,
-		fame: null,
-		marketValue: null,
-	});
+  const [currentSeason, setCurrentSeason] = useState({
+    year: null,
+    top10: null,
+    topNations: null,
+    topGains: null,
+    topLoss: null,
+    topNationsGains: null,
+    topNationsLoss: null,
+    age: null,
+    positionInClub: null,
+    team: null,
+    starting: null,
+    subbed: null,
+    titles: null,
+    goals: null,
+    assists: null,
+    performance: null,
+    awardPoints: null,
+    leagueTable: null,
+    fame: null,
+    marketValue: null
+  });
 
-	const [player] = useState({
-		age: 17,
-		nation: null,
-		team: null,
-		contractTeam: null,
-		position: null,
-		positionInClub: null,
-		performance: 0,
-		totalGoals: 0,
-		totalAssists: 0,
-		leagueTitles: [],
-		nationalCup: [],
-		champions: [],
-		clubWorldCup: [],
-		continentalChampionship: [],
-		worldCup: [],
-		awards: [],
-		playerOfTheSeason: [],
-		championsQualification: false,
-		lastLeaguePosition: 0,
-		fame: 0,
-		marketValue: 1,
-		baseValue: 1000000,
-	});
+  const [player] = useState({
+    age: 17,
+    nation: null,
+    team: null,
+    contractTeam: null,
+    position: null,
+    positionInClub: null,
+    performance: 0,
+    totalGoals: 0,
+    totalAssists: 0,
+    leagueTitles: [],
+    nationalCup: [],
+    champions: [],
+    clubWorldCup: [],
+    continentalChampionship: [],
+    worldCup: [],
+    awards: [],
+    playerOfTheSeason: [],
+    championsQualification: false,
+    lastLeaguePosition: 0,
+    fame: 0,
+    marketValue: 1,
+    baseValue: 1000000
+  });
 
-	const [lastLeagueResults, setLastLeagueResults] = useState(HistoryLeagues);
+  const [lastLeagueResults, setLastLeagueResults] = useState(HistoryLeagues);
 
-	const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([]);
 
-	const [year, setYear] = useState(2026);
+  const [year, setYear] = useState(2026);
 
-	const [contract, setContract] = useState(0);
+  const [contract, setContract] = useState(0);
 
-	const [generalPerformance, setGeneralPerformance] = useState([]);
+  const [generalPerformance, setGeneralPerformance] = useState([]);
 
-	const [transfers, setTransfers] = useState([]);
+  const [transfers, setTransfers] = useState([]);
 
-	const [uefaWinners, setUefaWinners] = useState([{ name: "Arsenal", country: "Inglaterra" }]);
+  const [uefaWinners, setUefaWinners] = useState([{ name: "Arsenal", country: "Inglaterra" }]);
+  const [championsDefendingChampion, setChampionsDefendingChampion] = useState(null);
 
-	const [renew, setRenew] = useState({ duration: 0, addition: null, position: null });
+  const [renew, setRenew] = useState({ duration: 0, addition: null, position: null });
 
-	function ChooseNation() {
-		const continentDropdown = document.getElementById("continent-dropdown");
-		const nationDropdown = document.getElementById("nation-dropdown");
+  function ChooseNation() {
+    const continentDropdown = document.getElementById("continent-dropdown");
+    const nationDropdown = document.getElementById("nation-dropdown");
 
-		// Find the selected continent
-		const selectedContinent = nations.find(
-			(continent) => continent.name === continentDropdown.value
-		);
+    // Find the selected continent
+    const selectedContinent = nations.find(
+      (continent) => continent.name === continentDropdown.value
+    );
 
-		// Find the selected nation within the chosen continent
-		const selectedNation = selectedContinent
-			? selectedContinent.teams.find((nation) => nation.name === nationDropdown.value)
-			: null;
+    // Find the selected nation within the chosen continent
+    const selectedNation = selectedContinent
+      ? selectedContinent.teams.find((nation) => nation.name === nationDropdown.value)
+      : null;
 
-		// Check if both the continent and nation are selected
-		if (selectedContinent && selectedNation) {
-			// Change display
-			document.getElementById("init-pos").style.display = "flex";
-			document.getElementById("init-nation").style.display = "none";
+    // Check if both the continent and nation are selected
+    if (selectedContinent && selectedNation) {
+      // Change display
+      document.getElementById("init-pos").style.display = "flex";
+      document.getElementById("init-nation").style.display = "none";
 
-			// Create a new player object with the selected nation
-			player.nation = selectedNation;
-		} else {
-			alert("Selecione um País.");
-		}
-	}
+      // Create a new player object with the selected nation
+      player.nation = selectedNation;
+    } else {
+      alert("Selecione um País.");
+    }
+  }
 
-	function updateNationDropdown() {
-		const continentDropdown = document.getElementById("continent-dropdown");
-		const nationDropdown = document.getElementById("nation-dropdown");
-		const selectedContinent = continentDropdown.value;
+  function updateNationDropdown() {
+    const continentDropdown = document.getElementById("continent-dropdown");
+    const nationDropdown = document.getElementById("nation-dropdown");
+    const selectedContinent = continentDropdown.value;
 
-		// Clear previous nations
-		nationDropdown.innerHTML = '<option value="">Selecione uma Nação</option>';
+    // Clear previous nations
+    nationDropdown.innerHTML = '<option value="">Selecione uma Nação</option>';
 
-		// Find nations for the selected continent
-		const continentData = nations.find((cont) => cont.name === selectedContinent);
-		if (continentData) {
-			continentData.teams.forEach((team) => {
-				const option = document.createElement("option");
-				option.value = team.name;
-				option.textContent = team.name;
-				nationDropdown.appendChild(option);
-			});
-		}
-	}
+    // Find nations for the selected continent
+    const continentData = nations.find((cont) => cont.name === selectedContinent);
+    if (continentData) {
+      continentData.teams.forEach((team) => {
+        const option = document.createElement("option");
+        option.value = team.name;
+        option.textContent = team.name;
+        nationDropdown.appendChild(option);
+      });
+    }
+  }
 
-	function ChoosePos() {
-		// Get the selected position
-		const positionDropdown = document.getElementById("position-select");
-		const selectedPosition = Positions.find(
-			(position) => position.title === positionDropdown.value
-		);
+  function ChoosePos() {
+    // Get the selected position
+    const positionDropdown = document.getElementById("position-select");
+    const selectedPosition = Positions.find(
+      (position) => position.title === positionDropdown.value
+    );
 
-		// Change display
-		document.getElementById("team-choice").style.display = "flex";
-		document.getElementById("init-pos").style.display = "none";
+    // Change display
+    document.getElementById("team-choice").style.display = "flex";
+    document.getElementById("init-pos").style.display = "none";
 
-		player.position = selectedPosition; // Assign the selected position
+    player.position = selectedPosition; // Assign the selected position
 
-		// Update league results
-		setTransfers(GetInitTeams(leagues, player)); // Use selectedPosition
-	}
+    // Update league results
+    setTransfers(GetInitTeams(leagues, player, extrateams)); // Use selectedPosition
+  }
 
-	function ChooseTeam(newTeam = null) {
-		//change display
-		document.getElementById("team-choice").style.display = "none";
-		document.getElementById("continue").style.display = "flex";
+  function ChooseTeam(newTeam = null) {
+    //change display
+    document.getElementById("team-choice").style.display = "none";
+    document.getElementById("continue").style.display = "flex";
 
-		//load
-		player.age++;
-		let newGeneralPerformance = generalPerformance;
-		let newHistory = history;
-		let newContract = contract - 1;
+    //load
+    player.age++;
+    let newGeneralPerformance = generalPerformance;
+    let newHistory = history;
+    let newContract = contract - 1;
 
-		newHistory = newHistory.filter((item) => year - item.year <= 8);
+    newHistory = newHistory.filter((item) => year - item.year <= 8);
 
-		if (newTeam !== null) {
-			// Se houver mudança de time
-			newHistory.push({ team: newTeam.team.name, year: year + newTeam.duration });
+    if (newTeam !== null) {
+      // Se houver mudança de time
+      newHistory.push({ team: newTeam.team.name, year: year + newTeam.duration });
 
-			// Verifica se o jogador foi emprestado para o novo time
-			if (newTeam.loan) {
-				// Atualiza os detalhes do contrato do jogador se ele estiver emprestado
-				player.contractTeam = {
-					team: player.team,
-					duration: newContract - newTeam.duration,
-					transferValue: newTeam.transferValue,
-					position: player.positionInClub.abbreviation,
-					loan: false,
-				};
-			}
+      // Verifica se o jogador foi emprestado para o novo time
+      if (newTeam.loan) {
+        // Atualiza os detalhes do contrato do jogador se ele estiver emprestado
+        player.contractTeam = {
+          team: player.team,
+          duration: newContract - newTeam.duration,
+          transferValue: newTeam.transferValue,
+          position: player.positionInClub.abbreviation,
+          loan: false
+        };
+      }
 
-			newGeneralPerformance = [];
-			player.team = newTeam.team;
-			newContract = newTeam.duration;
-			player.marketValue = GetTransferValue(
-				player.performance,
-				player.position.value,
-				player.age,
-				player.position.peak,
-				newTeam.power,
-				player.fame,
-				player.baseValue
-			);
-			player.positionInClub = Positions.find(
-				(position) => position.abbreviation === newTeam.position
-			);
+      newGeneralPerformance = [];
+      player.team = newTeam.team;
+      newContract = newTeam.duration;
+      player.marketValue = GetTransferValue(
+        player.performance,
+        player.position.value,
+        player.age,
+        player.position.peak,
+        newTeam.power,
+        player.fame,
+        player.baseValue
+      );
+      player.positionInClub = Positions.find(
+        (position) => position.abbreviation === newTeam.position
+      );
 
-			let lp = 99; // Inicializa o valor padrão de "lp"
+      let lp = 99; // Inicializa o valor padrão de "lp"
 
-			let newLeagueResults =
-				lastLeagueResults.find((league) => league.country === player.team.country) || [];
-			lp = newLeagueResults.table.findIndex((team) => team.name === player.team.name) + 1;
+      let newLeagueResults = lastLeagueResults.find(
+        (league) =>
+          league.country === player.team.country &&
+          (!league.unmodeled || league.teamName === player.team.name)
+      );
+      lp = newLeagueResults
+        ? newLeagueResults.unmodeled
+          ? newLeagueResults.position
+          : newLeagueResults.table.findIndex((team) => team.name === player.team.name) + 1
+        : -1;
 
-			// Verifica se o jogador se classificou no ano passado
-			if (lp <= 0 || lp > newLeagueResults.championsSpots) {
-				// Não foi classificado
-				player.championsQualification = false;
-			} else {
-				// Para os campeões
-				player.championsQualification = true;
-				player.lastLeaguePosition = lp;
-			}
+      // Verifica se o jogador se classificou no ano passado
+      if (!newLeagueResults || lp <= 0 || lp > newLeagueResults.championsSpots) {
+        // Não foi classificado
+        player.championsQualification = false;
+      } else {
+        // Para os campeões
+        player.championsQualification = true;
+        player.lastLeaguePosition = lp;
+      }
 
-			setRenew({ value: 0, duration: 0, addition: null, position: null });
-		} else if (newContract <= 0 || renew.addition != null) {
-			// Renovação do contrato
-			newContract = renew.duration + renew.addition; // Nova duração do contrato
-			player.positionInClub = Positions.find(
-				(position) => position.abbreviation === renew.position
-			);
+      setRenew({ value: 0, duration: 0, addition: null, position: null });
+    } else if (newContract <= 0 || renew.addition != null) {
+      // Renovação do contrato
+      newContract = renew.duration + renew.addition; // Nova duração do contrato
+      player.positionInClub = Positions.find(
+        (position) => position.abbreviation === renew.position
+      );
 
-			setRenew({ value: 0, duration: 0, addition: null, position: null });
-		}
+      setRenew({ value: 0, duration: 0, addition: null, position: null });
+    }
 
-		//change teams power on each season
-		let updatedTeams = UpdateTeamsStats(40.0);
-		let newTeams = updatedTeams.newTeams;
-		UpdateExtraTeamsStats();
+    //change teams power on each season
+    let updatedTeams = UpdateTeamsStats(40.0);
+    let newTeams = updatedTeams.newTeams;
+    let updatedExtraTeams = UpdateExtraTeamsStats();
 
-		let allTeams = [];
-		for (let leagueID = 0; leagueID < newTeams.length; leagueID++) {
-			allTeams = allTeams
-				.concat([...newTeams[leagueID].highestLeague.teams])
-				.concat([...newTeams[leagueID].lowerLeague.teams]);
-		}
-		allTeams.sort((a, b) => {
-			return b.power - a.power;
-		});
-		//creates a list of top 10 teams
-		let top10 = allTeams.slice(0, 10).map((team, index) => ({
-			...team,
-			rank: index + 1, // Rank starts from 1
-		}));
-		if (!top10.some((t) => t.name === player.team.name)) {
-			const playerTeam = allTeams.find((t) => t.name === player.team.name);
-			const playerRanking = allTeams.findIndex((t) => t.name === player.team.name) + 1;
-			if (playerTeam) {
-				top10.push({
-					...playerTeam,
-					rank: playerRanking,
-				});
-			}
-		}
+    let allTeams = [];
+    for (let leagueID = 0; leagueID < newTeams.length; leagueID++) {
+      allTeams = allTeams
+        .concat([...newTeams[leagueID].highestLeague.teams])
+        .concat([...newTeams[leagueID].lowerLeague.teams]);
+    }
+    allTeams.sort((a, b) => {
+      return b.power - a.power;
+    });
+    //creates a list of top 10 teams
+    let top10 = allTeams.slice(0, 10).map((team, index) => ({
+      ...team,
+      rank: index + 1 // Rank starts from 1
+    }));
+    if (!top10.some((t) => t.name === player.team.name)) {
+      const playerTeam = allTeams.find((t) => t.name === player.team.name);
+      const playerRanking = allTeams.findIndex((t) => t.name === player.team.name) + 1;
+      if (playerTeam) {
+        top10.push({
+          ...playerTeam,
+          rank: playerRanking
+        });
+      }
+    }
 
-		//change nations power on each season
-		let updatedNations = UpdateNationsStats();
-		let newNat = updatedNations.allNations;
-		let allNations = [];
-		for (let regionID = 0; regionID < newNat.length; regionID++) {
-			allNations = allNations.concat([...newNat[regionID].teams]);
-		}
-		allNations.sort((a, b) => {
-			return b.power - a.power;
-		});
-		//creates a list of top 10 nations
-		let topNations = allNations.slice(0, 10).map((team, index) => ({
-			...team,
-			rank: index + 1, // Rank starts from 1
-		}));
-		if (!topNations.some((t) => t.name === player.nation.name)) {
-			const playerTeam = allNations.find((t) => t.name === player.nation.name);
-			const playerRanking = allNations.findIndex((t) => t.name === player.nation.name) + 1;
-			if (playerTeam) {
-				topNations.push({
-					...playerTeam,
-					rank: playerRanking,
-				});
-			}
-		}
+    //change nations power on each season
+    let updatedNations = UpdateNationsStats();
+    let newNat = updatedNations.allNations;
+    let allNations = [];
+    for (let regionID = 0; regionID < newNat.length; regionID++) {
+      allNations = allNations.concat([...newNat[regionID].teams]);
+    }
+    allNations.sort((a, b) => {
+      return b.power - a.power;
+    });
+    //creates a list of top 10 nations
+    let topNations = allNations.slice(0, 10).map((team, index) => ({
+      ...team,
+      rank: index + 1 // Rank starts from 1
+    }));
+    if (!topNations.some((t) => t.name === player.nation.name)) {
+      const playerTeam = allNations.find((t) => t.name === player.nation.name);
+      const playerRanking = allNations.findIndex((t) => t.name === player.nation.name) + 1;
+      if (playerTeam) {
+        topNations.push({
+          ...playerTeam,
+          rank: playerRanking
+        });
+      }
+    }
 
-		player.team = allTeams.find((t) => t.name === player.team.name); //find player's team by name and update
-		player.nation = allNations.find((n) => n.name === player.nation.name); //find player's nation by name and update
+    let allExtraTeams = updatedExtraTeams.flatMap((conf) => conf.teams);
+    player.team =
+      allTeams.find((t) => t.name === player.team.name) ||
+      allExtraTeams.find((t) => t.name === player.team.name) ||
+      player.team;
+    player.nation = allNations.find((n) => n.name === player.nation.name); //find player's nation by name and update
 
-		player.marketValue = GetTransferValue(
-			player.performance,
-			player.position.value,
-			player.age,
-			player.position.peak,
-			player.team.power,
-			player.fame,
-			player.baseValue
-		);
+    player.marketValue = GetTransferValue(
+      player.performance,
+      player.position.value,
+      player.age,
+      player.position.peak,
+      player.team.power,
+      player.fame,
+      player.baseValue
+    );
 
-		//calcule the player's performance
-		player.performance = Math.round(100.0 * (Math.random() - Math.random())) / 100.0;
+    //calcule the player's performance
+    player.performance = Math.round(100.0 * (Math.random() - Math.random())) / 100.0;
 
-		//set performance over team
-		newGeneralPerformance.push(player.performance);
-		if (newGeneralPerformance.length > 4) newGeneralPerformance.shift();
+    //set performance over team
+    newGeneralPerformance.push(player.performance);
+    if (newGeneralPerformance.length > 4) newGeneralPerformance.shift();
 
-		//giving the performance, set how many games did they were the starter player
-		let r = Math.random() * 10;
-		let starting = Math.floor(
-			100 / (1 + (player.team.power * Math.pow(player.positionInClub.peak - player.age, 2)) / 400) +
-				player.performance * 10 +
-				r
-		);
-		if (starting > 100) starting = 100;
-		else if (starting < 0) starting = 0;
+    //giving the performance, set how many games did they were the starter player
+    let r = Math.random() * 10;
+    let starting = Math.floor(
+      100 / (1 + (player.team.power * Math.pow(player.positionInClub.peak - player.age, 2)) / 400) +
+        player.performance * 10 +
+        r
+    );
+    if (starting > 100) starting = 100;
+    else if (starting < 0) starting = 0;
 
-		let remaining = 100 - starting;
+    let remaining = 100 - starting;
 
-		let subbed =
-			Math.floor(
-				(player.positionInClub.subRate *
-					Math.exp(player.performance * 0.2) *
-					(1 + player.fame / 1000) *
-					remaining) /
-					2
-			) * 2;
-		if (subbed > remaining) subbed = remaining;
-		else if (subbed < 0) subbed = 0;
+    let subbed =
+      Math.floor(
+        (player.positionInClub.subRate *
+          Math.exp(player.performance * 0.2) *
+          (1 + player.fame / 1000) *
+          remaining) /
+          2
+      ) * 2;
+    if (subbed > remaining) subbed = remaining;
+    else if (subbed < 0) subbed = 0;
 
-		//set season start
-		let newSeason = {
-			year: year + 1,
-			top10: top10,
-			topNations: topNations,
-			topGains: updatedTeams.topGains,
-			topLoss: updatedTeams.topLosses,
-			topNationsGains: updatedNations.topGains,
-			topNationsLoss: updatedNations.topLosses,
-			age: player.age,
-			positionInClub: player.positionInClub,
-			team: DeepClone(player.team),
-			nation: DeepClone(player.nation),
-			starting: starting,
-			subbed: subbed,
-			titles: [],
-			goals: 0,
-			assists: 0,
-			performance: player.performance,
-			awardPoints: 0,
-			leagueTable: [],
-			fame: player.fame,
-			marketValue: player.marketValue,
-		};
+    //set season start
+    let newSeason = {
+      year: year + 1,
+      top10: top10,
+      topNations: topNations,
+      topGains: updatedTeams.topGains,
+      topLoss: updatedTeams.topLosses,
+      topNationsGains: updatedNations.topGains,
+      topNationsLoss: updatedNations.topLosses,
+      age: player.age,
+      positionInClub: player.positionInClub,
+      team: DeepClone(player.team),
+      nation: DeepClone(player.nation),
+      starting: starting,
+      subbed: subbed,
+      titles: [],
+      goals: 0,
+      assists: 0,
+      performance: player.performance,
+      awardPoints: 0,
+      leagueTable: [],
+      fame: player.fame,
+      marketValue: player.marketValue
+    };
 
-		//save
-		setCurrentSeason(newSeason);
-		setYear(year + 1);
-		setContract(newContract);
-		setGeneralPerformance(newGeneralPerformance);
-		setHistory(newHistory);
-	}
+    //save
+    setCurrentSeason(newSeason);
+    setYear(year + 1);
+    setContract(newContract);
+    setGeneralPerformance(newGeneralPerformance);
+    setHistory(newHistory);
+  }
 
-	function Continue() {
-		//change display
-		document.getElementById("team-choice").style.display = "flex";
-		document.getElementById("continue").style.display = "none";
+  function Continue() {
+    //change display
+    document.getElementById("team-choice").style.display = "flex";
+    document.getElementById("continue").style.display = "none";
 
-		let opportunities = 0;
-		let awardRecord = [
-			{ name: "Performance", stat: (currentSeason.performance + 1) / 2, multiplier: 1.0 },
-			{ name: "Starting", stat: currentSeason.starting / 100, multiplier: 1.0 },
-		];
-		let triplice = 0;
-		let competitionPerformance = 0;
+    let opportunities = 0;
+    let awardRecord = [
+      { name: "Performance", stat: (currentSeason.performance + 1) / 2, multiplier: 1.0 },
+      { name: "Starting", stat: currentSeason.starting / 100, multiplier: 1.0 }
+    ];
+    let triplice = 0;
+    let competitionPerformance = 0;
 
-		// Set champions qualification based on last season
-		let lastPlayerLeagueResult = lastLeagueResults.find((league) => league.country === player.team.country);
-		if (lastPlayerLeagueResult) {
-			let lp = lastPlayerLeagueResult.table.findIndex((team) => team.name === player.team.name) + 1;
-			player.championsQualification = lp > 0 && lp <= lastPlayerLeagueResult.championsSpots;
-		} else {
-			player.championsQualification = false;
-		}
+    // Set champions qualification based on last season or the defending title
+    const playerIsDefendingChampion =
+      championsDefendingChampion?.name === player.team.name &&
+      championsDefendingChampion?.country === player.team.country;
+    let lastPlayerLeagueResult = lastLeagueResults.find(
+      (league) =>
+        league.country === player.team.country &&
+        (!league.unmodeled || league.teamName === player.team.name)
+    );
+    if (lastPlayerLeagueResult) {
+      let lp = lastPlayerLeagueResult.unmodeled
+        ? lastPlayerLeagueResult.position
+        : lastPlayerLeagueResult.table.findIndex((team) => team.name === player.team.name) + 1;
+      player.championsQualification =
+        (lp > 0 && lp <= lastPlayerLeagueResult.championsSpots) || playerIsDefendingChampion;
+    } else {
+      player.championsQualification = playerIsDefendingChampion;
+    }
 
-		//national tournaments
-		let leagueResults = leagues.map((league) => {
-			const result = GetLeaguePosition(shuffleArray(league.highestLeague.teams));
-			const table = result.sortedTeams;
+    //national tournaments
+    let leagueResults = leagues.map((league) => {
+      const result = GetLeaguePosition(shuffleArray(league.highestLeague.teams));
+      const table = result.sortedTeams;
 
-			const rebaixados = table.slice(-league.demotions);
-			const promovidos = league.lowerLeague.teams
-				.sort((a, b) => {
-					return b.power - a.power - Math.random(); // pequeno fator de aleatoriedade
-				})
-				.slice(0, league.demotions);
+      const rebaixados = table.slice(-league.demotions);
+      const promovidos = league.lowerLeague.teams
+        .sort((a, b) => {
+          return b.power - a.power - Math.random(); // pequeno fator de aleatoriedade
+        })
+        .slice(0, league.demotions);
 
-			const rebaixadosNomes = rebaixados.map((t) => t.name);
-			const promovidosNomes = promovidos.map((t) => t.name);
+      const rebaixadosNomes = rebaixados.map((t) => t.name);
+      const promovidosNomes = promovidos.map((t) => t.name);
 
-			let leagueResult = {
-				leagueName: league.highestLeague.name,
-				country: league.country,
-				championsSpots: league.championsSpots,
-				table: table,
-				desc: result.desc,
-				// Guardamos aqui para rebaixar/promover depois
-				_pendingRebaixamento: {
-					rebaixados,
-					promovidos,
-					rebaixadosNomes,
-					promovidosNomes,
-				},
-				_reference: league, // guardamos a referência pra mexer depois
-			};
+      let leagueResult = {
+        leagueName: league.highestLeague.name,
+        country: league.country,
+        championsSpots: league.championsSpots,
+        table: table,
+        desc: result.desc,
+        // Guardamos aqui para rebaixar/promover depois
+        _pendingRebaixamento: {
+          rebaixados,
+          promovidos,
+          rebaixadosNomes,
+          promovidosNomes
+        },
+        _reference: league // guardamos a referência pra mexer depois
+      };
 
-			console.log(
-				league.highestLeague.name +
-					": " +
-					leagueResult.table[0].name +
-					" (" +
-					leagueResult.table[0].power +
-					")"
-			);
+      console.log(
+        league.highestLeague.name +
+          ": " +
+          leagueResult.table[0].name +
+          " (" +
+          leagueResult.table[0].power +
+          ")"
+      );
 
-			return leagueResult;
-		});
+      return leagueResult;
+    });
 
-		let playerLeagueResult = leagueResults.find((league) => league.country === player.team.country);
+    let playerLeagueResult = leagueResults.find((league) => league.country === player.team.country);
+    let playerUnmodeledLeagueResult = null;
+    const playerIsUnmodeledUefaClub = extrateams
+      .find((conf) => conf.name === "UEFA")
+      .teams.some((team) => team.name === player.team.name);
+    let playerPosition;
+    let unmodeledClubSeason = null;
 
-		let leaguesTable = [];
-		for (let l = 0; l < leagueResults.length; l++) {
-			leaguesTable.push(`${leagueResults[l].leagueName}${leagueResults[l].desc}`);
-		}
+    let leaguesTable = [];
+    for (let l = 0; l < leagueResults.length; l++) {
+      leaguesTable.push(`${leagueResults[l].leagueName}${leagueResults[l].desc}`);
+    }
 
-		const playerPosition = playerLeagueResult.table.findIndex(
-			(team) => team.name === player.team.name
-		);
-		competitionPerformance = Math.max(0, (10 - playerPosition) / 10); //max = 1, 0.5 at 6th
-		awardRecord.push({
-			name: "Liga",
-			stat: competitionPerformance,
-			multiplier: 0.5,
-		});
-		currentSeason.titles.push(
-			[`Liga${playerPosition >= 0 ? `: ${playerPosition + 1}º lugar` : ""}`].concat(leaguesTable)
-		);
-		player.fame += Math.floor((playerLeagueResult.championsSpots * (5 - playerPosition)) / 2.0); //max = 10
+    if (playerLeagueResult) {
+      playerPosition = playerLeagueResult.table.findIndex((team) => team.name === player.team.name);
+    } else {
+      unmodeledClubSeason = GetUnmodeledClubSeason(player.team);
+      playerPosition = unmodeledClubSeason.leaguePosition - 1;
+      leaguesTable.push(`Liga simulada por poder: ${unmodeledClubSeason.leaguePosition}º de 18`);
+      playerUnmodeledLeagueResult = {
+        country: player.team.country,
+        teamName: player.team.name,
+        position: unmodeledClubSeason.leaguePosition,
+        championsSpots: playerIsUnmodeledUefaClub ? 4 : 0,
+        unmodeled: true
+      };
+    }
+    competitionPerformance = Math.max(0, (10 - playerPosition) / 10); //max = 1, 0.5 at 6th
+    awardRecord.push({
+      name: "Liga",
+      stat: competitionPerformance,
+      multiplier: 0.5
+    });
+    currentSeason.titles.push(
+      [`Liga${playerPosition >= 0 ? `: ${playerPosition + 1}º lugar` : ""}`].concat(leaguesTable)
+    );
+    player.fame +=
+      playerLeagueResult && !unmodeledClubSeason
+        ? Math.floor((playerLeagueResult.championsSpots * (5 - playerPosition)) / 2.0)
+        : Math.max(0, 5 - Math.ceil(playerPosition / 4));
 
-		opportunities +=
-			playerPosition >= 0
-				? playerLeagueResult.table.length / (1 + playerPosition / 5)
-				: RandomNumber(1, 5); //max = 20 at 1, 10 at 5
+    opportunities +=
+      playerLeagueResult && !unmodeledClubSeason
+        ? playerPosition >= 0
+          ? playerLeagueResult.table.length / (1 + playerPosition / 5)
+          : RandomNumber(1, 5)
+        : 18 / (1 + playerPosition / 5);
 
-		//if fist place, then won trophy
-		if (playerPosition === 0) {
-			player.leagueTitles.push(`${year} (${player.team.name})`);
-			triplice++;
-		}
-
+    //if fist place, then won trophy
+    if (playerPosition === 0) {
+      player.leagueTitles.push(`${year} (${player.team.name})`);
+      triplice++;
+    }
     let nationalCupPerformance = 0;
     let end = false;
     let phase = 1;
     let playerPhase = 1;
     let nationalCupDescriptions = [];
     let nationalCupPlayerResult = null;
+    if (unmodeledClubSeason) {
+      const cupStages = ["Playoffs", "Quartas", "Semi-finais", "Final", "Vencedor"];
+      const cupStage = cupStages[unmodeledClubSeason.cupWins];
+      const matchesPlayed = Math.min(
+        unmodeledClubSeason.cupWins + 1,
+        unmodeledClubSeason.cupRounds
+      );
+      opportunities += matchesPlayed;
+      player.fame += matchesPlayed * 2;
+      if (unmodeledClubSeason.cupWins === unmodeledClubSeason.cupRounds) {
+        player.nationalCup.push(`${year} (${player.team.name})`);
+        player.fame += 2;
+        triplice++;
+      }
+      const cupDescription = Array.from(
+        { length: matchesPlayed },
+        (_, round) =>
+          `${["Playoffs", "Quartas", "Semi-finais", "Final"][round]}: ${
+            round < unmodeledClubSeason.cupWins ? "classificado" : "eliminado"
+          }`
+      );
+      nationalCupPerformance += unmodeledClubSeason.cupWins * 0.2;
+      nationalCupPlayerResult = `Copa Nacional: ${cupStage}`;
+      nationalCupDescriptions.push({ title: player.team.country, children: cupDescription });
+    }
 
     for (const leagueData of leagues) {
       end = false;
@@ -618,28 +688,57 @@ function App() {
 
     let championsDescription = [];
     let qualifiedToChampions = [];
+    let currentChampionsWinner = null;
 
     // Obter os principais times de cada liga
     for (let leagueID = 0; leagueID < leagues.length; leagueID++) {
-      let league = DeepClone([...leagues[leagueID].highestLeague.teams]);
+      const league = leagues[leagueID];
+      const leagueResult = lastLeagueResults[leagueID];
+      const leagueQualified = leagueResult.table
+        .slice(0, leagueResult.championsSpots)
+        .map((team) =>
+          league.highestLeague.teams.find((currentTeam) => currentTeam.name === team.name)
+        )
+        .filter(Boolean);
+      const isDefendingChampionLeague = championsDefendingChampion?.country === league.country;
+      const eligibleLeagueTeams = [
+        ...league.highestLeague.teams,
+        ...league.lowerLeague.teams,
+        ...(isDefendingChampionLeague ? [championsDefendingChampion] : [])
+      ];
 
-      let leagueTableNames = lastLeagueResults[leagueID].table.map((team) => team.name);
-      let leagueQualifiedNames = leagueTableNames.splice(
-        0,
-        lastLeagueResults[leagueID].championsSpots
+      qualifiedToChampions.push(
+        ...(isDefendingChampionLeague
+          ? prioritizeChampionQualification(
+              leagueQualified,
+              championsDefendingChampion,
+              eligibleLeagueTeams,
+              leagueResult.championsSpots
+            )
+          : leagueQualified)
       );
-
-      let leagueQualified = league.filter((team) => leagueQualifiedNames.includes(team.name));
-
-      for (let teamID = 0; teamID < lastLeagueResults[leagueID].championsSpots; teamID++) {
-        qualifiedToChampions.push(leagueQualified[teamID]);
-      }
     }
 
     // Adicionar as equipes extras aos times qualificados
-    qualifiedToChampions = qualifiedToChampions.concat(
-      extrateams.find((conf) => conf.name === "UEFA").teams.slice(0, 8)
-    );
+    const uefaExtraTeams = extrateams.find((conf) => conf.name === "UEFA").teams;
+    const playerQualifiesFromUnmodeledUefaClub =
+      playerIsUnmodeledUefaClub && player.championsQualification;
+    let qualifiedUefaExtras = uefaExtraTeams
+      .filter((team) => team.name !== player.team.name)
+      .slice(0, playerQualifiesFromUnmodeledUefaClub ? 7 : 8);
+    if (playerQualifiesFromUnmodeledUefaClub) qualifiedUefaExtras.push(player.team);
+    if (
+      championsDefendingChampion &&
+      !leagues.some((league) => league.country === championsDefendingChampion.country)
+    ) {
+      qualifiedUefaExtras = prioritizeChampionQualification(
+        qualifiedUefaExtras,
+        championsDefendingChampion,
+        [...uefaExtraTeams, player.team, championsDefendingChampion],
+        8
+      );
+    }
+    qualifiedToChampions = qualifiedToChampions.concat(qualifiedUefaExtras);
 
     // Obter a posição dos campeões em um grupo específico
     let championsGroup = GetChampionsPosition(
@@ -782,6 +881,8 @@ function App() {
       if (phase >= TournamentPath.length - 1) {
         console.log("Champions League: " + newClassif[0].name + " (" + newClassif[0].power + ")");
         uefaWinners.push(newClassif[0]);
+        currentChampionsWinner = newClassif[0];
+        setChampionsDefendingChampion(currentChampionsWinner);
         end = true;
       }
     }
@@ -1746,34 +1847,43 @@ function App() {
     });
 
     //setup next season
-    if (playerPosition <= playerLeagueResult.championsSpots) {
+    const qualifiedForChampions =
+      (playerLeagueResult
+        ? playerPosition < playerLeagueResult.championsSpots
+        : unmodeledClubSeason !== null &&
+          playerIsUnmodeledUefaClub &&
+          unmodeledClubSeason.leaguePosition <= 4) ||
+      (currentChampionsWinner?.name === player.team.name &&
+        currentChampionsWinner?.country === player.team.country);
+    if (qualifiedForChampions) {
       player.championsQualification = true;
-      player.lastLeaguePosition = playerPosition;
+      player.lastLeaguePosition = playerPosition + 1;
     } else {
       player.championsQualification = false;
     }
 
-		if (player.fame < 0) player.fame = 0;
+    if (player.fame < 0) player.fame = 0;
 
-		currentSeason.fame = player.fame;
+    currentSeason.fame = player.fame;
 
-		let med = 0;
-		for (let i = 0; i < generalPerformance.length; i++) {
-			med += generalPerformance[i];
-		}
-		med /= generalPerformance.length;
+    let med = 0;
+    for (let i = 0; i < generalPerformance.length; i++) {
+      med += generalPerformance[i];
+    }
+    med /= generalPerformance.length;
 
-		//trasnfer window
-		let { contracts: newTransfers, newBaseValue } = GetNewTeams(
-			player,
-			leagues,
-			history,
-			currentSeason.performance
-		);
-		player.baseValue = newBaseValue;
-		let newRenew = { value: 0, duration: 0, addition: null, position: null };
+    //trasnfer window
+    let { contracts: newTransfers, newBaseValue } = GetNewTeams(
+      player,
+      leagues,
+      history,
+      currentSeason.performance,
+      extrateams
+    );
+    player.baseValue = newBaseValue;
+    let newRenew = { value: 0, duration: 0, addition: null, position: null };
 
-		if (
+    if (
       //if ended loan
       player.contractTeam !== null &&
       contract <= 1
@@ -1917,323 +2027,293 @@ function App() {
       ChooseTeam();
     }
 
-		setLastLeagueResults(leagueResults);
-		setTransfers(newTransfers);
-		setRenew(newRenew);
+    if (playerUnmodeledLeagueResult) leagueResults.push(playerUnmodeledLeagueResult);
+    setLastLeagueResults(leagueResults);
+    setTransfers(newTransfers);
+    setRenew(newRenew);
 
-		//set Seasons
-		const newSeasons = [...seasons, currentSeason];
-		setSeasons(newSeasons);
-	}
+    //set Seasons
+    const newSeasons = [...seasons, currentSeason];
+    setSeasons(newSeasons);
+  }
 
-	function Retire() {
-		document.getElementById("team-choice").style.display = "none";
-		document.getElementById("continue").style.display = "none";
-		document.getElementById("chart").style.display = "flex";
-	}
+  function Retire() {
+    document.getElementById("team-choice").style.display = "none";
+    document.getElementById("continue").style.display = "none";
+    document.getElementById("chart").style.display = "flex";
+  }
 
-	function UpdateTeamsStats(limit) {
-		const result = computeTeamsStats(leagues, limit);
-		setLeagues(result.newTeams);
-		return result;
-	}
+  function UpdateTeamsStats(limit) {
+    const result = computeTeamsStats(leagues, limit);
+    setLeagues(result.newTeams);
+    return result;
+  }
 
-	function UpdateExtraTeamsStats() {
-		const newTeams = computeExtraTeamsStats(extrateams);
-		setExtraTeams(newTeams);
-		return newTeams;
-	}
+  function UpdateExtraTeamsStats() {
+    const newTeams = computeExtraTeamsStats(extrateams);
+    setExtraTeams(newTeams);
+    return newTeams;
+  }
 
-	function UpdateNationsStats() {
-		const result = computeNationsStats(nations);
-		setNations(result.allNations);
-		return result;
-	}
+  function UpdateNationsStats() {
+    const result = computeNationsStats(nations);
+    setNations(result.allNations);
+    return result;
+  }
 
-	return (
-		<>
-			<header>
-				<h1>Football Career Simulator</h1>
-				<h3 style={{ marginTop: "1rem" }}>Como Jogar</h3>
-				<ol style={{ marginLeft: "2rem" }}>
-					<li>Escolha seus dados iniciais.</li>
-					<li>Escolha qual proposta você aceitará.</li>
-					<li>O jogo simulará a partir do que você escolheu</li>
-					<li>Boa sorte e divirta-se</li>
-				</ol>
-			</header>
-			<main>
-				<section
-					className="career"
-					ref={parentRef}>
-					{seasons.map((s, index) => (
-						<div
-							key={index}
-							className="season-container">
-							<Season
-								season={s}
-								open={index >= seasons.length - 1}
-							/>
-						</div>
-					))}
-				</section>
-				<section
-					className="choices"
-					id="init-nation">
-					<select
-						id="continent-dropdown"
-						onChange={() => updateNationDropdown()}>
-						<option value="">Selecione uma Confederação</option>
-						<option value="AFC">Ásia (AFC)</option>
-						<option value="CAF">África (CAF)</option>
-						<option value="CONCACAF">América do Norte (CONCACAF)</option>
-						<option value="CONMEBOL">América do Sul (CONMEBOL)</option>
-						<option value="OFC">Oceania (OFC)</option>
-						<option value="UEFA">Europa (UEFA)</option>
-					</select>
-					<select id="nation-dropdown">
-						<option value="">Selecione uma Nação</option>
-					</select>
-					<button
-						className="confirm-button"
-						onClick={() => ChooseNation()}>
-						Confirmar
-					</button>
-				</section>
-				<section
-					className="choices"
-					id="init-pos"
-					style={{ display: "none" }}>
-					<h3 style={{ marginBottom: "1rem" }}>Escolha a posição do jogador:</h3>
-					<select id="position-select">
-						{Positions.map((position, index) => (
-							<option
-								key={index}
-								value={position.title}>
-								{position.title}
-							</option>
-						))}
-					</select>
-					<button
-						className="confirm-button"
-						onClick={() => ChoosePos()}>
-						Confirmar
-					</button>
-				</section>
-				<section
-					className="choices"
-					id="team-choice"
-					style={{ display: "none" }}>
-					<button
-						className="d-stay contract"
-						id="decision-stay"
-						style={{ display: "none" }}
-						onClick={() => ChooseTeam()}>
-						<p>{player.team === null ? "null" : player.team.name}</p>
-						<div className="contract-info">
-							<div>{player.team === null ? "null" : (player.team.power / 2).toFixed(2)} ⭐</div>
-							<div>
-								{renew.duration}
-								{renew.addition != null && renew.addition > 0 ? ` + ${renew.addition}` : ""} 🕗
-							</div>
-							<div>{renew.position} 👕</div>
-						</div>
-					</button>
-					<button
-						className="d-alert contract"
-						id="decision-transfer1"
-						onClick={() => ChooseTeam(transfers[0])}>
-						{transfers[0] ? (
-							<>
-								{transfers[0].loan ? <div>Empréstimo</div> : ""}
-								<p>{transfers[0].team.name}</p>
-								<div className="contract-info">
-									<div>{(transfers[0].team.power / 2).toFixed(2)} ⭐</div>
-									<div>{transfers[0].duration} 🕗</div>
-									<div>{transfers[0].position} 👕</div>
-								</div>
-							</>
-						) : (
-							<p>null</p>
-						)}
-					</button>
-					<button
-						className="d-alert contract"
-						id="decision-transfer2"
-						onClick={() => ChooseTeam(transfers[1])}>
-						{transfers[1] ? (
-							<>
-								{transfers[1].loan ? <div>Empréstimo</div> : ""}
-								<p>{transfers[1].team.name}</p>
-								<div className="contract-info">
-									<div>{(transfers[1].team.power / 2).toFixed(2)} ⭐</div>
-									<div>{transfers[1].duration} 🕗</div>
-									<div>{transfers[1].position} 👕</div>
-								</div>
-							</>
-						) : (
-							<p>null</p>
-						)}
-					</button>
-					<button
-						className="d-alert contract"
-						id="decision-transfer3"
-						onClick={() => ChooseTeam(transfers[2])}>
-						{transfers[2] ? (
-							<>
-								{transfers[2].loan ? <div>Empréstimo</div> : ""}
-								<p>{transfers[2].team.name}</p>
-								<div className="contract-info">
-									<div>{(transfers[2].team.power / 2).toFixed(2)} ⭐</div>
-									<div>{transfers[2].duration} 🕗</div>
-									<div>{transfers[2].position} 👕</div>
-								</div>
-							</>
-						) : (
-							<p>null</p>
-						)}
-					</button>
-					<button
-						className="d-alert"
-						id="retire"
-						style={{ display: "none" }}
-						onClick={() => Retire()}>
-						Aposentar-se
-					</button>
-				</section>
-				<section
-					className="choices"
-					id="continue"
-					style={{ display: "none" }}>
-					<button
-						className="d-stay"
-						onClick={() => Continue()}>
-						Simular ({contract} {contract > 1 ? "anos restantes" : "ano restante"})
-					</button>
-				</section>
-				<section
-					className="chart"
-					id="chart"
-					style={{ display: "none" }}>
-					<ChartComponent data={seasons} />
-				</section>
-				<section className="stats">
-					<h1>Carreira</h1>
-					<div className="stats-div">
-						Fama: {StarPath[Math.min(Math.floor(player.fame / 100), StarPath.length - 1)]}
-						<div
-							style={{
-								position: "relative", // This ensures absolute positioning works inside it
-								width: "100%",
-								height: "1rem",
-								backgroundColor: "var(--color-medium)",
-							}}>
-							<div
-								style={{
-									width: `${player.fame < 1000 ? Math.floor(player.fame) % 100 : 100}%`,
-									minHeight: "1rem",
-									backgroundColor: `${player.fame < 1000 ? "var(--color-contrast)" : "gold"}`,
-									margin: "0",
-								}}
-							/>
+  return (
+    <>
+      <header>
+        <h1>Football Career Simulator</h1>
+        <h3 style={{ marginTop: "1rem" }}>Como Jogar</h3>
+        <ol style={{ marginLeft: "2rem" }}>
+          <li>Escolha seus dados iniciais.</li>
+          <li>Escolha qual proposta você aceitará.</li>
+          <li>O jogo simulará a partir do que você escolheu</li>
+          <li>Boa sorte e divirta-se</li>
+        </ol>
+      </header>
+      <main>
+        <section className="career" ref={parentRef}>
+          {seasons.map((s, index) => (
+            <div key={index} className="season-container">
+              <Season season={s} open={index >= seasons.length - 1} />
+            </div>
+          ))}
+        </section>
+        <section className="choices" id="init-nation">
+          <select id="continent-dropdown" onChange={() => updateNationDropdown()}>
+            <option value="">Selecione uma Confederação</option>
+            <option value="AFC">Ásia (AFC)</option>
+            <option value="CAF">África (CAF)</option>
+            <option value="CONCACAF">América do Norte (CONCACAF)</option>
+            <option value="CONMEBOL">América do Sul (CONMEBOL)</option>
+            <option value="OFC">Oceania (OFC)</option>
+            <option value="UEFA">Europa (UEFA)</option>
+          </select>
+          <select id="nation-dropdown">
+            <option value="">Selecione uma Nação</option>
+          </select>
+          <button className="confirm-button" onClick={() => ChooseNation()}>
+            Confirmar
+          </button>
+        </section>
+        <section className="choices" id="init-pos" style={{ display: "none" }}>
+          <h3 style={{ marginBottom: "1rem" }}>Escolha a posição do jogador:</h3>
+          <select id="position-select">
+            {Positions.map((position, index) => (
+              <option key={index} value={position.title}>
+                {position.title}
+              </option>
+            ))}
+          </select>
+          <button className="confirm-button" onClick={() => ChoosePos()}>
+            Confirmar
+          </button>
+        </section>
+        <section className="choices" id="team-choice" style={{ display: "none" }}>
+          <button
+            className="d-stay contract"
+            id="decision-stay"
+            style={{ display: "none" }}
+            onClick={() => ChooseTeam()}>
+            <p>{player.team === null ? "null" : player.team.name}</p>
+            <div className="contract-info">
+              <div>{player.team === null ? "null" : (player.team.power / 2).toFixed(2)} ⭐</div>
+              <div>
+                {renew.duration}
+                {renew.addition != null && renew.addition > 0 ? ` + ${renew.addition}` : ""} 🕗
+              </div>
+              <div>{renew.position} 👕</div>
+            </div>
+          </button>
+          <button
+            className="d-alert contract"
+            id="decision-transfer1"
+            onClick={() => ChooseTeam(transfers[0])}>
+            {transfers[0] ? (
+              <>
+                {transfers[0].loan ? <div>Empréstimo</div> : ""}
+                <p>{transfers[0].team.name}</p>
+                <div className="contract-info">
+                  <div>{(transfers[0].team.power / 2).toFixed(2)} ⭐</div>
+                  <div>{transfers[0].duration} 🕗</div>
+                  <div>{transfers[0].position} 👕</div>
+                </div>
+              </>
+            ) : (
+              <p>null</p>
+            )}
+          </button>
+          <button
+            className="d-alert contract"
+            id="decision-transfer2"
+            onClick={() => ChooseTeam(transfers[1])}>
+            {transfers[1] ? (
+              <>
+                {transfers[1].loan ? <div>Empréstimo</div> : ""}
+                <p>{transfers[1].team.name}</p>
+                <div className="contract-info">
+                  <div>{(transfers[1].team.power / 2).toFixed(2)} ⭐</div>
+                  <div>{transfers[1].duration} 🕗</div>
+                  <div>{transfers[1].position} 👕</div>
+                </div>
+              </>
+            ) : (
+              <p>null</p>
+            )}
+          </button>
+          <button
+            className="d-alert contract"
+            id="decision-transfer3"
+            onClick={() => ChooseTeam(transfers[2])}>
+            {transfers[2] ? (
+              <>
+                {transfers[2].loan ? <div>Empréstimo</div> : ""}
+                <p>{transfers[2].team.name}</p>
+                <div className="contract-info">
+                  <div>{(transfers[2].team.power / 2).toFixed(2)} ⭐</div>
+                  <div>{transfers[2].duration} 🕗</div>
+                  <div>{transfers[2].position} 👕</div>
+                </div>
+              </>
+            ) : (
+              <p>null</p>
+            )}
+          </button>
+          <button
+            className="d-alert"
+            id="retire"
+            style={{ display: "none" }}
+            onClick={() => Retire()}>
+            Aposentar-se
+          </button>
+        </section>
+        <section className="choices" id="continue" style={{ display: "none" }}>
+          <button className="d-stay" onClick={() => Continue()}>
+            Simular ({contract} {contract > 1 ? "anos restantes" : "ano restante"})
+          </button>
+        </section>
+        <section className="chart" id="chart" style={{ display: "none" }}>
+          <ChartComponent data={seasons} />
+        </section>
+        <section className="stats">
+          <h1>Carreira</h1>
+          <div className="stats-div">
+            Fama: {StarPath[Math.min(Math.floor(player.fame / 100), StarPath.length - 1)]}
+            <div
+              style={{
+                position: "relative", // This ensures absolute positioning works inside it
+                width: "100%",
+                height: "1rem",
+                backgroundColor: "var(--color-medium)"
+              }}>
+              <div
+                style={{
+                  width: `${player.fame < 1000 ? Math.floor(player.fame) % 100 : 100}%`,
+                  minHeight: "1rem",
+                  backgroundColor: `${player.fame < 1000 ? "var(--color-contrast)" : "gold"}`,
+                  margin: "0"
+                }}
+              />
 
-							<span
-								style={{
-									position: "absolute", // Use absolute for easier centering
-									top: "50%", // Center vertically
-									left: "50%", // Center horizontally
-									transform: "translate(-50%, -50%)", // This will center perfectly
-									color: "var(--color-dark)",
-								}}>
-								{Math.floor(player.fame)}
-							</span>
-						</div>
-						<p>Posição: {player.position === null ? "A definir" : player.position.title}</p>
-						<p>Seleção: {player.nation === null ? "A definir" : player.nation.name}</p>
-					</div>
-					<div className="stats-div">
-						<div className="stats-div-div">
-							<details>
-								<summary>Continental: {player.continentalChampionship.length}</summary>
-								<div>
-									{player.continentalChampionship.map((wc) => (
-										<p key={wc}>{wc}</p>
-									))}
-								</div>
-							</details>
-							<details>
-								<summary>Copa do Mundo: {player.worldCup.length}</summary>
-								<div>
-									{player.worldCup.map((wc) => (
-										<p key={wc}>{wc}</p>
-									))}
-								</div>
-							</details>
-						</div>
-					</div>
-					<div className="stats-div">
-						<p>Gols: {player.totalGoals}</p>
-						<p>Assistências: {player.totalAssists}</p>
-					</div>
-					<div className="stats-div">
-						<div className="stats-div-div">
-							<details>
-								<summary className="titles-title">Ligas: {player.leagueTitles.length}</summary>
-								<div>
-									{player.leagueTitles.map((l) => (
-										<p key={l}>{l}</p>
-									))}
-								</div>
-							</details>
-							<details>
-								<summary>Copas Nacionais: {player.nationalCup.length}</summary>
-								<div>
-									{player.nationalCup.map((nc) => (
-										<p key={nc}>{nc}</p>
-									))}
-								</div>
-							</details>
-							<details>
-								<summary>Champions League: {player.champions.length}</summary>
-								<div>
-									{player.champions.map((ch) => (
-										<p key={ch}>{ch}</p>
-									))}
-								</div>
-							</details>
-							<details>
-								<summary>Mundial de Clubes: {player.clubWorldCup.length}</summary>
-								<div>
-									{player.clubWorldCup.map((cwc) => (
-										<p key={cwc}>{cwc}</p>
-									))}
-								</div>
-							</details>
-							<details>
-								<summary>Premiações: {player.awards.length}</summary>
-								<div>
-									{player.awards.map((a) => (
-										<p key={a}>{a}</p>
-									))}
-								</div>
-							</details>
-							<details>
-								<summary>Jogador da Temporada: {player.playerOfTheSeason.length}</summary>
-								<div>
-									{player.playerOfTheSeason.map((b) => (
-										<p key={b}>{b}</p>
-									))}
-								</div>
-							</details>
-						</div>
-					</div>
-				</section>
-			</main>
-			<footer>
-				<p>Por Gustavo Amamia Kumagai</p>
-			</footer>
-		</>
-	);
+              <span
+                style={{
+                  position: "absolute", // Use absolute for easier centering
+                  top: "50%", // Center vertically
+                  left: "50%", // Center horizontally
+                  transform: "translate(-50%, -50%)", // This will center perfectly
+                  color: "var(--color-dark)"
+                }}>
+                {Math.floor(player.fame)}
+              </span>
+            </div>
+            <p>Posição: {player.position === null ? "A definir" : player.position.title}</p>
+            <p>Seleção: {player.nation === null ? "A definir" : player.nation.name}</p>
+          </div>
+          <div className="stats-div">
+            <div className="stats-div-div">
+              <details>
+                <summary>Continental: {player.continentalChampionship.length}</summary>
+                <div>
+                  {player.continentalChampionship.map((wc) => (
+                    <p key={wc}>{wc}</p>
+                  ))}
+                </div>
+              </details>
+              <details>
+                <summary>Copa do Mundo: {player.worldCup.length}</summary>
+                <div>
+                  {player.worldCup.map((wc) => (
+                    <p key={wc}>{wc}</p>
+                  ))}
+                </div>
+              </details>
+            </div>
+          </div>
+          <div className="stats-div">
+            <p>Gols: {player.totalGoals}</p>
+            <p>Assistências: {player.totalAssists}</p>
+          </div>
+          <div className="stats-div">
+            <div className="stats-div-div">
+              <details>
+                <summary className="titles-title">Ligas: {player.leagueTitles.length}</summary>
+                <div>
+                  {player.leagueTitles.map((l) => (
+                    <p key={l}>{l}</p>
+                  ))}
+                </div>
+              </details>
+              <details>
+                <summary>Copas Nacionais: {player.nationalCup.length}</summary>
+                <div>
+                  {player.nationalCup.map((nc) => (
+                    <p key={nc}>{nc}</p>
+                  ))}
+                </div>
+              </details>
+              <details>
+                <summary>Champions League: {player.champions.length}</summary>
+                <div>
+                  {player.champions.map((ch) => (
+                    <p key={ch}>{ch}</p>
+                  ))}
+                </div>
+              </details>
+              <details>
+                <summary>Mundial de Clubes: {player.clubWorldCup.length}</summary>
+                <div>
+                  {player.clubWorldCup.map((cwc) => (
+                    <p key={cwc}>{cwc}</p>
+                  ))}
+                </div>
+              </details>
+              <details>
+                <summary>Premiações: {player.awards.length}</summary>
+                <div>
+                  {player.awards.map((a) => (
+                    <p key={a}>{a}</p>
+                  ))}
+                </div>
+              </details>
+              <details>
+                <summary>Jogador da Temporada: {player.playerOfTheSeason.length}</summary>
+                <div>
+                  {player.playerOfTheSeason.map((b) => (
+                    <p key={b}>{b}</p>
+                  ))}
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <p>Por Gustavo Amamia Kumagai</p>
+      </footer>
+    </>
+  );
 }
 
 export default App;

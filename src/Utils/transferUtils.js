@@ -4,7 +4,7 @@
  * Todas recebem os dados que precisam via parâmetros — sem acesso direto ao estado.
  */
 
-import { RandomNumber } from "../Utils";
+import { RandomNumber, shuffleArray } from "../Utils";
 
 /**
  * Calcula o valor de mercado de um jogador.
@@ -56,8 +56,9 @@ export function GetTransferValue(
  * @param {Object} currentPlayer  - Objeto do jogador
  * @returns {Array} lista de até 3 contratos
  */
-export function GetInitTeams(newTeams, currentPlayer) {
+export function GetInitTeams(newTeams, currentPlayer, extrateams = []) {
   let allTeams = newTeams.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
+  allTeams = allTeams.concat(extrateams.flatMap((conf) => conf.teams));
 
   allTeams.sort((a, b) => b.power - a.power - Math.random());
   allTeams = allTeams.slice(0, allTeams.length / 2);
@@ -107,29 +108,53 @@ export function GetInitTeams(newTeams, currentPlayer) {
  * @param {number} currentSeasonPerformance - Performance da temporada atual
  * @returns {{ contracts: Array, newBaseValue: number }}
  */
-export function GetNewTeams(currentPlayer, leagues, history, currentSeasonPerformance) {
+export function GetNewTeams(
+  currentPlayer,
+  leagues,
+  history,
+  currentSeasonPerformance,
+  extrateams = []
+) {
   let allTeams = leagues.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
+  allTeams = allTeams.concat(extrateams.flatMap((conf) => conf.teams));
 
   allTeams.sort((a, b) => b.power - a.power - Math.random());
   allTeams = allTeams.slice(0, allTeams.length / (4 + currentPlayer.performance));
 
+  const previousTeamNames = new Set(history.map((team) => team.team));
+  const eligibleTeams = allTeams.filter((team) => !previousTeamNames.has(team.name));
+  const extraTeamNames = new Set(
+    extrateams
+      .filter((conf) => conf.name !== "UEFA")
+      .flatMap((conf) => conf.teams.map((team) => team.name))
+  );
+  const eligibleExtraTeams = eligibleTeams.filter((team) => extraTeamNames.has(team.name));
+  const eligibleLeagueTeams = eligibleTeams.filter((team) => !extraTeamNames.has(team.name));
+
+  const age = currentPlayer.age;
+  const peak = currentPlayer.position.peak;
+  let extraTeamOfferChance = 0.25;
+  if (age >= peak - 3 && age <= peak + 3) {
+    extraTeamOfferChance = 0.08;
+  } else if (age > peak + 3) {
+    extraTeamOfferChance = Math.min(0.6, 0.08 + (age - peak - 3) * 0.13);
+  }
+
   const interestedTeams = [];
-  const isDuplicate = (teamName) => history.some((t) => t.team === teamName);
-
-  for (let i = 0; i < 3; i++) {
-    let teamID = RandomNumber(0, allTeams.length - 1);
-
-    while (isDuplicate(allTeams[teamID].name)) {
-      teamID = RandomNumber(0, allTeams.length - 1);
-    }
-
-    while (isDuplicate(allTeams[teamID].name)) {
-      teamID = RandomNumber(0, allTeams.length - 1);
-    }
-
-    const chosenTeam = allTeams[teamID];
-    interestedTeams.push(chosenTeam);
-    allTeams = allTeams.filter((t) => t.name !== chosenTeam.name);
+  if (eligibleExtraTeams.length > 0 && Math.random() < extraTeamOfferChance) {
+    interestedTeams.push(shuffleArray(eligibleExtraTeams)[0]);
+  }
+  interestedTeams.push(
+    ...shuffleArray(eligibleLeagueTeams)
+      .filter((team) => !interestedTeams.some((selected) => selected.name === team.name))
+      .slice(0, 3 - interestedTeams.length)
+  );
+  if (interestedTeams.length < 3) {
+    interestedTeams.push(
+      ...shuffleArray(eligibleExtraTeams)
+        .filter((team) => !interestedTeams.some((selected) => selected.name === team.name))
+        .slice(0, 3 - interestedTeams.length)
+    );
   }
 
   // Evolução do valor base — retornado para que o componente atualize player.baseValue
