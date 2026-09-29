@@ -4,7 +4,7 @@
  * Todas recebem os dados que precisam via parâmetros — sem acesso direto ao estado.
  */
 
-import { RandomNumber, shuffleArray } from "../Utils";
+import { RandomNumber } from "../Utils";
 
 /**
  * Calcula o valor de mercado de um jogador.
@@ -32,9 +32,9 @@ export function GetTransferValue(
 ) {
   const performanceMultiplier = 1.5 + performance / 2; // 1.0 em -1, 2.0 em +1
 
-  const ageFactor = Math.max(1, 8.0 - Math.abs(peak - 4 - age) * 0.5); // pico entre 22–26
+  const ageFactor = Math.max(0.5, 8.0 - Math.abs(peak - 4 - age) * 0.6); // pico entre 22–26
 
-  const clubMultiplier = clubPower / 5; // 0.4 em poder 2, 2.0 em poder 10
+  const clubMultiplier = clubPower / 4; // 0.5 em poder 2, 2.5 em poder 10
 
   const fameMultiplier = Math.max(fame, 100) / ((age - 10) * 10);
 
@@ -133,28 +133,44 @@ export function GetNewTeams(
 
   const age = currentPlayer.age;
   const peak = currentPlayer.position.peak;
-  let extraTeamOfferChance = 0.25;
-  if (age >= peak - 3 && age <= peak + 3) {
-    extraTeamOfferChance = 0.08;
-  } else if (age > peak + 3) {
-    extraTeamOfferChance = Math.min(0.6, 0.08 + (age - peak - 3) * 0.13);
+
+  const PRIME_CHANCE = 0.1; // chance dentro da janela do auge
+  const PRIME_WINDOW = 2; // anos para cada lado do peak
+
+  const YOUNG_MAX = 0.3; // teto para os mais jovens (era o valor fixo antigo)
+  const YOUNG_SLOPE = 0.04; // aumento por ano antes da janela do auge
+
+  const VET_MAX = 0.6; // teto para os veteranos
+  const VET_SLOPE = 0.1; // aumento por ano depois da janela do auge
+
+  const primeStart = peak - PRIME_WINDOW * 2;
+  const primeEnd = peak + PRIME_WINDOW;
+
+  let extraTeamOfferChance;
+  if (age < primeStart) {
+    extraTeamOfferChance = Math.min(YOUNG_MAX, PRIME_CHANCE + (primeStart - age) * YOUNG_SLOPE);
+  } else if (age <= primeEnd) {
+    extraTeamOfferChance = PRIME_CHANCE;
+  } else {
+    extraTeamOfferChance = Math.min(VET_MAX, PRIME_CHANCE + (age - primeEnd) * VET_SLOPE);
   }
 
+  const availableExtraTeams = [...eligibleExtraTeams];
+  const availableLeagueTeams = [...eligibleLeagueTeams];
   const interestedTeams = [];
-  if (eligibleExtraTeams.length > 0 && Math.random() < extraTeamOfferChance) {
-    interestedTeams.push(shuffleArray(eligibleExtraTeams)[0]);
-  }
-  interestedTeams.push(
-    ...shuffleArray(eligibleLeagueTeams)
-      .filter((team) => !interestedTeams.some((selected) => selected.name === team.name))
-      .slice(0, 3 - interestedTeams.length)
-  );
-  if (interestedTeams.length < 3) {
-    interestedTeams.push(
-      ...shuffleArray(eligibleExtraTeams)
-        .filter((team) => !interestedTeams.some((selected) => selected.name === team.name))
-        .slice(0, 3 - interestedTeams.length)
-    );
+
+  for (let index = 0; index < 3; index++) {
+    const prefersExtraTeam = Math.random() < extraTeamOfferChance;
+    const preferredTeams = prefersExtraTeam ? availableExtraTeams : availableLeagueTeams;
+    const fallbackTeams = prefersExtraTeam ? availableLeagueTeams : availableExtraTeams;
+    const availableTeams = preferredTeams.length > 0 ? preferredTeams : fallbackTeams;
+
+    if (availableTeams.length > 0) {
+      const teamIndex = Math.floor(Math.random() * availableTeams.length);
+      interestedTeams.push(availableTeams.splice(teamIndex, 1)[0]);
+    } else {
+      interestedTeams.push(null);
+    }
   }
 
   // Evolução do valor base — retornado para que o componente atualize player.baseValue

@@ -316,7 +316,7 @@ export function GetLeaguePosition(teams) {
  */
 export function GetUnmodeledClubSeason(team) {
   const power = Math.max(1, Math.min(10, team.power));
-  const expectedPosition = 18 - ((power - 1) / 9) * 17;
+  const expectedPosition = 15 - 13.5 * Math.pow((power - 1) / 9, 0.35);
   const positionNoise = (Math.random() + Math.random() - 1) * 4;
   const leaguePosition = Math.max(1, Math.min(15, Math.round(expectedPosition + positionNoise)));
 
