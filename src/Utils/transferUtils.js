@@ -134,14 +134,14 @@ export function GetNewTeams(
   const age = currentPlayer.age;
   const peak = currentPlayer.position.peak;
 
-  const PRIME_CHANCE = 0.1; // chance dentro da janela do auge
+  const PRIME_CHANCE = 0.0; // chance dentro da janela do auge
   const PRIME_WINDOW = 2; // anos para cada lado do peak
 
-  const YOUNG_MAX = 0.3; // teto para os mais jovens (era o valor fixo antigo)
-  const YOUNG_SLOPE = 0.04; // aumento por ano antes da janela do auge
+  const YOUNG_MAX = 0.2; // teto para os mais jovens (era o valor fixo antigo)
+  const YOUNG_SLOPE = 0.05; // aumento por ano antes da janela do auge
 
   const VET_MAX = 0.6; // teto para os veteranos
-  const VET_SLOPE = 0.1; // aumento por ano depois da janela do auge
+  const VET_SLOPE = 0.15; // aumento por ano depois da janela do auge
 
   const primeStart = peak - PRIME_WINDOW * 2;
   const primeEnd = peak + PRIME_WINDOW;

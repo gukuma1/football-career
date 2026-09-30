@@ -369,7 +369,7 @@ function App() {
         (1 +
           (Math.pow(player.team.power / 10, 5) *
             Math.pow(player.positionInClub.peak - player.age, 2)) /
-            21) +
+            25) +
         player.performance * 10 +
         r
     );
