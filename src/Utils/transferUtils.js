@@ -92,6 +92,74 @@ export function GetInitTeams(newTeams, currentPlayer, extrateams = []) {
   });
 }
 
+function getAllTeams(leagues, extrateams) {
+  const leagueTeams = leagues.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
+  return leagueTeams.concat(extrateams.flatMap((conf) => conf.teams));
+}
+
+function getExtraTeamNames(extrateams) {
+  return new Set(
+    extrateams
+      .filter((conf) => conf.name !== "UEFA")
+      .flatMap((conf) => conf.teams.map((team) => team.name))
+  );
+}
+
+function getExtraTeamOfferChance(currentPlayer) {
+  const age = currentPlayer.age;
+  const peak = currentPlayer.position.peak;
+  const PRIME_CHANCE = 0.0;
+  const PRIME_WINDOW = 2;
+  const YOUNG_MAX = 0.2;
+  const YOUNG_SLOPE = 0.05;
+  const VET_MAX = 0.6;
+  const VET_SLOPE = 0.15;
+  const primeStart = peak - PRIME_WINDOW * 2;
+  const primeEnd = peak + PRIME_WINDOW;
+
+  if (age < primeStart) {
+    return Math.min(YOUNG_MAX, PRIME_CHANCE + (primeStart - age) * YOUNG_SLOPE);
+  }
+  if (age <= primeEnd) return PRIME_CHANCE;
+  return Math.min(VET_MAX, PRIME_CHANCE + (age - primeEnd) * VET_SLOPE);
+}
+
+function selectTeams(teams, extraTeamNames, extraTeamOfferChance) {
+  const availableExtraTeams = teams.filter((team) => extraTeamNames.has(team.name));
+  const availableLeagueTeams = teams.filter((team) => !extraTeamNames.has(team.name));
+  const selectedTeams = [];
+
+  while (selectedTeams.length < 3 && (availableExtraTeams.length || availableLeagueTeams.length)) {
+    const prefersExtraTeam = Math.random() < extraTeamOfferChance;
+    const preferredTeams = prefersExtraTeam ? availableExtraTeams : availableLeagueTeams;
+    const fallbackTeams = prefersExtraTeam ? availableLeagueTeams : availableExtraTeams;
+    const availableTeams = preferredTeams.length > 0 ? preferredTeams : fallbackTeams;
+    const teamIndex = Math.floor(Math.random() * availableTeams.length);
+    selectedTeams.push(availableTeams.splice(teamIndex, 1)[0]);
+  }
+
+  return selectedTeams;
+}
+
+function createContracts(currentPlayer, teams, loan = false) {
+  return teams.map((team) => {
+    let newPosition;
+    if (currentPlayer.position.abbreviation !== "GO" && Math.random() < 0.2) {
+      const relatedPositions = currentPlayer.position.related;
+      newPosition = relatedPositions[RandomNumber(0, relatedPositions.length - 1)];
+    } else {
+      newPosition = currentPlayer.position.abbreviation;
+    }
+
+    let duration = loan ? RandomNumber(1, 2) : RandomNumber(1, 4);
+    if (!loan && currentPlayer.age <= currentPlayer.position.peak + 2) {
+      duration += RandomNumber(1, 2);
+    }
+
+    return { team, duration, loan, position: newPosition };
+  });
+}
+
 /**
  * Gera as 3 propostas de transferência para a temporada atual.
  *
@@ -115,62 +183,47 @@ export function GetNewTeams(
   currentSeasonPerformance,
   extrateams = []
 ) {
-  let allTeams = leagues.reduce((acc, liga) => acc.concat(liga.highestLeague.teams), []);
-  allTeams = allTeams.concat(extrateams.flatMap((conf) => conf.teams));
-
-  allTeams.sort((a, b) => b.power - a.power - Math.random());
-  allTeams = allTeams.slice(0, allTeams.length / (4 + currentPlayer.performance));
-
+  const allTeams = getAllTeams(leagues, extrateams);
   const previousTeamNames = new Set(history.map((team) => team.team));
   const eligibleTeams = allTeams.filter((team) => !previousTeamNames.has(team.name));
-  const extraTeamNames = new Set(
-    extrateams
-      .filter((conf) => conf.name !== "UEFA")
-      .flatMap((conf) => conf.teams.map((team) => team.name))
-  );
-  const eligibleExtraTeams = eligibleTeams.filter((team) => extraTeamNames.has(team.name));
-  const eligibleLeagueTeams = eligibleTeams.filter((team) => !extraTeamNames.has(team.name));
-
+  const extraTeamNames = getExtraTeamNames(extrateams);
   const age = currentPlayer.age;
-  const peak = currentPlayer.position.peak;
+  const currentPower = currentPlayer.team.power;
+  const boundary = currentPower + (age <= currentPlayer.position.peak ? -1 : 1);
+  const isWithinPowerLimit =
+    age <= currentPlayer.position.peak
+      ? (team) => team.power > boundary
+      : (team) => team.power < boundary;
 
-  const PRIME_CHANCE = 0.0; // chance dentro da janela do auge
-  const PRIME_WINDOW = 2; // anos para cada lado do peak
+  const shortlist = [...allTeams]
+    .sort((a, b) => b.power - a.power - Math.random())
+    .slice(0, allTeams.length / (4 + currentPlayer.performance));
+  const preferredTeams = shortlist.filter(
+    (team) => !previousTeamNames.has(team.name) && isWithinPowerLimit(team)
+  );
+  const selectedTeams = selectTeams(
+    preferredTeams,
+    extraTeamNames,
+    getExtraTeamOfferChance(currentPlayer)
+  );
+  const selectedNames = new Set(selectedTeams.map((team) => team.name));
+  const remainingPreferredTeams = eligibleTeams.filter(
+    (team) => isWithinPowerLimit(team) && !selectedNames.has(team.name)
+  );
+  selectedTeams.push(
+    ...selectTeams(
+      remainingPreferredTeams,
+      extraTeamNames,
+      getExtraTeamOfferChance(currentPlayer)
+    ).slice(0, 3 - selectedTeams.length)
+  );
 
-  const YOUNG_MAX = 0.2; // teto para os mais jovens (era o valor fixo antigo)
-  const YOUNG_SLOPE = 0.05; // aumento por ano antes da janela do auge
-
-  const VET_MAX = 0.6; // teto para os veteranos
-  const VET_SLOPE = 0.15; // aumento por ano depois da janela do auge
-
-  const primeStart = peak - PRIME_WINDOW * 2;
-  const primeEnd = peak + PRIME_WINDOW;
-
-  let extraTeamOfferChance;
-  if (age < primeStart) {
-    extraTeamOfferChance = Math.min(YOUNG_MAX, PRIME_CHANCE + (primeStart - age) * YOUNG_SLOPE);
-  } else if (age <= primeEnd) {
-    extraTeamOfferChance = PRIME_CHANCE;
-  } else {
-    extraTeamOfferChance = Math.min(VET_MAX, PRIME_CHANCE + (age - primeEnd) * VET_SLOPE);
-  }
-
-  const availableExtraTeams = [...eligibleExtraTeams];
-  const availableLeagueTeams = [...eligibleLeagueTeams];
-  const interestedTeams = [];
-
-  for (let index = 0; index < 3; index++) {
-    const prefersExtraTeam = Math.random() < extraTeamOfferChance;
-    const preferredTeams = prefersExtraTeam ? availableExtraTeams : availableLeagueTeams;
-    const fallbackTeams = prefersExtraTeam ? availableLeagueTeams : availableExtraTeams;
-    const availableTeams = preferredTeams.length > 0 ? preferredTeams : fallbackTeams;
-
-    if (availableTeams.length > 0) {
-      const teamIndex = Math.floor(Math.random() * availableTeams.length);
-      interestedTeams.push(availableTeams.splice(teamIndex, 1)[0]);
-    } else {
-      interestedTeams.push(null);
-    }
+  if (selectedTeams.length < 3) {
+    const selectedNames = new Set(selectedTeams.map((team) => team.name));
+    const fallbackTeams = eligibleTeams
+      .filter((team) => !selectedNames.has(team.name))
+      .sort((a, b) => Math.abs(a.power - boundary) - Math.abs(b.power - boundary));
+    selectedTeams.push(...fallbackTeams.slice(0, 3 - selectedTeams.length));
   }
 
   // Evolução do valor base — retornado para que o componente atualize player.baseValue
@@ -178,27 +231,34 @@ export function GetNewTeams(
     currentPlayer.baseValue * Math.exp(currentSeasonPerformance * 0.1)
   );
 
-  const contracts = [];
+  return { contracts: createContracts(currentPlayer, selectedTeams), newBaseValue };
+}
 
-  for (let index = 0; index < 3; index++) {
-    const team = interestedTeams[index];
-    if (team) {
-      let newPosition;
-      if (currentPlayer.position.abbreviation !== "GO" && Math.random() < 0.2) {
-        const relatedPositions = currentPlayer.position.related;
-        newPosition = relatedPositions[RandomNumber(0, relatedPositions.length - 1)];
-      } else {
-        newPosition = currentPlayer.position.abbreviation;
-      }
+export function GetLoanTeams(currentPlayer, leagues, history, extrateams = []) {
+  const allTeams = getAllTeams(leagues, extrateams);
+  const previousTeamNames = new Set(history.map((team) => team.team));
+  const currentPower = currentPlayer.team.power;
+  const eligibleTeams = allTeams.filter(
+    (team) => !previousTeamNames.has(team.name) && team.name !== currentPlayer.team.name
+  );
+  const weakerTeams = eligibleTeams.filter((team) => team.power < currentPower);
 
-      let duration = RandomNumber(1, 4);
-      duration += currentPlayer.age <= currentPlayer.position.peak + 4 ? RandomNumber(1, 2) : 0;
+  if (weakerTeams.length === 0) return [];
 
-      contracts.push({ team, duration, loan: false, position: newPosition });
-    } else {
-      contracts.push(null);
-    }
+  const extraTeamNames = getExtraTeamNames(extrateams);
+  const selectedTeams = selectTeams(
+    weakerTeams,
+    extraTeamNames,
+    getExtraTeamOfferChance(currentPlayer)
+  );
+
+  if (selectedTeams.length < 3) {
+    const selectedNames = new Set(selectedTeams.map((team) => team.name));
+    const fallbackTeams = eligibleTeams
+      .filter((team) => !selectedNames.has(team.name))
+      .sort((a, b) => Math.abs(a.power - currentPower) - Math.abs(b.power - currentPower));
+    selectedTeams.push(...fallbackTeams.slice(0, 3 - selectedTeams.length));
   }
 
-  return { contracts, newBaseValue };
+  return createContracts(currentPlayer, selectedTeams, true);
 }

@@ -24,7 +24,7 @@ import {
   GetUnmodeledClubSeason,
   prioritizeChampionQualification
 } from "./Utils/tournamentUtils";
-import { GetInitTeams, GetNewTeams, GetTransferValue } from "./Utils/transferUtils";
+import { GetInitTeams, GetLoanTeams, GetNewTeams, GetTransferValue } from "./Utils/transferUtils";
 import { computeTeamsStats, computeExtraTeamsStats, computeNationsStats } from "./Utils/statsUtils";
 
 const StarPath = [
@@ -1886,6 +1886,13 @@ function App() {
     );
     player.baseValue = newBaseValue;
     let newRenew = { value: 0, duration: 0, addition: null, position: null };
+    const loanConditions =
+      player.performance < -0.5 &&
+      med < 0 &&
+      (generalPerformance.length >= 2 || player.age < player.position.peak - 4) &&
+      contract > 3 &&
+      player.age < player.position.peak + 4;
+    const loanTransfers = loanConditions ? GetLoanTeams(player, leagues, history, extrateams) : [];
 
     if (
       //if ended loan
@@ -1943,39 +1950,13 @@ function App() {
       document.getElementById("retire").style.display = "none";
     } else if (
       //loan
-      player.performance < -0.5 &&
-      med < 0 &&
-      (generalPerformance.length >= 2 || player.age < player.position.peak - 4) &&
-      contract > 3 &&
-      player.age < player.position.peak + 4 &&
-      newTransfers.some((t) => t !== null && t.team.power < player.team.power)
+      loanConditions &&
+      loanTransfers.length > 0
     ) {
-      if (newTransfers[0].team.power > player.team.power) {
-        document.getElementById("decision-transfer1").style.display = "none";
-      } else {
-        //proposal 1
-        document.getElementById("decision-transfer1").style.display = "flex";
-        newTransfers[0].loan = true;
-        newTransfers[0].duration = RandomNumber(1, 2);
-      }
-
-      if (newTransfers[1].team.power > player.team.power) {
-        document.getElementById("decision-transfer2").style.display = "none";
-      } else {
-        //proposal 2
-        document.getElementById("decision-transfer2").style.display = "flex";
-        newTransfers[1].loan = true;
-        newTransfers[1].duration = RandomNumber(1, 2);
-      }
-
-      if (newTransfers[2].team.power > player.team.power) {
-        document.getElementById("decision-transfer3").style.display = "none";
-      } else {
-        //proposal 3
-        document.getElementById("decision-transfer3").style.display = "flex";
-        newTransfers[2].loan = true;
-        newTransfers[2].duration = RandomNumber(1, 2);
-      }
+      newTransfers = loanTransfers;
+      ["decision-transfer1", "decision-transfer2", "decision-transfer3"].forEach((id, index) => {
+        document.getElementById(id).style.display = newTransfers[index] ? "flex" : "none";
+      });
 
       //cant stay
       document.getElementById("decision-stay").style.display = "none";
