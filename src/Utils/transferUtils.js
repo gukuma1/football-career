@@ -189,7 +189,7 @@ export function GetNewTeams(
   const extraTeamNames = getExtraTeamNames(extrateams);
   const age = currentPlayer.age;
   const currentPower = currentPlayer.team.power;
-  const boundary = currentPower + (age <= currentPlayer.position.peak ? -1 : 1);
+  const boundary = currentPower + (age <= currentPlayer.position.peak ? -2 : 1);
   const isWithinPowerLimit =
     age <= currentPlayer.position.peak
       ? (team) => team.power > boundary
