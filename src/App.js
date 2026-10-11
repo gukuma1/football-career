@@ -24,7 +24,13 @@ import {
   GetUnmodeledClubSeason,
   prioritizeChampionQualification
 } from "./Utils/tournamentUtils";
-import { GetInitTeams, GetLoanTeams, GetNewTeams, GetTransferValue } from "./Utils/transferUtils";
+import {
+  GetInitTeams,
+  GetLoanTeams,
+  GetNewTeams,
+  GetRenewalPerformanceThreshold,
+  GetTransferValue
+} from "./Utils/transferUtils";
 import { computeTeamsStats, computeExtraTeamsStats, computeNationsStats } from "./Utils/statsUtils";
 
 const StarPath = [
@@ -1886,6 +1892,14 @@ function App() {
     );
     player.baseValue = newBaseValue;
     let newRenew = { value: 0, duration: 0, addition: null, position: null };
+    const meetsPostPeakRenewalThreshold =
+      player.age <= player.position.peak ||
+      med >=
+        GetRenewalPerformanceThreshold(
+          player.age,
+          player.position.peak,
+          player.team.power
+        );
     const loanConditions =
       player.performance < -0.5 &&
       med < 0 &&
@@ -1901,7 +1915,7 @@ function App() {
     ) {
       newTransfers = [player.contractTeam];
 
-      if (med > 0) {
+      if (med > 0 && meetsPostPeakRenewalThreshold) {
         let newPosition;
         if (player.position.abbreviation !== "GO" && Math.random() < 0.2) {
           let relatedPositions = player.position.related;
@@ -1930,6 +1944,7 @@ function App() {
       //if played good middle contract
       player.performance > 0.5 &&
       med > 0 &&
+      meetsPostPeakRenewalThreshold &&
       generalPerformance.length >= 2 &&
       contract > 1 &&
       player.age < player.position.peak + 4
@@ -1975,7 +1990,7 @@ function App() {
         document.getElementById("decision-transfer2").style.display = "none";
         document.getElementById("decision-transfer3").style.display = "none";
       } else {
-        if (med < 0) {
+        if (med < 0 || !meetsPostPeakRenewalThreshold) {
           //cant stay
           document.getElementById("decision-stay").style.display = "none";
         } else {

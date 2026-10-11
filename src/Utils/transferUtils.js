@@ -124,6 +124,11 @@ function getExtraTeamOfferChance(currentPlayer) {
   return Math.min(VET_MAX, PRIME_CHANCE + (age - primeEnd) * VET_SLOPE);
 }
 
+export function GetRenewalPerformanceThreshold(age, peak, currentTeamPower) {
+  const yearsAfterPeak = Math.max(0, age - peak);
+  return Math.min(0.8, Math.max(0, 0.2 + 0.05 * yearsAfterPeak + 0.05 * (currentTeamPower - 5)));
+}
+
 function selectTeams(teams, extraTeamNames, extraTeamOfferChance) {
   const availableExtraTeams = teams.filter((team) => extraTeamNames.has(team.name));
   const availableLeagueTeams = teams.filter((team) => !extraTeamNames.has(team.name));
@@ -189,11 +194,13 @@ export function GetNewTeams(
   const extraTeamNames = getExtraTeamNames(extrateams);
   const age = currentPlayer.age;
   const currentPower = currentPlayer.team.power;
+  const yearsAfterPeak = age - currentPlayer.position.peak;
   const boundary = currentPower + (age <= currentPlayer.position.peak ? -2 : 1);
   const isWithinPowerLimit =
     age <= currentPlayer.position.peak
       ? (team) => team.power > boundary
-      : (team) => team.power < boundary;
+      : (team) =>
+          team.power < boundary && team.power < 10 / (1 + (yearsAfterPeak * yearsAfterPeak) / 100);
 
   const shortlist = [...allTeams]
     .sort((a, b) => b.power - a.power - Math.random())
@@ -210,6 +217,9 @@ export function GetNewTeams(
   const remainingPreferredTeams = eligibleTeams.filter(
     (team) => isWithinPowerLimit(team) && !selectedNames.has(team.name)
   );
+  console.log(
+    JSON.parse(JSON.stringify(remainingPreferredTeams.sort((a, b) => b.power - a.power)))
+  );
   selectedTeams.push(
     ...selectTeams(
       remainingPreferredTeams,
@@ -221,7 +231,11 @@ export function GetNewTeams(
   if (selectedTeams.length < 3) {
     const selectedNames = new Set(selectedTeams.map((team) => team.name));
     const fallbackTeams = eligibleTeams
-      .filter((team) => !selectedNames.has(team.name))
+      .filter(
+        (team) =>
+          !selectedNames.has(team.name) &&
+          (age <= currentPlayer.position.peak || isWithinPowerLimit(team))
+      )
       .sort((a, b) => Math.abs(a.power - boundary) - Math.abs(b.power - boundary));
     selectedTeams.push(...fallbackTeams.slice(0, 3 - selectedTeams.length));
   }
@@ -241,7 +255,9 @@ export function GetLoanTeams(currentPlayer, leagues, history, extrateams = []) {
   const eligibleTeams = allTeams.filter(
     (team) => !previousTeamNames.has(team.name) && team.name !== currentPlayer.team.name
   );
-  const weakerTeams = eligibleTeams.filter((team) => team.power < currentPower);
+  const weakerTeams = eligibleTeams.filter(
+    (team) => team.power < currentPower && team.power > currentPower - 2
+  );
 
   if (weakerTeams.length === 0) return [];
 

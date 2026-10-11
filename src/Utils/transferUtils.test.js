@@ -1,4 +1,4 @@
-import { GetLoanTeams, GetNewTeams } from "./transferUtils";
+import { GetLoanTeams, GetNewTeams, GetRenewalPerformanceThreshold } from "./transferUtils";
 
 describe("GetNewTeams", () => {
   const createTeam = (name, power) => ({ name, power });
@@ -117,7 +117,7 @@ describe("GetNewTeams", () => {
       createTeam("Above limit", 8.5),
       createTeam("High", 9)
     ];
-    const player = { ...currentPlayer, age: 37, team: createTeam("Current", 7) };
+    const player = { ...currentPlayer, age: 30, team: createTeam("Current", 7) };
     const result = GetNewTeams(player, [{ highestLeague: { teams } }], [], 0);
 
     expect(result.contracts).toHaveLength(3);
@@ -138,6 +138,43 @@ describe("GetNewTeams", () => {
     expect(result.contracts.map((contract) => contract.team.name)).toEqual(
       expect.arrayContaining(["Only eligible", "Closest", "Next closest"])
     );
+  });
+
+  test("applies the current-team power limit strictly after peak", () => {
+    const teams = [
+      createTeam("Below limit", 7.99),
+      createTeam("At limit", 8),
+      createTeam("Above limit", 8.1)
+    ];
+    const player = { ...currentPlayer, age: 26, team: createTeam("Current", 7) };
+    const result = GetNewTeams(player, [{ highestLeague: { teams } }], [], 0);
+
+    expect(result.contracts).toHaveLength(1);
+    expect(result.contracts[0].team.name).toBe("Below limit");
+  });
+
+  test("applies the age-based power ceiling strictly and does not exceed it to fill offers", () => {
+    const teams = [
+      createTeam("Below age ceiling", 7.99),
+      createTeam("At age ceiling", 8),
+      createTeam("Above age ceiling", 8.1)
+    ];
+    const player = {
+      ...currentPlayer,
+      age: 30,
+      team: createTeam("Current", 10)
+    };
+    const result = GetNewTeams(player, [{ highestLeague: { teams } }], [], 0);
+
+    expect(result.contracts).toHaveLength(1);
+    expect(result.contracts[0].team.name).toBe("Below age ceiling");
+  });
+
+  test("raises the renewal performance threshold with age and current club power", () => {
+    expect(GetRenewalPerformanceThreshold(26, 25, 5)).toBeCloseTo(0.25);
+    expect(GetRenewalPerformanceThreshold(26, 25, 9)).toBeCloseTo(0.45);
+    expect(GetRenewalPerformanceThreshold(30, 25, 9)).toBeCloseTo(0.65);
+    expect(GetRenewalPerformanceThreshold(33, 25, 10)).toBeCloseTo(0.8);
   });
 
   test("completes loan offers when a weaker team exists", () => {
