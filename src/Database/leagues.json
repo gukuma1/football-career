@@ -300,4 +300,79 @@
         { "name": "Estoril", "country": "Portugal", "power": 4.4 },
         { "name": "Rio Ave", "country": "Portugal", "power": 4.4 },
         { "name": "Moreirense", "country": "Portugal", "power": 4.2 },
-        { "name": "Santa Clara", "country": "Portugal
+        { "name": "Santa Clara", "country": "Portugal", "power": 4.0 },
+        { "name": "Estrela Amadora", "country": "Portugal", "power": 3.8 },
+        { "name": "Nacional", "country": "Portugal", "power": 3.6 },
+        { "name": "Alverca", "country": "Portugal", "power": 3.4 },
+        { "name": "Marítimo", "country": "Portugal", "power": 3.3 },
+        { "name": "Viseu", "country": "Portugal", "power": 3.2 }
+      ]
+    },
+    "lowerLeague": {
+      "name": "Liga Portugal 2",
+      "teams": [
+        { "name": "Boavista", "country": "Portugal", "power": 3.8 },
+        { "name": "Chaves", "country": "Portugal", "power": 3.6 },
+        { "name": "Portimonense", "country": "Portugal", "power": 3.6 },
+        { "name": "Vizela", "country": "Portugal", "power": 3.6 },
+        { "name": "Farense", "country": "Portugal", "power": 3.6 },
+        { "name": "AVS SAD", "country": "Portugal", "power": 3.4 },
+        { "name": "Tondela", "country": "Portugal", "power": 3.3 },
+        { "name": "Passos Ferreira", "country": "Portugal", "power": 3.3 },
+        { "name": "B-SAD", "country": "Portugal", "power": 3.2 },
+        { "name": "Leixões", "country": "Portugal", "power": 3.2 },
+        { "name": "Torreense", "country": "Portugal", "power": 3.2 },
+        { "name": "Feirense", "country": "Portugal", "power": 3.2 },
+        { "name": "Felgueiras", "country": "Portugal", "power": 3.2 },
+        { "name": "Leiria", "country": "Portugal", "power": 3.2 }
+      ]
+    }
+  },
+  {
+    "country": "Itália",
+    "championsSpots": 4,
+    "demotions": 3,
+    "highestLeague": {
+      "name": "Serie A",
+      "teams": [
+        { "name": "Inter", "country": "Itália", "power": 9.0 },
+        { "name": "Napoli", "country": "Itália", "power": 8.4 },
+        { "name": "Milan", "country": "Itália", "power": 8.0 },
+        { "name": "Juventus", "country": "Itália", "power": 7.8 },
+        { "name": "Roma", "country": "Itália", "power": 7.8 },
+        { "name": "Atalanta", "country": "Itália", "power": 7.7 },
+        { "name": "Lazio", "country": "Itália", "power": 7.5 },
+        { "name": "Bologna", "country": "Itália", "power": 7.2 },
+        { "name": "Fiorentina", "country": "Itália", "power": 6.9 },
+        { "name": "Torino", "country": "Itália", "power": 6.4 },
+        { "name": "Udinese", "country": "Itália", "power": 6.0 },
+        { "name": "Lecce", "country": "Itália", "power": 5.4 },
+        { "name": "Genoa", "country": "Itália", "power": 5.3 },
+        { "name": "Sassuolo", "country": "Itália", "power": 5.1 },
+        { "name": "Como", "country": "Itália", "power": 5.1 },
+        { "name": "Cagliari", "country": "Itália", "power": 5.1 },
+        { "name": "Monza", "country": "Itália", "power": 5.1 },
+        { "name": "Parma", "country": "Itália", "power": 4.8 },
+        { "name": "Frosinone", "country": "Itália", "power": 4.6 },
+        { "name": "Venezia", "country": "Itália", "power": 4.5 }
+      ]
+    },
+    "lowerLeague": {
+      "name": "Serie B",
+      "teams": [
+        { "name": "Verona", "country": "Itália", "power": 5.2 },
+        { "name": "Empoli", "country": "Itália", "power": 5.0 },
+        { "name": "Cremonese", "country": "Itália", "power": 4.7 },
+        { "name": "Salernitana", "country": "Itália", "power": 4.7 },
+        { "name": "Spezia", "country": "Itália", "power": 4.6 },
+        { "name": "Sampdoria", "country": "Itália", "power": 4.5 },
+        { "name": "Pisa", "country": "Itália", "power": 4.5 },
+        { "name": "Catanzaro", "country": "Itália", "power": 4.4 },
+        { "name": "Cesena", "country": "Itália", "power": 4.4 },
+        { "name": "Palermo", "country": "Itália", "power": 4.4 },
+        { "name": "Bari", "country": "Itália", "power": 4.4 },
+        { "name": "Juve Stabia", "country": "Itália", "power": 4.4 }
+      ]
+    }
+  }
+]
