@@ -27,12 +27,18 @@ export function GetMatch(team1, team2) {
   let team1Power = Math.pow(team1.power, 2) / base;
   let team2Power = Math.pow(team2.power, 2) / base;
 
-  // média total de gols da partida
-  let totalGoals = 2.5;
+  // média de gols da partida
+  let totalGoals = 2.7;
+
+  // diferença de poder entre os times
+  let diff = team1.power - team2.power;
+
+  // bônus proporcional à vantagem de poder de cada time
+  let bonusFactor = 0.2;
 
   // média esperada de gols de cada time
-  let team1Lambda = totalGoals * team1Power;
-  let team2Lambda = totalGoals * team2Power;
+  let team1Lambda = totalGoals * team1Power + Math.max(0, diff) * bonusFactor;
+  let team2Lambda = totalGoals * team2Power + Math.max(0, -diff) * bonusFactor;
 
   // evita lambda muito baixo demais
   if (team1Lambda < 0.1) team1Lambda = 0.1;
@@ -56,12 +62,18 @@ export function GetExtraTime(team1, team2) {
   let team1Power = Math.pow(team1.power, 2) / base;
   let team2Power = Math.pow(team2.power, 2) / base;
 
-  // prorrogação tem menos gols
+  // média prorrogação
   let totalGoals = 0.8;
 
+  // diferença de poder entre os times
+  let diff = team1.power - team2.power;
+
+  // bônus reduzido proporcionalmente ao tempo extra (1/3 do jogo)
+  let bonusFactor = 0.06;
+
   // média esperada de gols
-  let team1Lambda = totalGoals * team1Power;
-  let team2Lambda = totalGoals * team2Power;
+  let team1Lambda = totalGoals * team1Power + Math.max(0, diff) * bonusFactor;
+  let team2Lambda = totalGoals * team2Power + Math.max(0, -diff) * bonusFactor;
 
   // evita lambda muito baixo
   if (team1Lambda < 0.05) team1Lambda = 0.05;
