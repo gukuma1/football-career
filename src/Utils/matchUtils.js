@@ -28,23 +28,21 @@ export function GetMatch(team1, team2) {
   let team2Power = Math.pow(team2.power, 2) / base;
 
   // média total de gols da partida
-  let totalGoals = 2.7;
+  let totalGoals = 2.5;
 
-  // diferença PROPORCIONAL de poder (normalizada entre -1 e 1)
-  // em vez de diferença absoluta — estabiliza o total esperado de gols
   let sumPower = team1.power + team2.power;
   let proportionalDiff = (team1.power - team2.power) / sumPower;
 
-  // bônus proporcional à vantagem relativa de cada time
-  let bonusFactor = 0.2;
+  // bônus
+  let bonusFactor = 0.5;
 
   // média esperada de gols de cada time
   let team1Lambda = totalGoals * team1Power + Math.max(0, proportionalDiff) * bonusFactor;
   let team2Lambda = totalGoals * team2Power + Math.max(0, -proportionalDiff) * bonusFactor;
 
-  // piso ELEVADO: evita lambdas irrealistas em mismatches extremos
-  if (team1Lambda < 0.2) team1Lambda = 0.2;
-  if (team2Lambda < 0.2) team2Lambda = 0.2;
+  // piso: evita lambdas irrealistas em mismatches extremos
+  if (team1Lambda < 0.25) team1Lambda = 0.25;
+  if (team2Lambda < 0.25) team2Lambda = 0.25;
 
   let team1Score = poisson(team1Lambda);
   let team2Score = poisson(team2Lambda);
@@ -67,19 +65,16 @@ export function GetExtraTime(team1, team2) {
   // média prorrogação
   let totalGoals = 0.8;
 
-  // diferença PROPORCIONAL de poder (normalizada entre -1 e 1)
-  // em vez de diferença absoluta — estabiliza o total esperado de gols
   let sumPower = team1.power + team2.power;
   let proportionalDiff = (team1.power - team2.power) / sumPower;
 
-  // bônus reduzido proporcionalmente ao tempo extra (1/3 do jogo)
-  let bonusFactor = 0.06;
+  // bônus
+  let bonusFactor = 0.2;
 
   // média esperada de gols
   let team1Lambda = totalGoals * team1Power + Math.max(0, proportionalDiff) * bonusFactor;
   let team2Lambda = totalGoals * team2Power + Math.max(0, -proportionalDiff) * bonusFactor;
 
-  // piso ELEVADO (2× o anterior): evita lambdas irrealistas em mismatches extremos
   if (team1Lambda < 0.1) team1Lambda = 0.1;
   if (team2Lambda < 0.1) team2Lambda = 0.1;
 
