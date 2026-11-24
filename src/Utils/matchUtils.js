@@ -27,22 +27,24 @@ export function GetMatch(team1, team2) {
   let team1Power = Math.pow(team1.power, 2) / base;
   let team2Power = Math.pow(team2.power, 2) / base;
 
-  // média de gols da partida
+  // média total de gols da partida
   let totalGoals = 2.7;
 
-  // diferença de poder entre os times
-  let diff = team1.power - team2.power;
+  // diferença PROPORCIONAL de poder (normalizada entre -1 e 1)
+  // em vez de diferença absoluta — estabiliza o total esperado de gols
+  let sumPower = team1.power + team2.power;
+  let proportionalDiff = (team1.power - team2.power) / sumPower;
 
-  // bônus proporcional à vantagem de poder de cada time
+  // bônus proporcional à vantagem relativa de cada time
   let bonusFactor = 0.2;
 
   // média esperada de gols de cada time
-  let team1Lambda = totalGoals * team1Power + Math.max(0, diff) * bonusFactor;
-  let team2Lambda = totalGoals * team2Power + Math.max(0, -diff) * bonusFactor;
+  let team1Lambda = totalGoals * team1Power + Math.max(0, proportionalDiff) * bonusFactor;
+  let team2Lambda = totalGoals * team2Power + Math.max(0, -proportionalDiff) * bonusFactor;
 
-  // evita lambda muito baixo demais
-  if (team1Lambda < 0.1) team1Lambda = 0.1;
-  if (team2Lambda < 0.1) team2Lambda = 0.1;
+  // piso ELEVADO: evita lambdas irrealistas em mismatches extremos
+  if (team1Lambda < 0.2) team1Lambda = 0.2;
+  if (team2Lambda < 0.2) team2Lambda = 0.2;
 
   let team1Score = poisson(team1Lambda);
   let team2Score = poisson(team2Lambda);
@@ -65,19 +67,21 @@ export function GetExtraTime(team1, team2) {
   // média prorrogação
   let totalGoals = 0.8;
 
-  // diferença de poder entre os times
-  let diff = team1.power - team2.power;
+  // diferença PROPORCIONAL de poder (normalizada entre -1 e 1)
+  // em vez de diferença absoluta — estabiliza o total esperado de gols
+  let sumPower = team1.power + team2.power;
+  let proportionalDiff = (team1.power - team2.power) / sumPower;
 
   // bônus reduzido proporcionalmente ao tempo extra (1/3 do jogo)
   let bonusFactor = 0.06;
 
   // média esperada de gols
-  let team1Lambda = totalGoals * team1Power + Math.max(0, diff) * bonusFactor;
-  let team2Lambda = totalGoals * team2Power + Math.max(0, -diff) * bonusFactor;
+  let team1Lambda = totalGoals * team1Power + Math.max(0, proportionalDiff) * bonusFactor;
+  let team2Lambda = totalGoals * team2Power + Math.max(0, -proportionalDiff) * bonusFactor;
 
-  // evita lambda muito baixo
-  if (team1Lambda < 0.05) team1Lambda = 0.05;
-  if (team2Lambda < 0.05) team2Lambda = 0.05;
+  // piso ELEVADO (2× o anterior): evita lambdas irrealistas em mismatches extremos
+  if (team1Lambda < 0.1) team1Lambda = 0.1;
+  if (team2Lambda < 0.1) team2Lambda = 0.1;
 
   let team1Score = poisson(team1Lambda);
   let team2Score = poisson(team2Lambda);
@@ -103,9 +107,9 @@ function penaltyChance(teamPower, opponentPower) {
   const baseChance = 0.75;
 
   // ajuste pela força relativa do time
-  const chance = baseChance + (strength - 0.5) * 0.18;
+  const chance = baseChance + (strength - 0.5) * 0.15;
 
-  return clamp(chance, 0.55, 0.9);
+  return clamp(chance, 0.6, 0.9);
 }
 
 function isDecided(team1Goals, team2Goals, team1ShotsLeft, team2ShotsLeft) {
